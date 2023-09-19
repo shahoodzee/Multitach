@@ -1,0 +1,48 @@
+.form {
+  background: transparent;
+  padding: 40px;
+  max-width: 45em;
+  margin: 40px auto;
+  border-radius: 4em;
+}
+
+.tab-group {
+  border-radius: 4em;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+}
+
+.tab-group:after {
+  border-radius: 4em;
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.tab-group li a {
+  border-radius: 4em;
+  display: block;
+  text-decoration: none;
+  padding: 15px;
+  background: rgba(160, 179, 176, 0.25);
+  color: #a0b3b0;
+  font-size: 20px;
+  float: left;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.tab-group li a:hover {
+  background: #1ab188;
+  border-radius: 4em;
+  color: #ffffff;
+}
+
+.tab-group .active a {
+  background: #1ab188;
+  border-radius: 4em;
+  color: #ffffff;
+}
