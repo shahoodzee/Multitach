@@ -1,7 +1,7 @@
 import './index.css'
 import React, { useState } from 'react'
-import Signup from '../../components/customerAccess/Signup'
-import Login from '../../components/customerAccess/Login'
+import Signup from '../../components/customerAccess/signup'
+import Login from '../../components/customerAccess/login'
 
 const CustomerAccess = () => {
   const [activeTab, setActiveTab] = useState('login')
