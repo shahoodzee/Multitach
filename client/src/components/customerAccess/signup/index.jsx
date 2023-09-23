@@ -15,6 +15,9 @@ const Signup = () => {
   const [image, setImage] = useState(null)
 
   const [firstNameRequired, setFirstNameRequired] = useState(true)
+
+
+  
   const [lastNameRequired, setLastNameRequired] = useState(true)
   const [emailRequired, setEmailRequired] = useState(true)
   const [passwordRequired, setPasswordRequired] = useState(true)
@@ -63,10 +66,10 @@ const Signup = () => {
       const res = await axios.post('', {
         email,
         password,
-        fullname: fullName,
+        name: fullName,
         gender,
         workerType,
-        dob,
+        // dob,
         message,
       })
       const { user, token } = res.data
