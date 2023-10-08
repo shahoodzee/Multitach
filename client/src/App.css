@@ -1,4 +1,12 @@
 html {
-  background-color: #080C3E;
+  background-image: linear-gradient(to top, #3a6073, #16222a);
+  background-repeat: no-repeat;
+  background-size: cover;
   color: white;
 }
+
+/* 
+ #0f2027, #2c5364 -> dark forest
+ #16222a, #3a6073 -> mirage
+#0f2027, #203a43, #2c5364
+*/

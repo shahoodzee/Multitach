@@ -1,14 +1,16 @@
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import CustomerAccess from './containers/customerAccess'
+import { BrowserRouter as Router} from 'react-router-dom'
+import Routes from './Routes'
+import Navbar from './components/navbar/index';
+import Footer from './components/footer';
 
 function App() {
   return (
     <div className='app'>
       <Router>
-        <Routes>
-          <Route path='/' element={<CustomerAccess />} />
-        </Routes>
+        <Navbar />
+        <Routes />
+        <Footer />
       </Router>
     </div>
   )
