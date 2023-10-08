@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('worker.urls'))
+    path('', include('worker.urls')),  # Define a URL pattern for the root URL
+    
 ]
