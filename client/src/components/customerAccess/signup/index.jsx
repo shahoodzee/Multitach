@@ -1,3 +1,4 @@
+import "./index.css";
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,16 +12,18 @@ const Signup = () => {
   const [gender, setGender] = useState("");
   const [workerType, setWorkerType] = useState("");
   const [dob, setDob] = useState("");
-  const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
+  const [cnic, setCnic] = useState("");
+  const [no, setNo] = useState(""); //  phone number
 
   const [firstNameRequired, setFirstNameRequired] = useState(true);
-
   const [lastNameRequired, setLastNameRequired] = useState(true);
   const [emailRequired, setEmailRequired] = useState(true);
   const [passwordRequired, setPasswordRequired] = useState(true);
   const [confirmPasswordRequired, setConfirmPasswordRequired] = useState(true);
   const [dobRequired, setDobRequired] = useState(true);
+  const [cnicRequired, setCnicRequired] = useState(true);
+  const [noRequired, setNoRequired] = useState(true);
 
   const navigate = useNavigate();
 
@@ -68,7 +71,8 @@ const Signup = () => {
         gender,
         workerType,
         // dob,
-        message,
+        cnic,
+        no,
       });
       const { user, token } = res.data;
 
@@ -86,15 +90,30 @@ const Signup = () => {
     }
   };
 
+  const validatePhoneNumber = (value) => {
+    const regex = /[0-9]/;
+    return regex.test(value);
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    const inputValue = e.target.value;
+    if (validatePhoneNumber(inputValue)) {
+      setNo(inputValue);
+    }
+    if (no.length === 11) {
+      setNoRequired(false);
+    }
+  };
+
   return (
     <div className="signup flex flex-col items-center justify-center text-white min-h-screen">
       <h1 className="p-4 text-4xl font-bold">Signup</h1>
       <div className="w-full max-w-lg">
-        <form className="glass-form rounded-xl border-slate-400 shadow-md px-8 pt-6 pb-8 mb-4">
+        <form className="glass-form rounded-xl shadow-md px-8 pt-6 pb-8 mb-4">
           <div className="mb-2 flex flex-wrap -mx-3">
             <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
               <label
-                className="block text-sm font-bold mb-1 text-slate-400"
+                className="block text-md font-bold mb-2 text-slate-200"
                 htmlFor="firstName"
               >
                 First Name
@@ -103,7 +122,7 @@ const Signup = () => {
                 )}
               </label>
               <input
-                className={`appearance-none border bg-slate-900 'border-slate-400' rounded-xl w-full py-2 px-3 text-slate-400 mb-1 leading-tight focus:outline-none focus:shadow-outline`}
+                className={`appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
                 id="firstName"
                 type="text"
                 placeholder="First Name"
@@ -115,7 +134,7 @@ const Signup = () => {
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
-                className="block text-sm font-bold mb-1 text-slate-400"
+                className="block text-md font-bold mb-2 text-slate-200"
                 htmlFor="lastName"
               >
                 Last Name
@@ -124,7 +143,7 @@ const Signup = () => {
                 )}
               </label>
               <input
-                className={`appearance-none border bg-slate-900 'border-slate-400' rounded-xl w-full py-2 px-3 text-slate-400 mb-1 leading-tight focus:outline-none focus:shadow-outline`}
+                className={`appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
                 id="lastName"
                 type="text"
                 placeholder="Last Name"
@@ -138,7 +157,7 @@ const Signup = () => {
 
           <div className="mb-2">
             <label
-              className="block text-sm font-bold mb-1 text-slate-400"
+              className="block text-md font-bold mb-2 text-slate-200"
               htmlFor="email"
             >
               Email
@@ -147,7 +166,7 @@ const Signup = () => {
               )}
             </label>
             <input
-              className={`appearance-none border bg-slate-900 'border-white' rounded-xl w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+              className={`appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
               id="email"
               type="text"
               placeholder="Email"
@@ -161,7 +180,7 @@ const Signup = () => {
           <div className="mb-2 flex flex-wrap -mx-3">
             <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
               <label
-                className="block text-sm font-bold mb-1 text-slate-400"
+                className="block text-md font-bold mb-2 text-slate-200"
                 htmlFor="password"
               >
                 Password
@@ -170,7 +189,7 @@ const Signup = () => {
                 )}
               </label>
               <input
-                className={`appearance-none border bg-slate-900 'border-white' rounded-xl w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+                className={`appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
                 id="password"
                 type="password"
                 placeholder="Password"
@@ -182,7 +201,7 @@ const Signup = () => {
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
-                className="block text-sm font-bold mb-1 text-slate-400"
+                className="block text-md font-bold mb-2 text-slate-200"
                 htmlFor="confirmPassword"
               >
                 Confirm Password
@@ -191,7 +210,7 @@ const Signup = () => {
                 )}
               </label>
               <input
-                className={`appearance-none border bg-slate-900 'border-white' rounded-xl w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+                className={`appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
                 id="confirmPassword"
                 type="password"
                 placeholder="Confirm Password"
@@ -205,68 +224,94 @@ const Signup = () => {
 
           <div className="mb-2">
             <label
-              className="block text-sm font-bold mb-1 text-slate-400"
-              htmlFor="dob"
+              className="block text-md font-bold mb-2 text-slate-200"
+              htmlFor="cnic"
             >
-              Date of Birth
-              {dobRequired && <span className="text-red-500 text-sm"> *</span>}
+              CNIC
+              {cnicRequired && <span className="text-red-500 text-sm"> *</span>}
             </label>
             <input
-              className={`appearance-none border bg-slate-900 'border-white' rounded-xl w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline`}
-              id="dob"
-              type="date"
-              placeholder="Date of Birth"
+              className={`appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+              id="cnic"
+              type="text"
+              placeholder="xxxxx-xxxxxxx-x"
               onChange={(e) => {
-                setDob(e.target.value);
-                setDobRequired(false);
+                setCnic(e.target.value);
+                setCnicRequired(false);
               }}
             />
           </div>
 
-          <div className="mb-2">
-            <label
-              className="block text-sm font-bold mb-1 text-slate-400"
-              htmlFor="message"
-            >
-              Message
-            </label>
-            <textarea
-              className="appearance-none border bg-slate-900 border-slate-400 rounded-xl w-full py-2 px-3 text-slate-400 mb-1 leading-tight focus:outline-none focus:shadow-outline"
-              id="message"
-              rows="4"
-              placeholder="Tell us about yourself..."
-              onChange={(e) => setMessage(e.target.value)}
-            />
+          <div className="mb-2 flex flex-wrap -mx-3">
+            <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+              <label
+                className="block text-md font-bold mb-2 text-slate-200"
+                htmlFor="dob"
+              >
+                Date of Birth
+                {dobRequired && (
+                  <span className="text-red-500 text-sm"> *</span>
+                )}
+              </label>
+              <input
+                className={`appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+                id="dob"
+                type="date"
+                placeholder="Date of Birth"
+                onChange={(e) => {
+                  setDob(e.target.value);
+                  setDobRequired(false);
+                }}
+              />
+            </div>
+            <div className="w-full md:w-1/2 px-3">
+              <label
+                className="block text-md font-bold mb-2 text-slate-200"
+                htmlFor="image"
+              >
+                Profile Image
+              </label>
+              <input
+                type="file"
+                id="image"
+                onChange={handleImage}
+                name="image"
+                accept="image/png image/jpeg image/jpg image/jfif"
+                className="appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
           </div>
 
           <div className="mb-2">
             <label
-              className="block text-sm font-bold mb-1 text-slate-400"
-              htmlFor="image"
+              className="block text-md font-bold mb-2 text-slate-200"
+              htmlFor="no"
             >
-              Profile Image
+              Phone Number
+              {noRequired && <span className="text-red-500 text-sm"> *</span>}
             </label>
             <input
-              type="file"
-              id="image"
-              onChange={handleImage}
-              name="image"
-              accept="image/png image/jpeg image/jpg image/jfif"
-              className="appearance-none border bg-slate-900 border-slate-400 rounded-xl w-full py-2 px-3 text-slate-400 mb-1 leading-tight focus:outline-none focus:shadow-outline"
+              className={`appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+              id="no"
+              type="text"
+              maxLength="11"
+              placeholder="03xx xxxxxxx"
+              value={no}
+              onChange={handlePhoneNumberChange}
             />
           </div>
 
           <div className="mb-6 flex flex-wrap -mx-3">
             <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
               <label
-                className="block text-sm font-bold mb-1 text-slate-400"
+                className="block text-md font-bold mb-2 text-slate-200"
                 htmlFor="gender"
               >
                 Gender
               </label>
               <div className="relative">
                 <select
-                  className="appearance-none bg-slate-900 border border-slate-400 rounded-xl w-full py-2 px-3 text-slate-400 mb-1 leading-tight focus:outline-none focus:shadow-outline"
+                  className="appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="gender"
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
@@ -290,14 +335,14 @@ const Signup = () => {
 
             <div className="w-full md:w-1/2 px-3">
               <label
-                className="block text-sm font-bold mb-1 text-slate-400"
+                className="block text-md font-bold mb-2 text-slate-200"
                 htmlFor="workerType"
               >
                 Worker Type
               </label>
               <div className="relative">
                 <select
-                  className="appearance-none border bg-slate-900 border-slate-400 rounded-xl w-full py-2 px-3 text-slate-400 mb-1 leading-tight focus:outline-none focus:shadow-outline"
+                  className="appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="workerType"
                   value={workerType}
                   onChange={(e) => setWorkerType(e.target.value)}
