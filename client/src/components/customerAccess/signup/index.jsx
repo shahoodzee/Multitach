@@ -61,33 +61,36 @@ const Signup = () => {
 
   const submit = async (e) => {
     e.preventDefault();
+    console.log(email,password,firstName+lastName,gender,workerType,dob,cnic,no)
+    alert('User Logged In succesffully')
 
-    const fullName = firstName + " " + lastName;
-    try {
-      const res = await axios.post("", {
-        email,
-        password,
-        name: fullName,
-        gender,
-        workerType,
-        // dob,
-        cnic,
-        no,
-      });
-      const { user, token } = res.data;
+    // const fullName = firstName + " " + lastName;
+    // try {
+    //   const res = await axios.post("", {
+    //     email,
+    //     password,
+    //     name: fullName,
+    //     gender,
+    //     workerType,
+    //     dob,
+    //     cnic,
+    //     no,
+    //   });
+    //   const { user, token } = res.data; // Yo! taha wat is this ?
+      
 
-      if (res.data == "Email already exists") {
-        alert(res.data);
-      } else if (password !== confirmPassword) {
-        alert("Passwords Must Match");
-      } else {
-        localStorage.setItem("token", token);
-        addImage(user.id);
-        navigate(`/home/${user.id}`);
-      }
-    } catch (err) {
-      alert(err.message);
-    }
+    //   if (res.data === "Email already exists") {
+    //     alert(res.data);
+    //   } else if (password !== confirmPassword) {
+    //     alert("Passwords Must Match");
+    //   } else {
+    //     localStorage.setItem("token", token);
+    //     addImage(user.id);
+    //     navigate(`/home/${user.id}`);
+    //   }
+    // } catch (err) {
+    //   alert(err.message);
+    // }
   };
 
   const validatePhoneNumber = (value) => {
@@ -105,6 +108,7 @@ const Signup = () => {
     }
   };
 
+  //why not use a from.
   return (
     <div className="signup flex flex-col items-center justify-center text-white min-h-screen">
       <h1 className="p-4 text-4xl font-bold">Signup</h1>
@@ -168,7 +172,7 @@ const Signup = () => {
             <input
               className={`appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
               id="email"
-              type="text"
+              type="text"       //whyb this is text not email.
               placeholder="Email"
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -347,6 +351,7 @@ const Signup = () => {
                   value={workerType}
                   onChange={(e) => setWorkerType(e.target.value)}
                 >
+                 {/* these values will come from the API. */}
                   <option value="">...</option>
                   <option value="Electrician">Electrician</option>
                   <option value="Plumber">Plumber</option>
@@ -354,7 +359,7 @@ const Signup = () => {
                   <option value="Goldsmith">Goldsmith</option>
                   <option value="Blacksmith">Blacksmith</option>
                   <option value="Others">Others</option>
-                </select>
+                </select> 
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
                   <svg
                     className="fill-current h-4 w-4"
