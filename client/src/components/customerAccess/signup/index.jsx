@@ -77,20 +77,22 @@ const Signup = () => {
       });
       const { user, token } = res.data;
 
-      if (res.data == "Email already exists") {
-        alert(res.data);
-      } else if (password !== confirmPassword) {
-        alert("Passwords Must Match");
-      } else {
-        localStorage.setItem("token", token);
-        addImage(user.id);
-        navigate(`/home/${user.id}`);
-      }
+      //   if (res.data === "Email already exists") {
+      //     alert(res.data);
+      //   } else if (password !== confirmPassword) {
+      //     alert("Passwords Must Match");
+      //   } else {
+      //     localStorage.setItem("token", token);
+      //     addImage(user.id);
+      //     navigate(`/home/${user.id}`);
+      //   }
+      // } catch (err) {
+      //   alert(err.message);
+      // }
     } catch (err) {
-      alert(err.message);
+      console.log(err);
     }
   };
-
   const validatePhoneNumber = (value) => {
     const regex = /[0-9]/;
     return regex.test(value);
@@ -462,35 +464,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-//  import "./index.css";
-//  import axios from "axios";
-//  import React, { useState } from "react";
-//  import { useNavigate } from "react-router-dom";
-
-//  const Signup = () => {
-
-//    return (
-//      <div className="signup flex flex-col items-center justify-center text-white min-h-screen">
-//        <h1 className="p-4 text-4xl font-bold">Signup</h1>
-//        <div className="w-full max-w-lg">
-//          <form className="glass-form rounded-xl shadow-md px-8 pt-6 pb-8 mb-4">
-{
-  /* <div className="flex items-center justify-center">
-  <button
-    className="bg-cyan-950 text-cyan-400 border border-cyan-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group"
-    type="submit"
-    onClick={submit}
-  >
-    <span className="bg-cyan-400 shadow-cyan-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
-    Signup
-  </button>
-</div>; */
-}
-//          </form>
-//        </div>
-//      </div>
-//    );
-//  };
-
-//  export default Signup;
