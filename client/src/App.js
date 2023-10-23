@@ -6,7 +6,7 @@ import Footer from "./components/footer";
 
 function App() {
   return (
-    <div className="app">
+    <div className="app min-h-screen">
       <Router>
         <Navbar />
         <Routes />

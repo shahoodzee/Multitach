@@ -6,6 +6,7 @@ import PostTask from "./containers/postTask/index";
 import About from "./containers/about/index";
 import ContactUs from "./containers/contactUs/index";
 import Feedback from "./containers/feedback/index";
+import TaskContainer from "./containers/task";
 
 const ProjectRoutes = () => {
   return (
@@ -13,6 +14,7 @@ const ProjectRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/customer-access/:type" element={<CustomerAccess />} />
+        <Route path="/task" element={<TaskContainer />} />
         <Route path="/post-task" element={<PostTask />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact-us" element={<ContactUs />} />
