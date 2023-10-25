@@ -28,14 +28,14 @@ const Signup = () => {
   const [noRequired, setNoRequired] = useState(true);
   const [roleRequired, setRoleRequired] = useState(true);
 
+  const navigate = useNavigate();
+
   const addImage = async (userId) => {
     try {
       await axios.post(
         "",
         {
           image,
-          imageableType: "User",
-          imageableId: userId,
         },
         {
           token: localStorage.getItem("token"),
@@ -63,19 +63,22 @@ const Signup = () => {
   const submit = async (e) => {
     e.preventDefault();
 
-    const fullName = firstName + " " + lastName;
     try {
-      const res = await axios.post("", {
-        email,
-        password,
-        name: fullName,
-        gender,
-        workerType,
-        dob,
-        cnic,
-        no,
-      });
-      const { user, token } = res.data;
+      if (password === confirmPassword) {
+        const fullName = firstName + " " + lastName;
+
+        const res = await axios.post("", {
+          name: fullName,
+          email,
+          password,
+          gender,
+          workerType,
+          dob,
+          cnic,
+          no,
+        });
+        const { user, token } = res.data;
+      }
 
       //   if (res.data === "Email already exists") {
       //     alert(res.data);
@@ -107,8 +110,6 @@ const Signup = () => {
       setNoRequired(false);
     }
   };
-
-  const navigate = useNavigate();
 
   const submitStep1 = () => {
     setStep(2);
