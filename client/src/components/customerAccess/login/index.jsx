@@ -1,6 +1,7 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useSpring, animated } from "react-spring";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
 
 const Login = () => {
@@ -11,6 +12,18 @@ const Login = () => {
   const [activeTab, setActiveTab] = useState("customer");
 
   const navigate = useNavigate();
+
+  const tabSpring = useSpring({
+    opacity: 1,
+    transform: "translateX(0)",
+    from: { opacity: 0, transform: "translateX(-50px)" },
+  });
+
+  const formSpring = useSpring({
+    opacity: 1,
+    transform: "translateY(0)",
+    from: { opacity: 0, transform: "translateY(50px)" },
+  });
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -40,9 +53,9 @@ const Login = () => {
   };
 
   return (
-    <div className="login flex flex-col items-center justify-center text-white min-h-screen">
+    <div className="login flex flex-col items-center justify-center text-white justify-self-center mt-10 pt-10">
       <div className="w-full max-w-lg form flex flex-col lg:flex-row lg:items-center justify-center lg:space-x-8">
-        <div className="tab-group lg:w-1/3">
+        <animated.div style={tabSpring} className="tab-group lg:w-1/3">
           <ul>
             <li
               className={`text-center text-lg font-bold mb-4 ${
@@ -65,9 +78,12 @@ const Login = () => {
               Worker
             </li>
           </ul>
-        </div>
+        </animated.div>
 
-        <div className="lg:w-2/3 flex flex-col items-center justify-center">
+        <animated.div
+          style={formSpring}
+          className="lg:w-2/3 flex flex-col items-center justify-center"
+        >
           <h1 className="text-4xl font-bold mb-4">Login</h1>
           <form className="glass-form rounded-xl shadow-md w-full px-8 py-4 mx-2 mb-4">
             <div className="mb-4">
@@ -123,13 +139,15 @@ const Login = () => {
               </button>
               <p className="text-slate-200 px-4 mt-4">
                 Don't Have An Account?{" "}
-                <button className="text-cyan-400 hover:text-cyan-500 font-bold">
-                  Sign-Up
-                </button>
+                <Link to="/customer-access/signup">
+                  <button className="text-cyan-400 hover:text-cyan-500 font-bold">
+                    Sign-Up
+                  </button>
+                </Link>
               </p>
             </div>
           </form>
-        </div>
+        </animated.div>
       </div>
     </div>
   );
