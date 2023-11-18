@@ -7,6 +7,7 @@ import About from "./containers/about/index";
 import ContactUs from "./containers/contactUs/index";
 import Feedback from "./containers/feedback/index";
 import TaskContainer from "./containers/task";
+import Profile from "./containers/profile";
 
 const ProjectRoutes = () => {
   return (
@@ -19,6 +20,7 @@ const ProjectRoutes = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/feedback" element={<Feedback />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );
