@@ -49,7 +49,8 @@ const Login = () => {
         );
         const token = res.data.jwt;
         Cookies.set("token", token);
-        navigate(`/task`);
+        navigate(`/profile`);
+        window.location.reload();
       } else {
         alert("Kindly Fill All Required Fields");
       }

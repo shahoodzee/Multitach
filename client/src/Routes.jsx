@@ -1,5 +1,6 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import CustomerAccess from "./containers/customerAccess";
 import Home from "./containers/home";
 import PostTask from "./containers/postTask/index";
@@ -10,19 +11,31 @@ import TaskContainer from "./containers/task";
 import Profile from "./containers/profile";
 
 const ProjectRoutes = () => {
+  const isAuthenticated = !!Cookies.get("token");
+  console.log(`Token: ${Cookies.get("token")}`);
+
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Home />} />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact-us" element={<ContactUs />} />
+
+      {isAuthenticated ? (
+        <>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/task" element={<TaskContainer />} />
+          <Route path="/post-task" element={<PostTask />} />
+          <Route path="/feedback" element={<Feedback />} />
+        </>
+      ) : (
+        <Route path="*" element={<Navigate to="/customer-access/login" />} />
+      )}
+      {!isAuthenticated ? (
         <Route path="/customer-access/:type" element={<CustomerAccess />} />
-        <Route path="/task" element={<TaskContainer />} />
-        <Route path="/post-task" element={<PostTask />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact-us" element={<ContactUs />} />
-        <Route path="/feedback" element={<Feedback />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-    </div>
+      ) : (
+        <Route path="*" element={<Navigate to="/profile" />} />
+      )}
+    </Routes>
   );
 };
 
