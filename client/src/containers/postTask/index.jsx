@@ -36,13 +36,6 @@ const PostTask = () => {
       !dateRequired &&
       !timeRequired
     ) {
-      console.log({
-        title: title,
-        description: description,
-        address: address,
-        date: date,
-        time: time,
-      });
     } else {
       alert("Fill all fields");
     }

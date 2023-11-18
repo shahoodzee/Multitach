@@ -30,22 +30,22 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
-  const addImage = async (userId) => {
-    try {
-      await axios.post(
-        "",
-        {
-          image,
-        },
-        {
-          token: localStorage.getItem("token"),
-          CustomHeader: "custom-value",
-        }
-      );
-    } catch (err) {
-      alert(err.message);
-    }
-  };
+  // const addImage = async (userId) => {
+  //   try {
+  //     await axios.post(
+  //       "",
+  //       {
+  //         image,
+  //       },
+  //       {
+  //         token: localStorage.getItem("token"),
+  //         CustomHeader: "custom-value",
+  //       }
+  //     );
+  //   } catch (err) {
+  //     alert(err.message);
+  //   }
+  // };
 
   const setFileToBase = (file) => {
     const reader = new FileReader();
@@ -63,20 +63,27 @@ const Signup = () => {
   const submit = async (e) => {
     e.preventDefault();
 
+    const workerEndpoint = "http://127.0.0.1:8000/workers/";
+    const customerEndpoint = "http://127.0.0.1:8000/clients/";
+
     try {
       if (password === confirmPassword) {
         const fullName = firstName + " " + lastName;
 
-        const res = await axios.post("", {
-          name: fullName,
-          email,
-          password,
-          gender,
-          workerType,
-          dob,
-          cnic,
-          no,
-        });
+        const res = await axios.post(
+          role === "client" ? customerEndpoint : workerEndpoint,
+          {
+            name: fullName,
+            password,
+            email,
+            gender,
+            workerType,
+            dob,
+            cnic,
+            no,
+          }
+        );
+        console.log(res);
         const { user, token } = res.data;
       }
 

@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { useSpring, animated } from "react-spring";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import "./index.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [emailRequired, setEmailRequired] = useState(true);
   const [passwordRequired, setPasswordRequired] = useState(true);
+
   const [activeTab, setActiveTab] = useState("customer");
 
   const navigate = useNavigate();
@@ -32,20 +35,23 @@ const Login = () => {
   const submit = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await axios.post("", {
-        email: email,
-        password: password,
-      });
-      const { userId, token } = res.data;
+    const workerEndpoint = "http://127.0.0.1:8000/api/login/worker/";
+    const customerEndpoint = "http://127.0.0.1:8000/api/login/client/";
 
-      if (userId === -1) {
-        alert("User does not exist");
-      } else if (userId === -2) {
-        alert("Incorrect Password");
+    try {
+      if (!emailRequired && !passwordRequired) {
+        const res = await axios.post(
+          activeTab === "customer" ? customerEndpoint : workerEndpoint,
+          {
+            email,
+            password,
+          }
+        );
+        const token = res.data.jwt;
+        Cookies.set("token", token);
+        navigate(`/task`);
       } else {
-        await localStorage.setItem("token", token);
-        navigate(`/home/${userId}`);
+        alert("Kindly Fill All Required Fields");
       }
     } catch (err) {
       alert(err.message);
