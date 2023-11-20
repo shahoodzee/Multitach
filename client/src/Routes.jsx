@@ -9,6 +9,8 @@ import ContactUs from "./containers/contactUs/index";
 import Feedback from "./containers/feedback/index";
 import TaskContainer from "./containers/task";
 import Profile from "./containers/profile";
+import WorkerSignup from "./containers/worker/signup";
+import WorkerTask from "./containers/worker/task";
 
 const ProjectRoutes = () => {
   const isAuthenticated = !!Cookies.get("token");
@@ -19,6 +21,9 @@ const ProjectRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact-us" element={<ContactUs />} />
+
+      <Route path="/worker/signup" element={<WorkerSignup />} />
+      <Route path="/worker/task" element={<WorkerTask />} />
 
       {isAuthenticated ? (
         <>

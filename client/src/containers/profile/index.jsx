@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import EditProfile from "../../components/profile/edit";
 import RemoveProfile from "../../components/profile/remove";
+import DefaultAvatar from "../../images/Default Avatar.jpg";
 
 const Profile = () => {
   // USER DATA NEEDED FROM BACKEND
@@ -33,9 +34,9 @@ const Profile = () => {
         </div>
 
         <img
-          src={user.image_url || "default-profile-image.jpg"}
+          src={user.image_url || DefaultAvatar}
           alt="Profile Picture"
-          className="rounded-full h-20 w-20 object-cover pl-14 md:ml-auto"
+          className="rounded-full h-20 w-20 object-cover md:h-32 md:w-32 ml-auto"
         />
       </div>
 
