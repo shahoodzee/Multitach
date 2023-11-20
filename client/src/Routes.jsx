@@ -11,6 +11,8 @@ import TaskContainer from "./containers/task";
 import Profile from "./containers/profile";
 import WorkerSignup from "./containers/worker/signup";
 import WorkerTask from "./containers/worker/task";
+import Login from "./components/customerAccess/login";
+import Signup from "./components/customerAccess/signup";
 
 const ProjectRoutes = () => {
   const isAuthenticated = !!Cookies.get("token");
@@ -22,6 +24,8 @@ const ProjectRoutes = () => {
       <Route path="/about" element={<About />} />
       <Route path="/contact-us" element={<ContactUs />} />
 
+      <Route path="/customer-access/login" element={<Login />} />
+      <Route path="/customer-access/signup" element={<Signup />} />
       <Route path="/worker/signup" element={<WorkerSignup />} />
       <Route path="/worker/task" element={<WorkerTask />} />
 

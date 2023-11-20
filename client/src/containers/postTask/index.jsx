@@ -1,10 +1,15 @@
-// PostTask.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatBot from "../../components/chatBot";
-import RecommendWorker from "../../components/chatBot/recommendWorker";
+import RecommendWorker from "./../../components/chatBot/recommendWorker/index";
 
 const PostTask = () => {
   const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    // Send initial greeting message when the component is loaded
+    const initialBotMessage = "Hello! Kindly, give me a title for your task.";
+    setMessages([{ text: initialBotMessage, isBot: true }]);
+  }, []);
 
   const addMessage = (text, isBot) => {
     setMessages((prevMessages) => [...prevMessages, { text, isBot }]);
@@ -23,12 +28,19 @@ const PostTask = () => {
   // Function to generate a simulated bot response
   const generateBotResponse = (userMessage) => {
     // Implement your own logic here
-    if (userMessage.toLowerCase().includes("hello")) {
-      return "Hi there! How can I assist you?";
-    } else if (userMessage.toLowerCase().includes("task")) {
-      return "Sure, I can help you with that. Please provide more details about the task.";
+    if (messages.length === 1) {
+      // Ask the user for a description of the task
+      return "Sure! Please provide a description of the task you need help with.";
+    } else if (messages.length === 2) {
+      // Ask the user when they want the task to be carried out
+      return "Great! When would you like the task to be carried out?";
+    } else if (messages.length === 3) {
+      // Ask the user for their house address
+      return "Perfect! Could you please provide your house address?";
     } else {
-      return "I'm sorry, I didn't understand that. Can you please rephrase?";
+      // If the user has provided all necessary information, you can handle it accordingly
+      // For simplicity, let's assume the conversation ends here
+      return "Thank you for providing the information. I will process your request. The recommended workers will be shown on the left hand side of the screen.";
     }
   };
 
