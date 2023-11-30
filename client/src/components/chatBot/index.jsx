@@ -32,8 +32,8 @@ const ChatBot = ({ messages, onSendMessage }) => {
             key={index}
             className={`px-4 message ${
               message.isBot
-                ? "bg-blue-500 text-white rounded-xl mb-2 ml-auto"
-                : "bg-white text-black rounded-xl mb-2 mr-auto"
+                ? "bg-blue-500 text-white rounded-xl mb-3 ml-auto"
+                : "bg-white text-black rounded-xl mb-3 mr-auto"
             }`}
           >
             {message.text}
@@ -47,7 +47,7 @@ const ChatBot = ({ messages, onSendMessage }) => {
           value={newMessage}
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
-          className="px-4 w-full bg-gray-700 text-white border-none rounded-xl h-14 resize-none focus:outline-none"
+          className="px-4 w-full bg-gray-700 text-white border-none rounded-xl h-16 resize-none focus:outline-none"
         />
       </div>
     </div>

@@ -25,7 +25,7 @@ const ChatBot = ({ messages, onSendMessage }) => {
   };
 
   return (
-    <div className="px-4 chat-bot flex flex-col items-stretch text-white fixed bottom-0 right-0 left-0">
+    <div className="px-4 chat-bot flex flex-col items-stretch text-white absolute bottom-0 right-0 left-96">
       <div className="px-4 chat-messages flex-grow max-h-96 overflow-y-auto flex flex-col mx-4 py-4">
         {messages.map((message, index) => (
           <div

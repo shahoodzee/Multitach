@@ -6,12 +6,9 @@ const PostTask = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    setMessages([
-      {
-        text: "Hello! Kindly, give me a description for your task.",
-        isBot: true,
-      },
-    ]);
+    // Send initial greeting message when the component is loaded
+    const initialBotMessage = "Hello! Kindly, give me a title for your task.";
+    setMessages([{ text: initialBotMessage, isBot: true }]);
   }, []);
 
   const addMessage = (text, isBot) => {
@@ -21,18 +18,28 @@ const PostTask = () => {
   const addUserMessage = async (userMessage) => {
     addMessage(userMessage, false);
 
+    // Simulate backend response after a short delay
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     const botResponse = generateBotResponse(userMessage);
     addMessage(botResponse, true);
   };
 
+  // Function to generate a simulated bot response
   const generateBotResponse = (userMessage) => {
+    // Implement your own logic here
     if (messages.length === 1) {
-      return "Great! When would you like the task to be carried out?";
+      // Ask the user for a description of the task
+      return "Sure! Please provide a description of the task you need help with.";
     } else if (messages.length === 2) {
+      // Ask the user when they want the task to be carried out
+      return "Great! When would you like the task to be carried out?";
+    } else if (messages.length === 3) {
+      // Ask the user for their house address
       return "Perfect! Could you please provide your house address?";
     } else {
+      // If the user has provided all necessary information, you can handle it accordingly
+      // For simplicity, let's assume the conversation ends here
       return "Thank you for providing the information. I will process your request. The recommended workers will be shown on the left hand side of the screen.";
     }
   };

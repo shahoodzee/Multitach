@@ -24,8 +24,6 @@ const ProjectRoutes = () => {
       <Route path="/about" element={<About />} />
       <Route path="/contact-us" element={<ContactUs />} />
 
-      <Route path="/customer-access/login" element={<Login />} />
-      <Route path="/customer-access/signup" element={<Signup />} />
       <Route path="/worker/signup" element={<WorkerSignup />} />
       <Route path="/worker/task" element={<WorkerTask />} />
 

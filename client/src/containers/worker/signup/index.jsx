@@ -140,7 +140,7 @@ const WorkerSignup = () => {
 
   return (
     <div className="signup flex flex-col items-center justify-center text-white min-h-screen">
-      <h1 className="p-4 text-4xl font-bold">Signup</h1>
+      <h1 className="p-4 text-4xl font-bold">Become A Worker</h1>
       {step === 1 && (
         <div className="w-full max-w-lg">
           <form className="glass-form rounded-xl shadow-md px-8 pt-6 pb-8 mb-4">
