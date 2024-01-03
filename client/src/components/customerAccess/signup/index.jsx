@@ -65,13 +65,13 @@ const Signup = () => {
     try {
       if (password === confirmPassword) {
         const fullName = firstName + " " + lastName;
-
+        console.log(`Fullname: ${fullName}`);
         if (password === confirmPassword) {
           const res = await axios.post(customerEndpoint, {
             user: {
-              name: fullName,
+              // name: fullName,
               email,
-              cnic,
+              // cnic,
               phone: no,
               image_url: image || DefaultAvatar,
               date_of_birth: dob,

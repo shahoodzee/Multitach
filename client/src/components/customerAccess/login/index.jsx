@@ -12,8 +12,6 @@ const Login = () => {
   const [emailRequired, setEmailRequired] = useState(true);
   const [passwordRequired, setPasswordRequired] = useState(true);
 
-  const [activeTab, setActiveTab] = useState("customer");
-
   const navigate = useNavigate();
 
   const tabSpring = useSpring({
@@ -28,25 +26,17 @@ const Login = () => {
     from: { opacity: 0, transform: "translateY(50px)" },
   });
 
-  const handleTabClick = (tabId) => {
-    setActiveTab(tabId);
-  };
-
   const submit = async (e) => {
     e.preventDefault();
 
-    const workerEndpoint = "http://127.0.0.1:8000/api/login/worker/";
     const customerEndpoint = "http://127.0.0.1:8000/api/login/client/";
 
     try {
       if (!emailRequired && !passwordRequired) {
-        const res = await axios.post(
-          activeTab === "customer" ? customerEndpoint : workerEndpoint,
-          {
-            email,
-            password,
-          }
-        );
+        const res = await axios.post(customerEndpoint, {
+          email,
+          password,
+        });
         const token = res.data.jwt;
         Cookies.set("token", token);
         navigate(`/profile`);
@@ -63,28 +53,12 @@ const Login = () => {
     <div className="login flex flex-col items-center justify-center text-white justify-self-center mt-10 pt-10">
       <div className="w-full max-w-lg form flex flex-col lg:flex-row lg:items-center justify-center lg:space-x-8">
         <animated.div style={tabSpring} className="tab-group lg:w-1/3">
-          <ul>
-            <li
-              className={`text-center text-lg font-bold mb-4 ${
-                activeTab === "customer"
-                  ? "bg-indigo-950 text-violet-300"
-                  : "bg-slate-700 text-slate-200"
-              } p-3 rounded-lg cursor-pointer`}
-              onClick={() => handleTabClick("customer")}
-            >
-              Customer
-            </li>
-            <li
-              className={`text-center text-lg font-bold ${
-                activeTab === "worker"
-                  ? "bg-indigo-950 text-violet-300"
-                  : "bg-slate-700 text-slate-200"
-              } p-3 rounded-lg cursor-pointer`}
-              onClick={() => handleTabClick("worker")}
-            >
-              Worker
-            </li>
-          </ul>
+          <div className="text-left w-full">
+            <h2 className="font-bold text-2xl pb-2">Login As A Customer</h2>
+            <p className="text-md pt-2">
+              Get any task done by our professional workers
+            </p>
+          </div>
         </animated.div>
 
         <animated.div
