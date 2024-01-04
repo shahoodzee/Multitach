@@ -18,6 +18,7 @@ const WorkerSignup = () => {
   const [no, setNo] = useState("");
   const [workerType, setWorkerType] = useState("");
   const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
 
   const [firstNameRequired, setFirstNameRequired] = useState(true);
   const [lastNameRequired, setLastNameRequired] = useState(true);
@@ -29,6 +30,7 @@ const WorkerSignup = () => {
   const [noRequired, setNoRequired] = useState(true);
   const [workerTypeRequired, setWorkerTypeRequired] = useState(true);
   const [addressRequired, setAddressRequired] = useState(true);
+  const [cityRequired, setCityRequired] = useState(true);
 
   const navigate = useNavigate();
 
@@ -62,9 +64,6 @@ const WorkerSignup = () => {
     setFileToBase(file);
   };
 
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // You can perform any validation before calling the onSubmit function
@@ -73,7 +72,7 @@ const WorkerSignup = () => {
   const submit = async (e) => {
     e.preventDefault();
 
-    const workerEndpoint = "http://127.0.0.1:8000/workers/";
+    const workerEndpoint = "http://127.0.0.1:8000/api/workers/create/";
 
     try {
       if (password === confirmPassword) {
@@ -83,17 +82,18 @@ const WorkerSignup = () => {
           const res = await axios.post(workerEndpoint, {
             user: {
               name: fullName,
+              password,
               email,
+              gender,
               cnic,
               phone: no,
               image_url: image || DefaultAvatar,
-              date_of_birth: dob,
-              gender,
-              password,
+              workerType,
+              address: address + ", " + city,
             },
           });
           console.log(res);
-          navigate("/customer-access/login");
+          navigate("/worker/login");
         } else {
           alert("Passwords do not match");
         }
@@ -392,13 +392,19 @@ const WorkerSignup = () => {
                   htmlFor="workerType"
                 >
                   Worker Type
+                  {workerTypeRequired && (
+                    <span className="text-red-500 text-sm"> *</span>
+                  )}
                 </label>
                 <div className="relative">
                   <select
                     className="appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                     id="workerType"
                     value={workerType}
-                    onChange={(e) => setWorkerType(e.target.value)}
+                    onChange={(e) => {
+                      setWorkerType(e.target.value);
+                      setWorkerTypeRequired(false);
+                    }}
                   >
                     <option value="">...</option>
                     <option value="Electrician">Electrician</option>
@@ -424,6 +430,9 @@ const WorkerSignup = () => {
             <div className="mb-4">
               <label className="block text-md font-bold mb-2" htmlFor="city">
                 City
+                {cityRequired && (
+                  <span className="text-red-500 text-sm"> *</span>
+                )}
               </label>
               <input
                 className="appearance-none shadow-lg bg-gray-600 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -431,11 +440,14 @@ const WorkerSignup = () => {
                 type="text"
                 placeholder="Enter your city"
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
+                onChange={(e) => {
+                  setCity(e.target.value);
+                  setCityRequired(false);
+                }}
               />
             </div>
 
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <label className="block text-md font-bold mb-2" htmlFor="country">
                 Country
               </label>
@@ -447,11 +459,14 @@ const WorkerSignup = () => {
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
               />
-            </div>
+            </div> */}
 
             <div className="mb-6">
               <label className="block text-md font-bold mb-2" htmlFor="country">
                 Shop Address
+                {addressRequired && (
+                  <span className="text-red-500 text-sm"> *</span>
+                )}
               </label>
               <input
                 className="appearance-none shadow-lg bg-gray-600 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -459,7 +474,10 @@ const WorkerSignup = () => {
                 type="text"
                 placeholder="Enter your shop's complete address"
                 value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                onChange={(e) => {
+                  setAddress(e.target.value);
+                  setAddressRequired(false);
+                }}
               />
             </div>
 
