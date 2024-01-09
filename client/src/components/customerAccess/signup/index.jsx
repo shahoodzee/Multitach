@@ -68,40 +68,40 @@ const Signup = () => {
 
     try {
       if (password === confirmPassword) {
-        const fullName = firstName + " " + lastName;
-
-        const res = await axios.post(
-          role === "client" ? customerEndpoint : workerEndpoint,
-          {
-            name: fullName,
-            password,
+          const fullName = firstName + " " + lastName;
+  
+          let userData = {
             email,
+            image_url:null, // Assuming image_url is provided
+            date_of_birth: dob,
             gender,
-            workerType,
-            dob,
-            cnic,
-            no,
+            phone: no,
+            password
+          };
+  
+          if (role === 'worker') {
+              userData = {
+                ...userData,
+                cnic,
+                workerLocation:null, // Make sure workerLocation is defined
+                workerType
+              };
           }
-        );
-        console.log(res);
-        const { user, token } = res.data;
+  
+          const res = await axios.post(
+              role === "client" ? customerEndpoint : workerEndpoint,
+              { user: userData }
+          );
+  
+          console.log(res);
+          const { user, token } = res.data;
       }
-
-      //   if (res.data === "Email already exists") {
-      //     alert(res.data);
-      //   } else if (password !== confirmPassword) {
-      //     alert("Passwords Must Match");
-      //   } else {
-      //     localStorage.setItem("token", token);
-      //     addImage(user.id);
-      //     navigate(`/home/${user.id}`);
-      //   }
-      // } catch (err) {
-      //   alert(err.message);
-      // }
-    } catch (err) {
+  } catch (err) {
       console.log(err);
-    }
+  }
+  
+
+
   };
   const validatePhoneNumber = (value) => {
     const regex = /[0-9]/;
