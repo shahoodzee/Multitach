@@ -12,6 +12,11 @@ import Profile from "./containers/profile";
 import WorkerSignup from "./containers/worker/signup";
 import WorkerLogin from "./containers/worker/login";
 import WorkerTask from "./containers/worker/task";
+import AboutUs from "./containers/static/AboutUs";
+import Careers from "./containers/static/Carrers";
+import CustomerCare from "./containers/static/CustomerCare";
+import TermsAndConditions from "./containers/static/TermsAndConditions";
+import FAQ from "./containers/static/FAQ";
 
 const ProjectRoutes = () => {
   const isAuthenticated = !!Cookies.get("token");
@@ -20,8 +25,11 @@ const ProjectRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact-us" element={<ContactUs />} />
+      <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/careers" element={<Careers />} />
+      <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+      <Route path="/customer-care" element={<CustomerCare />} />
+      <Route path="/faq" element={<FAQ />} />
 
       <Route path="/worker/signup" element={<WorkerSignup />} />
       <Route path="/worker/login" element={<WorkerLogin />} />

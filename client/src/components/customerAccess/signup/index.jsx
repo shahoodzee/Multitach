@@ -104,6 +104,7 @@ const Signup = () => {
       console.log(err);
     }
   };
+
   const validatePhoneNumber = (value) => {
     const regex = /[0-9]/;
     return regex.test(value);

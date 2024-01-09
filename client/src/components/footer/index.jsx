@@ -1,5 +1,4 @@
 // Footer.js
-
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -43,6 +42,36 @@ const Footer = () => {
               Twitter
             </a>
             <a href="#instagram">Instagram</a>
+          </div>
+          <div className="w-full mt-8">
+            <h2 className="text-2xl font-bold mb-4">Useful Links</h2>
+            <Link
+              to="/about-us"
+              className="block mb-2 text-gray-400 hover:text-white"
+            >
+              About Us
+            </Link>
+            <Link
+              to="/careers"
+              className="block mb-2 text-gray-400 hover:text-white"
+            >
+              Careers
+            </Link>
+            <Link
+              to="/terms-and-conditions"
+              className="block mb-2 text-gray-400 hover:text-white"
+            >
+              Terms and Conditions
+            </Link>
+            <Link
+              to="/customer-care"
+              className="block mb-2 text-gray-400 hover:text-white"
+            >
+              Customer Care
+            </Link>
+            <Link to="/faq" className="text-gray-400 hover:text-white">
+              FAQ
+            </Link>
           </div>
         </div>
       </div>

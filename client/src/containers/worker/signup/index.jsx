@@ -72,6 +72,9 @@ const WorkerSignup = () => {
   const submit = async (e) => {
     e.preventDefault();
 
+    // Remove '-' from CNIC
+    const cleanedCnic = cnic.replace(/-/g, "");
+
     const workerEndpoint = "http://127.0.0.1:8000/workers/";
     const fullName = firstName + " " + lastName;
     const bodyData = {
@@ -85,7 +88,7 @@ const WorkerSignup = () => {
         phone: no,
         password,
       },
-      cnic,
+      cnic: cleanedCnic, // Use the cleaned CNIC without '-'
       workerLocation: address + ", " + city,
       workerType,
       task_count: null,
