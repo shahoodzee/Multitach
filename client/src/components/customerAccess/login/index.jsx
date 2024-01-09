@@ -33,10 +33,17 @@ const Login = () => {
 
     try {
       if (!emailRequired && !passwordRequired) {
-        const res = await axios.post(customerEndpoint, {
-          email,
-          password,
-        });
+        const res = await axios.post(
+          customerEndpoint,
+          {
+            email,
+            password,
+          },
+          {
+            withCredentials: true, // Include credentials option in the request config
+          }
+        );
+
         const token = res.data.jwt;
         Cookies.set("token", token);
         navigate(`/profile`);

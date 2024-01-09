@@ -4,8 +4,6 @@ import Cookies from "js-cookie";
 import CustomerAccess from "./containers/customerAccess";
 import Home from "./containers/home";
 import PostTask from "./containers/postTask/index";
-import About from "./containers/about/index";
-import ContactUs from "./containers/contactUs/index";
 import Feedback from "./containers/feedback/index";
 import TaskContainer from "./containers/task";
 import Profile from "./containers/profile";
@@ -34,12 +32,12 @@ const ProjectRoutes = () => {
       <Route path="/worker/signup" element={<WorkerSignup />} />
       <Route path="/worker/login" element={<WorkerLogin />} />
       <Route path="/worker/task" element={<WorkerTask />} />
-      <Route path="/post-task" element={<PostTask />} />
 
       {isAuthenticated ? (
         <>
           <Route path="/profile" element={<Profile />} />
           <Route path="/task" element={<TaskContainer />} />
+          <Route path="/post-task" element={<PostTask />} />
           <Route path="/feedback" element={<Feedback />} />
         </>
       ) : (
