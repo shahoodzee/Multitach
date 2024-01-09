@@ -34,11 +34,17 @@ const Profile = () => {
     try {
       const jwt = Cookies.get("token");
 
-      const res = await axios.get("http://127.0.0.1:8000/api/profile/client/", {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
+      const res = await axios.get(
+        "http://127.0.0.1:8000/api/profile/client/",
+        {
+          jwt,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
 
       console.log("Res: ", res);
     } catch (err) {
