@@ -72,10 +72,12 @@ const Signup = () => {
               // name: fullName,
               email,
               // cnic,
-              phone: no,
-              image_url: image || DefaultAvatar,
+              image_url:
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSvsNYYKYKncYyNM93VLI1OMm2yEa2XeRHexcmkjeNJMNlRrM0NIV8n08ATQm1anbn5QTE&usqp=CAU",
+              //image_url: image || DefaultAvatar,
               date_of_birth: dob,
               gender,
+              phone: no,
               password,
             },
           });

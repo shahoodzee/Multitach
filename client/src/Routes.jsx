@@ -26,12 +26,12 @@ const ProjectRoutes = () => {
       <Route path="/worker/signup" element={<WorkerSignup />} />
       <Route path="/worker/login" element={<WorkerLogin />} />
       <Route path="/worker/task" element={<WorkerTask />} />
+      <Route path="/post-task" element={<PostTask />} />
 
       {isAuthenticated ? (
         <>
           <Route path="/profile" element={<Profile />} />
           <Route path="/task" element={<TaskContainer />} />
-          <Route path="/post-task" element={<PostTask />} />
           <Route path="/feedback" element={<Feedback />} />
         </>
       ) : (

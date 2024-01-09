@@ -1,54 +1,172 @@
-import React, { useEffect, useState } from "react";
-import ChatBot from "../../components/chatBot";
-import RecommendWorker from "./../../components/chatBot/recommendWorker/index";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import RecommendedWorkersModal from "../../components/task/recommendedWorker";
+import "./index.css";
 
 const PostTask = () => {
-  const [messages, setMessages] = useState([]);
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    time: "",
+    longitude: "",
+    latitude: "",
+  });
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [recommendedWorkers, setRecommendedWorkers] = useState([]);
 
   useEffect(() => {
-    setMessages([
-      {
-        text: "Hello! Kindly, give me a description for your task.",
-        isBot: true,
-      },
-    ]);
-  }, []);
+    // Fetch user's location when component mounts
+    handleLocation();
+  }, []); // Empty dependency array ensures that this effect runs only once on mount
 
-  const addMessage = (text, isBot) => {
-    setMessages((prevMessages) => [...prevMessages, { text, isBot }]);
+  const openModal = async () => {
+    try {
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/task/recommended_workers"
+      );
+
+      setRecommendedWorkers(response.data);
+      setModalIsOpen(true);
+    } catch (error) {
+      console.error("Error fetching recommended workers:", error.message);
+    }
   };
 
-  const addUserMessage = async (userMessage) => {
-    addMessage(userMessage, false);
-
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    const botResponse = generateBotResponse(userMessage);
-    addMessage(botResponse, true);
+  const closeModal = () => {
+    setModalIsOpen(false);
   };
 
-  const generateBotResponse = (userMessage) => {
-    if (messages.length === 1) {
-      return "Great! When would you like the task to be carried out?";
-    } else if (messages.length === 2) {
-      return "Perfect! Could you please provide your house address?";
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setFormData({
+            ...formData,
+            longitude: position.coords.longitude.toString(),
+            latitude: position.coords.latitude.toString(),
+          });
+        },
+        (error) => {
+          console.error("Error getting location:", error.message);
+        }
+      );
     } else {
-      return "Thank you for providing the information. I will process your request. The recommended workers will be shown on the left hand side of the screen.";
+      console.error("Geolocation is not supported by this browser.");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Check if all fields are filled
+    if (!formData.title || !formData.description || !formData.time) {
+      alert("Please fill in all required fields before submitting the form.");
+      return;
+    }
+
+    try {
+      console.log(formData);
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/task/post_a_task/",
+        formData
+      );
+
+      console.log("Task Posted:", response.data);
+
+      // Open the modal with recommended workers
+      openModal();
+
+      setFormData({
+        title: "",
+        description: "",
+        time: "",
+        longitude: "",
+        latitude: "",
+      });
+    } catch (error) {
+      console.error("Error posting task:", error.message);
     }
   };
 
   return (
-    <div className="flex">
-      <div className="w-1/4 mt-6 mr-4 px-2 items-center text-center">
-        <h1 className="text-2xl px-2 font-bold mb-4">Recommended Workers</h1>
-        <RecommendWorker />
-      </div>
-      <div className="flex-grow flex flex-col items-center ml-4 text-slate-200">
-        <h1 className="p-4 text-4xl font-bold">Post Task</h1>
-        <div className="w-full overflow-hidden">
-          <ChatBot messages={messages} onSendMessage={addUserMessage} />
+    <div className="flex flex-col items-center mt-8">
+      <h1 className="text-4xl font-bold mb-4">Post a Task</h1>
+      <form className="glass-form rounded-xl shadow-md w-full max-w-md px-8 py-4 mb-4">
+        <div className="mb-4">
+          <label
+            htmlFor="title"
+            className="block text-sm font-bold mb-2 text-white"
+          >
+            Title
+          </label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleInputChange}
+            className="appearance-none border bg-slate-700 'border-white' rounded-xl w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          />
         </div>
-      </div>
+        <div className="mb-4">
+          <label
+            htmlFor="description"
+            className="block text-sm font-bold mb-2 text-white"
+          >
+            Description
+          </label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            className="appearance-none border bg-slate-700 'border-white' rounded-xl w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="time"
+            className="block text-sm font-bold mb-2 text-white"
+          >
+            Time
+          </label>
+          <input
+            type="time"
+            id="time"
+            name="time"
+            value={formData.time}
+            onChange={handleInputChange}
+            className="appearance-none border bg-slate-700 'border-white' rounded-xl w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+
+        <div className="flex items-center justify-center">
+          <button
+            className="bg-indigo-950 text-violet-400 border border-violet-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            <span className="bg-violet-400 shadow-violet-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
+            Post Task
+          </button>
+        </div>
+      </form>
+
+      <RecommendedWorkersModal
+        isOpen={modalIsOpen}
+        onClose={closeModal}
+        recommendedWorkers={recommendedWorkers}
+      />
     </div>
   );
 };

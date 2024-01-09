@@ -1,7 +1,7 @@
 import React from "react";
 import DefaultAvatar from "../../../images/Default Avatar.jpg";
 
-const WorkerCard = ({ worker, onAccept, onReject }) => {
+const WorkerCard = ({ worker }) => {
   const { name, profilePicture, matchRating } = worker;
 
   return (
@@ -22,13 +22,13 @@ const WorkerCard = ({ worker, onAccept, onReject }) => {
       <div className="flex justify-between">
         <button
           className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-          onClick={() => onReject(worker)}
+          // Handle reject logic
         >
           Reject
         </button>
         <button
           className="bg-green-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-green-600"
-          onClick={() => onAccept(worker)}
+          // Handle accept logic
         >
           Accept
         </button>
@@ -37,32 +37,4 @@ const WorkerCard = ({ worker, onAccept, onReject }) => {
   );
 };
 
-const RecommendWorker = () => {
-  const exampleWorker = {
-    name: "John Doe",
-    profilePicture: "",
-    matchRating: 95,
-  };
-
-  const handleAccept = (worker) => {
-    // Implement logic for handling worker acceptance
-    console.log(`Accepted: ${worker.name}`);
-  };
-
-  const handleReject = (worker) => {
-    // Implement logic for handling worker rejection
-    console.log(`Rejected: ${worker.name}`);
-  };
-
-  return (
-    <div className="h-full">
-      <WorkerCard
-        worker={exampleWorker}
-        onAccept={handleAccept}
-        onReject={handleReject}
-      />
-    </div>
-  );
-};
-
-export default RecommendWorker;
+export default WorkerCard;

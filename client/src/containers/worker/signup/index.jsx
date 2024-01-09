@@ -72,49 +72,39 @@ const WorkerSignup = () => {
   const submit = async (e) => {
     e.preventDefault();
 
-    const workerEndpoint = "http://127.0.0.1:8000/api/workers/create/";
+    const workerEndpoint = "http://127.0.0.1:8000/workers/";
+    const fullName = firstName + " " + lastName;
+    const bodyData = {
+      user: {
+        email,
+        //image_url: image || DefaultAvatar,
+        image_url:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSvsNYYKYKncYyNM93VLI1OMm2yEa2XeRHexcmkjeNJMNlRrM0NIV8n08ATQm1anbn5QTE&usqp=CAU",
+        date_of_birth: dob,
+        gender,
+        phone: no,
+        password,
+      },
+      cnic,
+      workerLocation: address + ", " + city,
+      workerType,
+      task_count: null,
+    };
+    console.log("Body Data: ", bodyData);
 
     try {
       if (password === confirmPassword) {
-        const fullName = firstName + " " + lastName;
-
-        if (password === confirmPassword) {
-          const res = await axios.post(workerEndpoint, {
-            user: {
-              name: fullName,
-              password,
-              email,
-              gender,
-              cnic,
-              phone: no,
-              image_url: image || DefaultAvatar,
-              workerType,
-              address: address + ", " + city,
-            },
-          });
-          console.log(res);
-          navigate("/worker/login");
-        } else {
-          alert("Passwords do not match");
-        }
+        const res = await axios.post(workerEndpoint, bodyData);
+        console.log(res);
+        navigate("/worker/login");
+      } else {
+        alert("Passwords do not match");
       }
-
-      //   if (res.data === "Email already exists") {
-      //     alert(res.data);
-      //   } else if (password !== confirmPassword) {
-      //     alert("Passwords Must Match");
-      //   } else {
-      //     localStorage.setItem("token", token);
-      //     addImage(user.id);
-      //     navigate(`/home/${user.id}`);
-      //   }
-      // } catch (err) {
-      //   alert(err.message);
-      // }
     } catch (err) {
       console.log(err);
     }
   };
+
   const validatePhoneNumber = (value) => {
     const regex = /[0-9]/;
     return regex.test(value);

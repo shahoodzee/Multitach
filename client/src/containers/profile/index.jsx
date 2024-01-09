@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import EditProfile from "../../components/profile/edit";
 import RemoveProfile from "../../components/profile/remove";
 import DefaultAvatar from "../../images/Default Avatar.jpg";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const Profile = () => {
   // USER DATA NEEDED FROM BACKEND
@@ -20,8 +22,28 @@ const Profile = () => {
 
   const [selectedTab, setSelectedTab] = useState(0);
 
+  useEffect(() => {
+    loadUserData();
+  }, []);
+
   const handleTabChange = (index) => {
     setSelectedTab(index);
+  };
+
+  const loadUserData = async () => {
+    try {
+      const jwt = Cookies.get("token");
+
+      const res = await axios.get("http://127.0.0.1:8000/api/profile/client/", {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+
+      console.log("Res: ", res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
