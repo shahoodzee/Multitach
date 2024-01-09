@@ -1,5 +1,7 @@
 import React from "react";
-import "./AboutUs.css"; // Import the CSS file for styling
+import "./AboutUs.css";
+import KhursandImage from "../../images/Khursand_Sohail_Pic.jpg";
+import TahaImage from "../../images/Taha Profile Pic.jpg";
 import TeamMemberCard from "./TeamMemberCard";
 function AboutUs() {
   return (
@@ -44,7 +46,7 @@ function AboutUs() {
                 name="Khursand Sohail Iqbal"
                 email="sohailkhursand02@gmail.com"
                 phoneNumber="+92 305-9544672"
-                image="Khursand_Sohail_Pic.jpg"
+                image={KhursandImage}
               />
             </center>
           </div>
@@ -54,7 +56,7 @@ function AboutUs() {
                 name="Taha Sohail "
                 email="sohailkhursand02@gmail.com"
                 phoneNumber="+92 305-9544672"
-                image="Khursand_Sohail_Pic.jpg"
+                image={TahaImage}
               />
             </center>
           </div>

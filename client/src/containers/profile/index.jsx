@@ -8,18 +8,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const Profile = () => {
-  // USER DATA NEEDED FROM BACKEND
-  const user = {
-    name: "Taha Sohail",
-    email: "taha1@gmail.com",
-    image_url: "",
-    date_of_birth: "2001-11-27",
-    gender: "Male",
-    phone: "03214178057",
-    password: "taha123",
-    cnic: "3520211725467",
-  };
-
+  const [user, setUser] = useState({});
   const [selectedTab, setSelectedTab] = useState(0);
 
   useEffect(() => {
@@ -30,18 +19,34 @@ const Profile = () => {
     setSelectedTab(index);
   };
 
+  const handleSave = async (editedUser) => {
+    try {
+      const jwt = Cookies.get("token");
+      await axios.put("http://127.0.0.1:8000/api/update/client/", {
+        user: editedUser,
+        params: { token: jwt },
+      });
+
+      setUser(editedUser);
+      console.log("User data updated successfully!");
+      setSelectedTab(0);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error updating user data:", error.message);
+    }
+  };
+
   const loadUserData = async () => {
     try {
       const jwt = Cookies.get("token");
-      console.log(jwt)
-
       const res = await axios.get("http://127.0.0.1:8000/api/profile/client/", {
         params: {
           token: jwt,
         },
       });
 
-      console.log("Res: ", res);
+      setUser(res.data.user);
+      console.log(res.data.user);
     } catch (err) {
       console.log(err);
     }
@@ -51,13 +56,15 @@ const Profile = () => {
     <div className="container mx-auto p-8 flex flex-col items-center">
       <div className="user-profile p-8 rounded-md flex flex-col md:flex-row md:items-center">
         <div className="md:mr-8">
-          <h2 className="text-3xl font-bold text-white">{user.name}</h2>
+          <h2 className="text-3xl font-bold text-white">
+            {user.username || "N/A"}
+          </h2>
           <p className="text-gray-400">Email: {user.email}</p>
-          <p className="text-gray-400">CNIC: {user.cnic}</p>
+          <p className="text-gray-400">CNIC: {user.cnic || "N/A"}</p>
         </div>
 
         <img
-          src={user.image_url || DefaultAvatar}
+          src={DefaultAvatar}
           alt="Profile Picture"
           className="rounded-full h-20 w-20 object-cover md:h-32 md:w-32 ml-auto"
         />
@@ -93,7 +100,7 @@ const Profile = () => {
               <h3 className="text-2xl font-bold text-white">
                 Edit Your Profile
               </h3>
-              <EditProfile user={user} />
+              <EditProfile user={user} onSave={handleSave} />
             </div>
           </TabPanel>
 

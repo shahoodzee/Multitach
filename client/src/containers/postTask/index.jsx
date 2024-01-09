@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RecommendedWorkersModal from "../../components/task/recommendedWorker";
 import "./index.css";
+import Cookies from "js-cookie";
 
 const PostTask = () => {
   const [formData, setFormData] = useState({
@@ -16,9 +17,8 @@ const PostTask = () => {
   const [recommendedWorkers, setRecommendedWorkers] = useState([]);
 
   useEffect(() => {
-    // Fetch user's location when component mounts
     handleLocation();
-  }, []); // Empty dependency array ensures that this effect runs only once on mount
+  }, []);
 
   const openModal = async () => {
     try {
@@ -66,32 +66,33 @@ const PostTask = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Check if all fields are filled
     if (!formData.title || !formData.description || !formData.time) {
       alert("Please fill in all required fields before submitting the form.");
       return;
     }
 
     try {
-      console.log(formData);
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/task/post_a_task/",
-        formData
+      const jwt = Cookies.get("token");
+      const res = await axios.get(
+        "http://127.0.0.1:8000/api/task/recommended_workers/",
+        {
+          title: formData.title,
+          description: formData.description,
+          params: { token: jwt },
+        }
       );
 
-      console.log("Task Posted:", response.data);
+      console.log("Res:", res);
 
-      // Open the modal with recommended workers
-      openModal();
+      // openModal();
 
-      setFormData({
-        title: "",
-        description: "",
-        time: "",
-        longitude: "",
-        latitude: "",
-      });
+      // setFormData({
+      //   title: "",
+      //   description: "",
+      //   time: "",
+      //   longitude: "",
+      //   latitude: "",
+      // });
     } catch (error) {
       console.error("Error posting task:", error.message);
     }

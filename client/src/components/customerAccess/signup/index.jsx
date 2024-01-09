@@ -69,9 +69,9 @@ const Signup = () => {
         if (password === confirmPassword) {
           const res = await axios.post(customerEndpoint, {
             user: {
-              // name: fullName,
+              username: fullName,
               email,
-              // cnic,
+              cnic,
               image_url:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSvsNYYKYKncYyNM93VLI1OMm2yEa2XeRHexcmkjeNJMNlRrM0NIV8n08ATQm1anbn5QTE&usqp=CAU",
               //image_url: image || DefaultAvatar,

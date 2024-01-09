@@ -32,22 +32,22 @@ const EditProfile = ({ user, onSave }) => {
         <div className="mb-6">
           <label
             className="block text-md font-bold mb-2 text-slate-200"
-            htmlFor="name"
+            htmlFor="username"
           >
-            Name
+            Username
           </label>
           <input
             className="appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="name"
+            id="username"
             type="text"
-            placeholder="Name"
-            name="name"
-            value={editedUser.name}
+            placeholder="Username"
+            name="username"
+            value={editedUser.username}
             onChange={handleInputChange}
           />
         </div>
 
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <label
             className="block text-md font-bold mb-2 text-slate-200"
             htmlFor="image"
@@ -62,6 +62,43 @@ const EditProfile = ({ user, onSave }) => {
             accept="image/png image/jpeg image/jpg image/jfif"
             className="appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
           />
+        </div> */}
+
+        <div className="mb-6">
+          <label
+            className="block text-md font-bold mb-2 text-slate-200"
+            htmlFor="date_of_birth"
+          >
+            Date of Birth
+          </label>
+          <input
+            className="appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            id="date_of_birth"
+            type="date"
+            name="date_of_birth"
+            value={editedUser.date_of_birth}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="mb-6">
+          <label
+            className="block text-md font-bold mb-2 text-slate-200"
+            htmlFor="gender"
+          >
+            Gender
+          </label>
+          <select
+            className="appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            id="gender"
+            name="gender"
+            value={editedUser.gender}
+            onChange={handleInputChange}
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            {/* Add more options if needed */}
+          </select>
         </div>
 
         <div className="mb-6">
@@ -79,24 +116,6 @@ const EditProfile = ({ user, onSave }) => {
             placeholder="03xx xxxxxxx"
             name="phone"
             value={editedUser.phone}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="mb-6">
-          <label
-            className="block text-md font-bold mb-2 text-slate-200"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input
-            className="appearance-none shadow-lg bg-slate-600 rounded-xl w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={editedUser.password}
             onChange={handleInputChange}
           />
         </div>
