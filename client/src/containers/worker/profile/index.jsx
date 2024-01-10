@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import EditProfile from "../../components/profile/edit";
-import RemoveProfile from "../../components/profile/remove";
-import DefaultAvatar from "../../images/Default Avatar.jpg";
+import DefaultAvatar from "../../../images/Default Avatar.jpg";
 import axios from "axios";
 import Cookies from "js-cookie";
+import EditProfile from "../../../components/worker/edit";
+import RemoveProfile from "../../../components/worker/remove";
 
-const Profile = () => {
+const WorkerProfile = () => {
   const [user, setUser] = useState({});
   const [selectedTab, setSelectedTab] = useState(0);
 
@@ -23,7 +23,7 @@ const Profile = () => {
     try {
       const jwt = Cookies.get("token");
       await axios.put(
-        "http://127.0.0.1:8000/api/update/client/",
+        "http://127.0.0.1:8000/api/update/worker/",
         {
           user: editedUser,
         },
@@ -42,7 +42,7 @@ const Profile = () => {
   const loadUserData = async () => {
     try {
       const jwt = Cookies.get("token");
-      const res = await axios.get("http://127.0.0.1:8000/api/profile/client/", {
+      const res = await axios.get("http://127.0.0.1:8000/api/profile/worker/", {
         params: {
           token: jwt,
         },
@@ -121,4 +121,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default WorkerProfile;

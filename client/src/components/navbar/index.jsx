@@ -6,6 +6,7 @@ import { useMediaQuery } from "@mui/material";
 import Cookies from "js-cookie";
 import "./navbar.scss";
 import DefaultAvatar from "../../images/Default Avatar.jpg";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get("token"));
@@ -67,6 +68,11 @@ const Navbar = () => {
                   className="rounded-full w-full h-full object-cover"
                 />
               </button>
+              <Link to="/notifications">
+                <button className="ml-4 relative py-2 px-8 text-base rounded-[50px] overflow-hidden bg-transparent transition-all duration-400 ease-in-out shadow-md hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-blue-500 before:to-blue-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-[50px] hover:before:left-0">
+                  <NotificationsActiveIcon className="" />
+                </button>
+              </Link>
             </div>
           ) : (
             <>

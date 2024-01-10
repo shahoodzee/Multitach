@@ -42,10 +42,11 @@ const WorkerLogin = () => {
             "Content-Type": "multipart/form-data",
           },
         });
+        console.log(res.data);
 
         const token = res.data.jwt;
         Cookies.set("token", token);
-        navigate(`/profile`);
+        navigate(`worker/profile`);
         window.location.reload();
       } else {
         alert("Kindly Fill All Required Fields");

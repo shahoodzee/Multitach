@@ -22,11 +22,6 @@ const PostTask = () => {
 
   const openModal = async () => {
     try {
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/task/recommended_workers"
-      );
-
-      setRecommendedWorkers(response.data);
       setModalIsOpen(true);
     } catch (error) {
       console.error("Error fetching recommended workers:", error.message);
@@ -76,23 +71,16 @@ const PostTask = () => {
       const res = await axios.get(
         "http://127.0.0.1:8000/api/task/recommended_workers/",
         {
-          title: formData.title,
-          description: formData.description,
-          params: { token: jwt },
+          params: {
+            jwt,
+            title: formData.title,
+            description: formData.description,
+          },
         }
       );
-
-      console.log("Res:", res);
-
-      // openModal();
-
-      // setFormData({
-      //   title: "",
-      //   description: "",
-      //   time: "",
-      //   longitude: "",
-      //   latitude: "",
-      // });
+      setRecommendedWorkers(res.data.top_workers);
+      console.log("Res:", res.data);
+      openModal();
     } catch (error) {
       console.error("Error posting task:", error.message);
     }
@@ -164,9 +152,12 @@ const PostTask = () => {
       </form>
 
       <RecommendedWorkersModal
-        isOpen={modalIsOpen}
+        isOpen={openModal}
         onClose={closeModal}
         recommendedWorkers={recommendedWorkers}
+        title={formData.title}
+        description={formData.description}
+        client_id={formData.client_id}
       />
     </div>
   );

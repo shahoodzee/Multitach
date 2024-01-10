@@ -79,6 +79,7 @@ const WorkerSignup = () => {
     const fullName = firstName + " " + lastName;
     const bodyData = {
       user: {
+        username: fullName,
         email,
         //image_url: image || DefaultAvatar,
         image_url:
@@ -88,7 +89,7 @@ const WorkerSignup = () => {
         phone: no,
         password,
       },
-      cnic: cleanedCnic, // Use the cleaned CNIC without '-'
+      cnic: cleanedCnic,
       workerLocation: address + ", " + city,
       workerType,
       task_count: null,
