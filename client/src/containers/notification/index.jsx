@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const Notifications = ({ userId }) => {
   const [notifications, setNotifications] = useState([]);
@@ -10,9 +11,10 @@ const Notifications = ({ userId }) => {
 
   const fetchNotifications = async () => {
     try {
-      // Fetch user notifications based on the user ID
+      const jwt = Cookies.get("token");
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/Client/notifications/user/${userId}/`
+        `http://127.0.0.1:8000/api/Worker/notifications/`,
+        { parmas: { jwt } }
       );
       setNotifications(response.data);
     } catch (error) {
@@ -22,10 +24,11 @@ const Notifications = ({ userId }) => {
 
   const handleAccept = async (notification) => {
     try {
-      // Update the notification status to 'Accepted' when accepted
+      const jwt = Cookies.get("token");
       await axios.put(
-        `http://127.0.0.1:8000/api/Client/notifications/update/${notification.id}/`,
-        { worker_decision: "Accepted" }
+        `http://127.0.0.1:8000/api/Worker/notifications/taskAccept/`,
+        { notification_id: notification.id },
+        { parmas: { jwt } }
       );
       // Fetch updated notifications
       fetchNotifications();
@@ -36,12 +39,12 @@ const Notifications = ({ userId }) => {
 
   const handleReject = async (notification) => {
     try {
-      // Update the notification status to 'Rejected' when rejected
+      const jwt = Cookies.get("token");
       await axios.put(
-        `http://127.0.0.1:8000/api/Client/notifications/update/${notification.id}/`,
-        { worker_decision: "Rejected" }
+        `http://127.0.0.1:8000/notifications/`,
+        { notification_id: notification.id },
+        { parmas: { jwt } }
       );
-      // Fetch updated notifications
       fetchNotifications();
     } catch (error) {
       console.error("Error rejecting notification:", error.message);
