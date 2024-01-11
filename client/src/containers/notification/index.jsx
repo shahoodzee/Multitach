@@ -12,11 +12,12 @@ const Notifications = ({ userId }) => {
   const fetchNotifications = async () => {
     try {
       const jwt = Cookies.get("token");
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/Worker/notifications/`,
-        { parmas: { jwt } }
+      const res = await axios.get(
+        "http://127.0.0.1:8000/api/Worker/notifications/",
+        { parmas: { token: jwt } }
       );
-      setNotifications(response.data);
+      setNotifications(res.data);
+      console.log("res: ", res.data);
     } catch (error) {
       console.error("Error fetching notifications:", error.message);
     }
@@ -62,7 +63,7 @@ const Notifications = ({ userId }) => {
           <p className="text-lg font-semibold">{`Title: ${notification.title}`}</p>
           <p>{`Description: ${notification.description}`}</p>
           <p>{`Status: ${notification.worker_decision}`}</p>
-          {notification.worker_decision === "Pending" && (
+          {/* {notification.worker_decision === "Pending" && (
             <div className="mt-4 flex justify-between">
               <button
                 className="bg-green-500 text-white px-4 py-2 rounded-md mr-2"
@@ -77,7 +78,7 @@ const Notifications = ({ userId }) => {
                 Reject
               </button>
             </div>
-          )}
+          )} */}
         </div>
       ))}
     </div>
