@@ -23,7 +23,7 @@ const Profile = () => {
     try {
       const jwt = Cookies.get("token");
       await axios.put(
-        "http://127.0.0.1:8000/api/update/client/",
+        "http://127.0.0.1:8000/api/update/worker/",
         {
           user: editedUser,
         },
@@ -42,7 +42,7 @@ const Profile = () => {
   const loadUserData = async () => {
     try {
       const jwt = Cookies.get("token");
-      const res = await axios.get("http://127.0.0.1:8000/api/profile/client/", {
+      const res = await axios.get("http://127.0.0.1:8000/api/profile/worker/", {
         params: {
           token: jwt,
         },
