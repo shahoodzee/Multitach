@@ -68,18 +68,22 @@ const PostTask = () => {
 
     try {
       const jwt = Cookies.get("token");
-      const res = await axios.get(
-        "http://127.0.0.1:8000/api/task/recommended_workers/",
+      console.log("token", jwt)
+      console.log("title", formData.title)
+      console.log("desc", formData.description)
+      const res = await axios.post("http://127.0.0.1:8000/api/task/recommended_workers/",
+        { 
+          title: formData.title,
+          description: formData.description
+        },
         {
           params: {
             jwt,
-            title: formData.title,
-            description: formData.description,
           },
         }
       );
       setRecommendedWorkers(res.data.top_workers);
-      console.log("Res:", res.data);
+      console.log("top workers:", res.data.top_workers);
       openModal();
     } catch (error) {
       console.error("Error posting task:", error.message);
