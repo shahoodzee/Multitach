@@ -62,21 +62,26 @@ const PostTask = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.title || !formData.description || !formData.time) {
+    if (
+      !formData.title ||
+      !formData.description ||
+      !formData.time ||
+      formData.address
+    ) {
       alert("Please fill in all required fields before submitting the form.");
       return;
     }
 
     try {
       const jwt = Cookies.get("token");
-      console.log("token", jwt);
-      console.log("title", formData.title);
-      console.log("desc", formData.description);
-      const res = await axios.post(
+      const res = await axios.get(
         "http://127.0.0.1:8000/api/task/recommended_workers/",
         {
           title: formData.title,
           description: formData.description,
+          params: {
+            jwt,
+          },
         },
         {
           params: {
@@ -84,8 +89,8 @@ const PostTask = () => {
           },
         }
       );
+      console.log("res: ", res.data);
       setRecommendedWorkers(res.data.top_workers);
-      console.log("top workers:", res.data.top_workers);
       openModal();
     } catch (error) {
       console.error("Error posting task:", error.message);
@@ -140,6 +145,22 @@ const PostTask = () => {
             id="time"
             name="time"
             value={formData.time}
+            onChange={handleInputChange}
+            className="appearance-none border bg-slate-700 'border-white' rounded-xl w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="address"
+            className="block text-sm font-bold mb-2 text-white"
+          >
+            Address
+          </label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            value={formData.address}
             onChange={handleInputChange}
             className="appearance-none border bg-slate-700 'border-white' rounded-xl w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
           />
