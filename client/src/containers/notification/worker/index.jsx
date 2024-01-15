@@ -14,9 +14,13 @@ const Notifications = ({ userId }) => {
       const jwt = Cookies.get("token");
       const res = await axios.get(
         "http://127.0.0.1:8000/api/Worker/notifications/",
-        { parmas: { token: jwt } }
+        {
+          params: {
+            jwt,
+          },
+        }
       );
-      setNotifications(res.data);
+      setNotifications(res.data.notifications);
       console.log("res: ", res.data);
     } catch (error) {
       console.error("Error fetching notifications:", error.message);
@@ -26,12 +30,16 @@ const Notifications = ({ userId }) => {
   const handleAccept = async (notification) => {
     try {
       const jwt = Cookies.get("token");
+      console.log("id: ", notification.id);
       await axios.put(
         `http://127.0.0.1:8000/api/Worker/notifications/taskAccept/`,
         { notification_id: notification.id },
-        { parmas: { jwt } }
+        {
+          params: {
+            jwt,
+          },
+        }
       );
-      // Fetch updated notifications
       fetchNotifications();
     } catch (error) {
       console.error("Error accepting notification:", error.message);
@@ -40,11 +48,16 @@ const Notifications = ({ userId }) => {
 
   const handleReject = async (notification) => {
     try {
+      console.log("id: ", notification.id);
       const jwt = Cookies.get("token");
       await axios.put(
-        `http://127.0.0.1:8000/notifications/`,
+        `http://127.0.0.1:8000/api/Worker/notifications/taskReject/`,
         { notification_id: notification.id },
-        { parmas: { jwt } }
+        {
+          params: {
+            jwt,
+          },
+        }
       );
       fetchNotifications();
     } catch (error) {
@@ -63,7 +76,7 @@ const Notifications = ({ userId }) => {
           <p className="text-lg font-semibold">{`Title: ${notification.title}`}</p>
           <p>{`Description: ${notification.description}`}</p>
           <p>{`Status: ${notification.worker_decision}`}</p>
-          {/* {notification.worker_decision === "Pending" && (
+          {notification.worker_decision === "Pending" && (
             <div className="mt-4 flex justify-between">
               <button
                 className="bg-green-500 text-white px-4 py-2 rounded-md mr-2"
@@ -78,7 +91,7 @@ const Notifications = ({ userId }) => {
                 Reject
               </button>
             </div>
-          )} */}
+          )}
         </div>
       ))}
     </div>

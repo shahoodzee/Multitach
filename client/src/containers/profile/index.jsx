@@ -10,7 +10,6 @@ import Cookies from "js-cookie";
 const Profile = () => {
   const [user, setUser] = useState({});
   const [selectedTab, setSelectedTab] = useState(0);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadUserData();
@@ -24,7 +23,7 @@ const Profile = () => {
     try {
       const jwt = Cookies.get("token");
       await axios.put(
-        "http://127.0.0.1:8000/api/update/client/",
+        "http://127.0.0.1:8000/api/update/worker/",
         {
           user: editedUser,
         },
@@ -52,29 +51,26 @@ const Profile = () => {
       await setUser(res.data.user);
     } catch (err) {
       console.log(err);
-      setLoading(false);
     }
   };
 
   return (
     <div className="container mx-auto p-8 flex flex-col items-center">
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="user-profile p-8 rounded-md flex flex-col md:flex-row md:items-center">
-          <div className="md:mr-8">
-            <h2 className="text-3xl font-bold text-white">{user.username}</h2>
-            <p className="text-gray-400">Email: {user.email}</p>
-            <p className="text-gray-400">CNIC: {user.cnic || "N/A"}</p>
-          </div>
-
-          <img
-            src={DefaultAvatar}
-            alt="Profile Picture"
-            className="rounded-full h-20 w-20 object-cover md:h-32 md:w-32 ml-auto"
-          />
+      <div className="user-profile p-8 rounded-md flex flex-col md:flex-row md:items-center">
+        <div className="md:mr-8">
+          <h2 className="text-3xl font-bold text-white">
+            {user.username || "N/A"}
+          </h2>
+          <p className="text-gray-400">Email: {user.email}</p>
+          <p className="text-gray-400">CNIC: {user.cnic || "N/A"}</p>
         </div>
-      )}
+
+        <img
+          src={DefaultAvatar}
+          alt="Profile Picture"
+          className="rounded-full h-20 w-20 object-cover md:h-32 md:w-32 ml-auto"
+        />
+      </div>
 
       <div className="flex flex-col justify-center mt-4 md:mt-0">
         <Tabs
@@ -94,7 +90,30 @@ const Profile = () => {
             </Tab>
           </TabList>
 
-          {/* ... (rest of your JSX) */}
+          <TabPanel>
+            <div className="tab-content">
+              <h3 className="text-2xl font-bold text-white">Recent Activity</h3>
+              {/* DATA NEEDED FROM BACKEND */}
+            </div>
+          </TabPanel>
+
+          <TabPanel>
+            <div className="tab-content">
+              <h3 className="text-2xl font-bold text-white">
+                Edit Your Profile
+              </h3>
+              <EditProfile user={user} onSave={handleSave} />
+            </div>
+          </TabPanel>
+
+          <TabPanel>
+            <div className="tab-content">
+              <h3 className="text-2xl font-bold text-white">
+                Delete Your Account
+              </h3>
+              <RemoveProfile user={user} />
+            </div>
+          </TabPanel>
         </Tabs>
       </div>
     </div>

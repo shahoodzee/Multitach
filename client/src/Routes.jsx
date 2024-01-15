@@ -15,7 +15,7 @@ import Careers from "./containers/static/Carrers";
 import CustomerCare from "./containers/static/CustomerCare";
 import TermsAndConditions from "./containers/static/TermsAndConditions";
 import FAQ from "./containers/static/FAQ";
-import Notifications from "./containers/notification";
+import Notifications from "./containers/notification/worker";
 import WorkerProfile from "./containers/worker/profile";
 
 const ProjectRoutes = () => {

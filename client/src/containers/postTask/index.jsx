@@ -9,6 +9,7 @@ const PostTask = () => {
     title: "",
     description: "",
     time: "",
+    address: "",
     longitude: "",
     latitude: "",
   });
@@ -68,13 +69,14 @@ const PostTask = () => {
 
     try {
       const jwt = Cookies.get("token");
-      console.log("token", jwt)
-      console.log("title", formData.title)
-      console.log("desc", formData.description)
-      const res = await axios.post("http://127.0.0.1:8000/api/task/recommended_workers/",
-        { 
+      console.log("token", jwt);
+      console.log("title", formData.title);
+      console.log("desc", formData.description);
+      const res = await axios.post(
+        "http://127.0.0.1:8000/api/task/recommended_workers/",
+        {
           title: formData.title,
-          description: formData.description
+          description: formData.description,
         },
         {
           params: {
