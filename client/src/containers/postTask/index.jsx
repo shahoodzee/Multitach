@@ -13,7 +13,18 @@ const PostTask = () => {
     longitude: "",
     latitude: "",
   });
-
+  const [postTaskData, setPostTaskData] = useState({
+    lat: "",
+    long: "",
+    title: "",
+    description: "",
+    time: "",
+    text_address: "",
+    taskType: "",
+    status: "",
+    worker_response: "",
+    worker: "",
+  });
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [recommendedWorkers, setRecommendedWorkers] = useState([]);
 
@@ -86,12 +97,35 @@ const PostTask = () => {
           },
         }
       );
-      console.log("res: ", res.data);
-      setRecommendedWorkers(res.data.top_workers);
+
+      const recommendedWorkersData = res.data;
+      const taskType = recommendedWorkersData.task_type;
+
+      setPostTaskData({
+        lat: formData.latitude,
+        long: formData.longitude,
+        title: formData.title,
+        description: formData.description,
+        time: formData.time,
+        text_address: formData.address,
+        taskType: taskType,
+        status: "Accepted",
+        worker_response: "",
+        worker: "",
+      });
+      setRecommendedWorkers(recommendedWorkersData.top_workers);
+
       openModal();
     } catch (error) {
       console.error("Error posting task:", error.message);
     }
+  };
+
+  const updatePostTaskData = (workerId) => {
+    setPostTaskData((prevData) => ({
+      ...prevData,
+      worker: workerId,
+    }));
   };
 
   return (
@@ -176,12 +210,17 @@ const PostTask = () => {
       </form>
 
       <RecommendedWorkersModal
-        isOpen={openModal}
+        isOpen={modalIsOpen}
         onClose={closeModal}
         recommendedWorkers={recommendedWorkers}
+        lat={formData.latitude}
+        long={formData.longitude}
         title={formData.title}
         description={formData.description}
-        client_id={formData.client_id}
+        time={formData.time}
+        text_address={formData.text_address}
+        taskType={postTaskData.taskType}
+        sender={formData.client_id}
       />
     </div>
   );

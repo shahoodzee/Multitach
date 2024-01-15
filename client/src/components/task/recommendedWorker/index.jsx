@@ -6,28 +6,42 @@ const RecommendedWorkersModal = ({
   isOpen,
   onClose,
   recommendedWorkers,
+  lat,
+  long,
   title,
   description,
-  client_id,
+  time,
+  text_address,
+  taskType,
+  sender,
 }) => {
   const [selectedWorker, setSelectedWorker] = useState();
 
   const handleAccept = async (worker) => {
-    console.log("Accepted worker:", worker, title, description, client_id);
     onClose();
 
     try {
       const jwt = Cookies.get("token");
+      const body = {
+        lat,
+        long,
+        title,
+        description,
+        time,
+        text_address,
+        taskType,
+        status: "",
+        worker_decision: "Pending",
+        is_read: false,
+        sender,
+        receiver: worker.worker_id,
+      };
+
+      console.log("body: ", body);
+
       const response = await axios.post(
         "http://127.0.0.1:8000/api/Client/notifications/createNoti/",
-        {
-          title,
-          description,
-          is_read: false,
-          worker_decision: "Pending",
-          sender: client_id,
-          receiver: worker.worker_id,
-        },
+        body,
         { params: { jwt } }
       );
 
