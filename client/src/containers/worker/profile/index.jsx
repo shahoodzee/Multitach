@@ -44,12 +44,12 @@ const WorkerProfile = () => {
       const jwt = Cookies.get("token");
       const res = await axios.get("http://127.0.0.1:8000/api/profile/worker/", {
         params: {
-          token: jwt,
+          jwt,
         },
       });
 
       await setUser(res.data.user);
-      console.log(res.data.user);
+      console.log(res.data);
     } catch (err) {
       console.log(err);
     }

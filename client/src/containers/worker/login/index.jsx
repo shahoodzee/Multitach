@@ -46,7 +46,7 @@ const WorkerLogin = () => {
 
         const token = res.data.jwt;
         Cookies.set("token", token);
-        navigate(`worker/profile`);
+        navigate(`/worker/profile`);
         window.location.reload();
       } else {
         alert("Kindly Fill All Required Fields");

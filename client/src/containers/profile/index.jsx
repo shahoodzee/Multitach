@@ -42,13 +42,14 @@ const Profile = () => {
   const loadUserData = async () => {
     try {
       const jwt = Cookies.get("token");
-      const res = await axios.get("http://127.0.0.1:8000/api/profile/worker/", {
+      const res = await axios.get("http://127.0.0.1:8000/api/profile/client/", {
         params: {
           jwt,
         },
       });
 
       await setUser(res.data.user);
+      console.log("res: ", res.data);
     } catch (err) {
       console.log(err);
     }
