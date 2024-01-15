@@ -48,7 +48,7 @@ const Profile = () => {
         },
       });
 
-      await setUser(res.data.user);
+      setUser(res.data.data.user);
     } catch (err) {
       console.log(err);
     }
@@ -59,10 +59,10 @@ const Profile = () => {
       <div className="user-profile p-8 rounded-md flex flex-col md:flex-row md:items-center">
         <div className="md:mr-8">
           <h2 className="text-3xl font-bold text-white">
-            {user.username || "N/A"}
+            {user?.username || "N/A"}
           </h2>
-          <p className="text-gray-400">Email: {user.email}</p>
-          <p className="text-gray-400">CNIC: {user.cnic || "N/A"}</p>
+          <p className="text-gray-400">Email: {user?.email}</p>
+          <p className="text-gray-400">CNIC: {user?.cnic || "N/A"}</p>
         </div>
 
         <img
