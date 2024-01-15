@@ -66,7 +66,7 @@ const PostTask = () => {
       !formData.title ||
       !formData.description ||
       !formData.time ||
-      formData.address
+      !formData.address
     ) {
       alert("Please fill in all required fields before submitting the form.");
       return;
@@ -74,14 +74,11 @@ const PostTask = () => {
 
     try {
       const jwt = Cookies.get("token");
-      const res = await axios.get(
+      const res = await axios.post(
         "http://127.0.0.1:8000/api/task/recommended_workers/",
         {
           title: formData.title,
           description: formData.description,
-          params: {
-            jwt,
-          },
         },
         {
           params: {
