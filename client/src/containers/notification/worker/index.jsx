@@ -21,7 +21,6 @@ const Notifications = ({ userId }) => {
         }
       );
       setNotifications(res.data.notifications);
-      console.log("res: ", res.data);
     } catch (error) {
       console.error("Error fetching notifications:", error.message);
     }
@@ -30,7 +29,6 @@ const Notifications = ({ userId }) => {
   const handleAccept = async (notification) => {
     try {
       const jwt = Cookies.get("token");
-      console.log("id: ", notification.id);
       await axios.put(
         `http://127.0.0.1:8000/api/Worker/notifications/taskAccept/`,
         { notification_id: notification.id },
@@ -41,6 +39,30 @@ const Notifications = ({ userId }) => {
         }
       );
       fetchNotifications();
+      const body = {
+        lat: notification.lat,
+        long: notification.log,
+        title: notification.title,
+        description: notification.description,
+        time: notification.time,
+        text_address: notification.text_address,
+        taskType: notification.taskType,
+        status: "Accepted",
+        worker_decision: "Accepted",
+        is_read: true,
+        worker: notification.receiver,
+      };
+
+      const res = axios.post(
+        "http://127.0.0.1:8000/api/task/post_a_task/",
+        body,
+        {
+          params: {
+            jwt,
+          },
+        }
+      );
+      console.log("Post Task Response: ", res);
     } catch (error) {
       console.error("Error accepting notification:", error.message);
     }

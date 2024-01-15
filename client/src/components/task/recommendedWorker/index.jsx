@@ -37,8 +37,6 @@ const RecommendedWorkersModal = ({
         receiver: worker.worker_id,
       };
 
-      console.log("body: ", body);
-
       const response = await axios.post(
         "http://127.0.0.1:8000/api/Client/notifications/createNoti/",
         body,
