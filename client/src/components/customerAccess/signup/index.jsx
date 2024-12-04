@@ -86,23 +86,14 @@ const Signup = () => {
         } else {
           alert("Passwords do not match");
         }
-      }
 
-      //   if (res.data === "Email already exists") {
-      //     alert(res.data);
-      //   } else if (password !== confirmPassword) {
-      //     alert("Passwords Must Match");
-      //   } else {
-      //     localStorage.setItem("token", token);
-      //     addImage(user.id);
-      //     navigate(`/home/${user.id}`);
-      //   }
-      // } catch (err) {
-      //   alert(err.message);
-      // }
-    } catch (err) {
+      }
+  } catch (err) {
       console.log(err);
-    }
+  }
+  
+
+
   };
 
   const validatePhoneNumber = (value) => {
