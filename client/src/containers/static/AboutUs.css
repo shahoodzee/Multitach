@@ -1,0 +1,52 @@
+/* AboutUs.css */
+
+/* Styles for the About Multitach section */
+.about-multitach {
+  padding: 20px;
+  background-color: #817676;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.about-multitach h1 {
+  margin-bottom: 10px;
+}
+
+.about-multitach h1.hello {
+  color: rgba(0, 0, 0, 0.689);
+}
+
+/* AboutUs.css */
+
+.team-members h2 {
+  color: black;
+}
+
+.about-multitach p {
+  margin-bottom: 15px;
+}
+
+/* Styles for the Team Members section */
+.team-members {
+  padding: 20px;
+  background-color: #176b8a;
+  border-radius: 8px;
+}
+
+.team-members h2 {
+  margin-bottom: 15px;
+}
+
+/* Styles for the individual team member cards */
+.member-card {
+  border: 1px solid #0c0303;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.member-card img {
+  max-width: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}

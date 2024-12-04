@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import "./index.css";
 
-const Login = () => {
+const WorkerLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,17 +29,24 @@ const Login = () => {
   const submit = async (e) => {
     e.preventDefault();
 
-    const customerEndpoint = "http://127.0.0.1:8000/api/login/client/";
+    const workerEndpoint = "http://127.0.0.1:8000/api/login/worker/";
 
     try {
       if (!emailRequired && !passwordRequired) {
-        const res = await axios.post(customerEndpoint, {
-          email,
-          password,
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("password", password);
+
+        const res = await axios.post(workerEndpoint, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         });
+        console.log(res.data);
+
         const token = res.data.jwt;
         Cookies.set("token", token);
-        navigate(`/profile`);
+        navigate(`/worker/profile`);
         window.location.reload();
       } else {
         alert("Kindly Fill All Required Fields");
@@ -54,9 +61,9 @@ const Login = () => {
       <div className="w-full max-w-lg form flex flex-col lg:flex-row lg:items-center justify-center lg:space-x-8">
         <animated.div style={tabSpring} className="tab-group lg:w-1/3">
           <div className="text-left w-full">
-            <h2 className="font-bold text-2xl pb-2">Login As A Customer</h2>
+            <h2 className="font-bold text-2xl pb-2">Login As A Worker</h2>
             <p className="text-md pt-2">
-              Get any task done by our professional workers
+              Complete customer tasks to earn money
             </p>
           </div>
         </animated.div>
@@ -134,4 +141,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default WorkerLogin;
