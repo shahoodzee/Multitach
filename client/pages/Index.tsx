@@ -31,40 +31,40 @@ import { motion } from "framer-motion";
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: "easeOut" }
+  transition: { duration: 0.6, ease: "easeOut" },
 };
 
 const fadeInLeft = {
   initial: { opacity: 0, x: -60 },
   animate: { opacity: 1, x: 0 },
-  transition: { duration: 0.6, ease: "easeOut" }
+  transition: { duration: 0.6, ease: "easeOut" },
 };
 
 const fadeInRight = {
   initial: { opacity: 0, x: 60 },
   animate: { opacity: 1, x: 0 },
-  transition: { duration: 0.6, ease: "easeOut" }
+  transition: { duration: 0.6, ease: "easeOut" },
 };
 
 const staggerContainer = {
   animate: {
     transition: {
-      staggerChildren: 0.1
-    }
-  }
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 const scaleIn = {
   initial: { opacity: 0, scale: 0.8 },
   animate: { opacity: 1, scale: 1 },
-  transition: { duration: 0.5, ease: "easeOut" }
+  transition: { duration: 0.5, ease: "easeOut" },
 };
 
 export default function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-purple-50/30 to-blue-50/30">
       {/* Navigation */}
-      <motion.nav 
+      <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -74,7 +74,7 @@ export default function Index() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <motion.div 
+                <motion.div
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.5 }}
                   className="h-10 w-10 bg-gradient-to-br from-brand-500 to-brand-600 rounded-xl flex items-center justify-center shadow-lg"
@@ -109,13 +109,26 @@ export default function Index() {
                 >
                   For Professionals
                 </motion.a>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button variant="outline" size="sm" className="border-brand-200 hover:bg-brand-50">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="border-brand-200 hover:bg-brand-50"
+                  >
                     Sign In
                   </Button>
                 </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button size="sm" className="bg-gradient-to-r from-brand-500 to-purple-600 hover:from-brand-600 hover:to-purple-700 shadow-lg">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    size="sm"
+                    className="bg-gradient-to-r from-brand-500 to-purple-600 hover:from-brand-600 hover:to-purple-700 shadow-lg"
+                  >
                     Get Started
                   </Button>
                 </motion.div>
@@ -136,10 +149,10 @@ export default function Index() {
         <div className="absolute inset-0 bg-gradient-to-br from-brand-50/40 via-purple-50/40 to-blue-50/40" />
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-brand-400/10 to-purple-400/10 rounded-full blur-3xl" />
         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-br from-purple-400/10 to-blue-400/10 rounded-full blur-3xl" />
-        
+
         <div className="max-w-7xl mx-auto relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div 
+            <motion.div
               initial="initial"
               animate="animate"
               variants={staggerContainer}
@@ -154,8 +167,8 @@ export default function Index() {
                   AI-Powered Service Matching
                 </Badge>
               </motion.div>
-              
-              <motion.h1 
+
+              <motion.h1
                 variants={fadeInUp}
                 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6"
               >
@@ -167,35 +180,48 @@ export default function Index() {
                   Maintenance Professionals
                 </span>
               </motion.h1>
-              
-              <motion.p 
+
+              <motion.p
                 variants={fadeInUp}
                 className="text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed"
               >
-                Get matched with the perfect maintenance worker for your needs in seconds.
-                From plumbing to HVAC, our AI finds the best professionals in your
-                area instantly.
+                Get matched with the perfect maintenance worker for your needs
+                in seconds. From plumbing to HVAC, our AI finds the best
+                professionals in your area instantly.
               </motion.p>
-              
-              <motion.div 
+
+              <motion.div
                 variants={fadeInUp}
                 className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               >
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button size="lg" className="text-lg px-8 py-4 bg-gradient-to-r from-brand-500 to-purple-600 hover:from-brand-600 hover:to-purple-700 shadow-xl hover:shadow-2xl transition-all duration-300">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    size="lg"
+                    className="text-lg px-8 py-4 bg-gradient-to-r from-brand-500 to-purple-600 hover:from-brand-600 hover:to-purple-700 shadow-xl hover:shadow-2xl transition-all duration-300"
+                  >
                     Find a Professional
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-brand-200 hover:bg-brand-50 hover:border-brand-300 transition-all duration-300">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="text-lg px-8 py-4 border-brand-200 hover:bg-brand-50 hover:border-brand-300 transition-all duration-300"
+                  >
                     Join as Professional
                   </Button>
                 </motion.div>
               </motion.div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -208,7 +234,7 @@ export default function Index() {
                   className="w-full h-[500px] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                
+
                 {/* Floating elements */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -218,7 +244,9 @@ export default function Index() {
                 >
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                    <span className="text-sm font-medium text-gray-800">AI Matching Active</span>
+                    <span className="text-sm font-medium text-gray-800">
+                      AI Matching Active
+                    </span>
                   </div>
                 </motion.div>
 
@@ -235,7 +263,9 @@ export default function Index() {
                       <div className="w-8 h-8 bg-blue-500 rounded-full border-2 border-white" />
                     </div>
                     <div>
-                      <div className="text-sm font-medium text-gray-800">2,500+ Professionals</div>
+                      <div className="text-sm font-medium text-gray-800">
+                        2,500+ Professionals
+                      </div>
                       <div className="text-xs text-gray-600">Ready to help</div>
                     </div>
                   </div>
@@ -247,7 +277,7 @@ export default function Index() {
       </section>
 
       {/* Stats Section */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -255,7 +285,7 @@ export default function Index() {
         className="py-16 bg-white/50 backdrop-blur-sm"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
@@ -266,34 +296,45 @@ export default function Index() {
               <div className="text-4xl font-bold bg-gradient-to-r from-brand-600 to-purple-600 bg-clip-text text-transparent">
                 10K+
               </div>
-              <div className="text-gray-600 mt-2 font-medium">Verified Professionals</div>
+              <div className="text-gray-600 mt-2 font-medium">
+                Verified Professionals
+              </div>
             </motion.div>
             <motion.div variants={scaleIn}>
               <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 50K+
               </div>
-              <div className="text-gray-600 mt-2 font-medium">Jobs Completed</div>
+              <div className="text-gray-600 mt-2 font-medium">
+                Jobs Completed
+              </div>
             </motion.div>
             <motion.div variants={scaleIn}>
               <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-brand-600 bg-clip-text text-transparent">
                 4.9
               </div>
-              <div className="text-gray-600 mt-2 font-medium">Average Rating</div>
+              <div className="text-gray-600 mt-2 font-medium">
+                Average Rating
+              </div>
             </motion.div>
             <motion.div variants={scaleIn}>
               <div className="text-4xl font-bold bg-gradient-to-r from-brand-600 to-purple-600 bg-clip-text text-transparent">
                 24/7
               </div>
-              <div className="text-gray-600 mt-2 font-medium">Support Available</div>
+              <div className="text-gray-600 mt-2 font-medium">
+                Support Available
+              </div>
             </motion.div>
           </motion.div>
         </div>
       </motion.section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 bg-gradient-to-br from-slate-50 to-brand-50/30">
+      <section
+        id="how-it-works"
+        className="py-20 bg-gradient-to-br from-slate-50 to-brand-50/30"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -307,8 +348,8 @@ export default function Index() {
               Get matched with the perfect professional in minutes
             </p>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
@@ -318,33 +359,37 @@ export default function Index() {
             <motion.div variants={fadeInUp}>
               <Card className="text-center border-0 shadow-xl bg-white/80 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2">
                 <CardHeader className="pb-4">
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.1, rotate: 360 }}
                     transition={{ duration: 0.5 }}
                     className="w-20 h-20 bg-gradient-to-br from-brand-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-brand-500/25"
                   >
                     <Users className="h-10 w-10 text-white" />
                   </motion.div>
-                  <CardTitle className="text-2xl mb-4">1. Tell Us What You Need</CardTitle>
+                  <CardTitle className="text-2xl mb-4">
+                    1. Tell Us What You Need
+                  </CardTitle>
                   <CardDescription className="text-base leading-relaxed">
-                    Describe your maintenance job and requirements. Our smart form
-                    captures all the details to find your perfect match.
+                    Describe your maintenance job and requirements. Our smart
+                    form captures all the details to find your perfect match.
                   </CardDescription>
                 </CardHeader>
               </Card>
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <Card className="text-center border-0 shadow-xl bg-white/80 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2">
                 <CardHeader className="pb-4">
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.5 }}
                     className="w-20 h-20 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-purple-500/25"
                   >
                     <Zap className="h-10 w-10 text-white" />
                   </motion.div>
-                  <CardTitle className="text-2xl mb-4">2. AI Finds Perfect Matches</CardTitle>
+                  <CardTitle className="text-2xl mb-4">
+                    2. AI Finds Perfect Matches
+                  </CardTitle>
                   <CardDescription className="text-base leading-relaxed">
                     Our AI analyzes thousands of professionals to find the best
                     matches based on skills, location, and availability.
@@ -352,21 +397,23 @@ export default function Index() {
                 </CardHeader>
               </Card>
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <Card className="text-center border-0 shadow-xl bg-white/80 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2">
                 <CardHeader className="pb-4">
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.5 }}
                     className="w-20 h-20 bg-gradient-to-br from-blue-500 to-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-blue-500/25"
                   >
                     <CheckCircle className="h-10 w-10 text-white" />
                   </motion.div>
-                  <CardTitle className="text-2xl mb-4">3. Get Connected & Done</CardTitle>
+                  <CardTitle className="text-2xl mb-4">
+                    3. Get Connected & Done
+                  </CardTitle>
                   <CardDescription className="text-base leading-relaxed">
-                    Connect with your matched professional, schedule the work, and
-                    get it done right the first time.
+                    Connect with your matched professional, schedule the work,
+                    and get it done right the first time.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -379,7 +426,7 @@ export default function Index() {
       <section id="services" className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-white via-purple-50/20 to-brand-50/20" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -393,8 +440,8 @@ export default function Index() {
               Professional maintenance services for every need
             </p>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
@@ -419,12 +466,13 @@ export default function Index() {
                 <CardHeader>
                   <CardTitle className="text-xl">Plumbing</CardTitle>
                   <CardDescription className="leading-relaxed">
-                    Leaks, installations, repairs, and emergency plumbing services from certified professionals.
+                    Leaks, installations, repairs, and emergency plumbing
+                    services from certified professionals.
                   </CardDescription>
                 </CardHeader>
               </Card>
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 bg-white/90 backdrop-blur-sm">
                 <div className="aspect-video relative overflow-hidden">
@@ -443,12 +491,13 @@ export default function Index() {
                 <CardHeader>
                   <CardTitle className="text-xl">HVAC</CardTitle>
                   <CardDescription className="leading-relaxed">
-                    Heating, cooling, ventilation, and air quality solutions for optimal comfort.
+                    Heating, cooling, ventilation, and air quality solutions for
+                    optimal comfort.
                   </CardDescription>
                 </CardHeader>
               </Card>
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 bg-white/90 backdrop-blur-sm">
                 <div className="aspect-video relative overflow-hidden">
@@ -467,12 +516,13 @@ export default function Index() {
                 <CardHeader>
                   <CardTitle className="text-xl">Carpentry</CardTitle>
                   <CardDescription className="leading-relaxed">
-                    Custom builds, repairs, installations, and expert woodworking services.
+                    Custom builds, repairs, installations, and expert
+                    woodworking services.
                   </CardDescription>
                 </CardHeader>
               </Card>
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 bg-white/90 backdrop-blur-sm">
                 <div className="aspect-video relative overflow-hidden bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center">
@@ -486,7 +536,8 @@ export default function Index() {
                 <CardHeader>
                   <CardTitle className="text-xl">General Repairs</CardTitle>
                   <CardDescription className="leading-relaxed">
-                    Handyman services, maintenance, and comprehensive home improvements.
+                    Handyman services, maintenance, and comprehensive home
+                    improvements.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -496,10 +547,13 @@ export default function Index() {
       </section>
 
       {/* For Professionals Section */}
-      <section id="for-professionals" className="py-20 bg-gradient-to-br from-slate-900 via-purple-900/10 to-slate-900 text-white relative overflow-hidden">
+      <section
+        id="for-professionals"
+        className="py-20 bg-gradient-to-br from-slate-900 via-purple-900/10 to-slate-900 text-white relative overflow-hidden"
+      >
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 to-purple-900/20" />
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-brand-500/10 to-purple-500/10 rounded-full blur-3xl" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -508,17 +562,23 @@ export default function Index() {
               variants={staggerContainer}
               viewport={{ once: true }}
             >
-              <motion.h2 variants={fadeInLeft} className="text-4xl sm:text-5xl font-bold mb-6">
+              <motion.h2
+                variants={fadeInLeft}
+                className="text-4xl sm:text-5xl font-bold mb-6"
+              >
                 <span className="bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
                   Join Multitach as a Professional
                 </span>
               </motion.h2>
-              
-              <motion.p variants={fadeInLeft} className="text-xl text-slate-300 mb-8 leading-relaxed">
+
+              <motion.p
+                variants={fadeInLeft}
+                className="text-xl text-slate-300 mb-8 leading-relaxed"
+              >
                 Grow your business with a steady stream of qualified leads. Our
                 AI matches you with clients who need exactly what you offer.
               </motion.p>
-              
+
               <motion.div variants={fadeInLeft} className="space-y-4 mb-8">
                 <div className="flex items-center group">
                   <motion.div
@@ -527,7 +587,9 @@ export default function Index() {
                   >
                     <CheckCircle className="h-6 w-6 text-brand-400 mr-4" />
                   </motion.div>
-                  <span className="group-hover:text-white transition-colors">Get matched with qualified clients automatically</span>
+                  <span className="group-hover:text-white transition-colors">
+                    Get matched with qualified clients automatically
+                  </span>
                 </div>
                 <div className="flex items-center group">
                   <motion.div
@@ -536,7 +598,9 @@ export default function Index() {
                   >
                     <Clock className="h-6 w-6 text-brand-400 mr-4" />
                   </motion.div>
-                  <span className="group-hover:text-white transition-colors">Set your own rates and schedule</span>
+                  <span className="group-hover:text-white transition-colors">
+                    Set your own rates and schedule
+                  </span>
                 </div>
                 <div className="flex items-center group">
                   <motion.div
@@ -545,7 +609,9 @@ export default function Index() {
                   >
                     <Shield className="h-6 w-6 text-brand-400 mr-4" />
                   </motion.div>
-                  <span className="group-hover:text-white transition-colors">Fast, secure payments</span>
+                  <span className="group-hover:text-white transition-colors">
+                    Fast, secure payments
+                  </span>
                 </div>
                 <div className="flex items-center group">
                   <motion.div
@@ -554,21 +620,29 @@ export default function Index() {
                   >
                     <Award className="h-6 w-6 text-brand-400 mr-4" />
                   </motion.div>
-                  <span className="group-hover:text-white transition-colors">Build your reputation with reviews</span>
+                  <span className="group-hover:text-white transition-colors">
+                    Build your reputation with reviews
+                  </span>
                 </div>
               </motion.div>
-              
+
               <motion.div variants={fadeInLeft}>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button size="lg" className="bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-700 hover:to-purple-700 shadow-xl hover:shadow-2xl transition-all duration-300">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-700 hover:to-purple-700 shadow-xl hover:shadow-2xl transition-all duration-300"
+                  >
                     Apply to Join
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </motion.div>
               </motion.div>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               variants={staggerContainer}
               initial="initial"
               whileInView="animate"
@@ -578,7 +652,7 @@ export default function Index() {
               <motion.div variants={scaleIn}>
                 <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm hover:bg-slate-800/70 transition-all duration-300 group">
                   <CardHeader className="text-center">
-                    <motion.div 
+                    <motion.div
                       whileHover={{ scale: 1.1 }}
                       className="text-3xl font-bold bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent group-hover:from-brand-300 group-hover:to-purple-300"
                     >
@@ -590,11 +664,11 @@ export default function Index() {
                   </CardHeader>
                 </Card>
               </motion.div>
-              
+
               <motion.div variants={scaleIn}>
                 <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm hover:bg-slate-800/70 transition-all duration-300 group">
                   <CardHeader className="text-center">
-                    <motion.div 
+                    <motion.div
                       whileHover={{ scale: 1.1 }}
                       className="text-3xl font-bold bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent group-hover:from-brand-300 group-hover:to-purple-300"
                     >
@@ -606,11 +680,11 @@ export default function Index() {
                   </CardHeader>
                 </Card>
               </motion.div>
-              
+
               <motion.div variants={scaleIn}>
                 <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm hover:bg-slate-800/70 transition-all duration-300 group">
                   <CardHeader className="text-center">
-                    <motion.div 
+                    <motion.div
                       whileHover={{ scale: 1.1 }}
                       className="text-3xl font-bold bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent group-hover:from-brand-300 group-hover:to-purple-300"
                     >
@@ -622,15 +696,15 @@ export default function Index() {
                   </CardHeader>
                 </Card>
               </motion.div>
-              
+
               <motion.div variants={scaleIn}>
                 <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm hover:bg-slate-800/70 transition-all duration-300 group">
                   <CardHeader className="text-center">
-                    <motion.div 
+                    <motion.div
                       whileHover={{ scale: 1.1 }}
                       className="text-3xl font-bold bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent group-hover:from-brand-300 group-hover:to-purple-300"
                     >
-                      <24hr className="text-2xl"></24hr>
+                      24hr
                     </motion.div>
                     <CardDescription className="text-slate-400 group-hover:text-slate-300">
                       Average Response Time
@@ -646,7 +720,7 @@ export default function Index() {
       {/* Testimonials */}
       <section className="py-20 bg-gradient-to-br from-white via-purple-50/20 to-brand-50/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -656,10 +730,12 @@ export default function Index() {
             <h2 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-gray-900 to-brand-800 bg-clip-text text-transparent mb-4">
               What Our Customers Say
             </h2>
-            <p className="text-xl text-gray-600">Real stories from satisfied customers and professionals</p>
+            <p className="text-xl text-gray-600">
+              Real stories from satisfied customers and professionals
+            </p>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
@@ -687,22 +763,26 @@ export default function Index() {
                   </div>
                   <CardDescription className="text-base leading-relaxed text-gray-700">
                     "Found an amazing plumber through Multitach in just 10
-                    minutes. The AI matching really works - he was perfect for my
-                    specific problem and very affordable."
+                    minutes. The AI matching really works - he was perfect for
+                    my specific problem and very affordable."
                   </CardDescription>
                   <div className="mt-6 flex items-center space-x-3">
                     <div className="w-12 h-12 bg-gradient-to-br from-brand-400 to-purple-400 rounded-full flex items-center justify-center text-white font-bold">
                       SJ
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">Sarah Johnson</div>
-                      <div className="text-sm text-gray-500">Homeowner, Seattle</div>
+                      <div className="font-semibold text-gray-900">
+                        Sarah Johnson
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        Homeowner, Seattle
+                      </div>
                     </div>
                   </div>
                 </CardHeader>
               </Card>
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
                 <CardHeader className="pb-6">
@@ -724,22 +804,26 @@ export default function Index() {
                   </div>
                   <CardDescription className="text-base leading-relaxed text-gray-700">
                     "As an HVAC professional, Multitach has transformed my
-                    business. I get steady, quality leads without having to chase
-                    down work. The platform just works."
+                    business. I get steady, quality leads without having to
+                    chase down work. The platform just works."
                   </CardDescription>
                   <div className="mt-6 flex items-center space-x-3">
                     <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-blue-400 rounded-full flex items-center justify-center text-white font-bold">
                       MR
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">Mike Rodriguez</div>
-                      <div className="text-sm text-gray-500">HVAC Technician, Denver</div>
+                      <div className="font-semibold text-gray-900">
+                        Mike Rodriguez
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        HVAC Technician, Denver
+                      </div>
                     </div>
                   </div>
                 </CardHeader>
               </Card>
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
                 <CardHeader className="pb-6">
@@ -761,16 +845,20 @@ export default function Index() {
                   </div>
                   <CardDescription className="text-base leading-relaxed text-gray-700">
                     "The quality of professionals on Multitach is outstanding.
-                    Every carpenter I've hired has been skilled, professional, and
-                    reliable. Highly recommend!"
+                    Every carpenter I've hired has been skilled, professional,
+                    and reliable. Highly recommend!"
                   </CardDescription>
                   <div className="mt-6 flex items-center space-x-3">
                     <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-brand-400 rounded-full flex items-center justify-center text-white font-bold">
                       DC
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">David Chen</div>
-                      <div className="text-sm text-gray-500">Business Owner, Austin</div>
+                      <div className="font-semibold text-gray-900">
+                        David Chen
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        Business Owner, Austin
+                      </div>
                     </div>
                   </div>
                 </CardHeader>
@@ -785,7 +873,7 @@ export default function Index() {
         <div className="absolute inset-0 bg-gradient-to-r from-brand-600/90 via-purple-600/90 to-brand-700/90" />
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
         <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
-        
+
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -797,17 +885,27 @@ export default function Index() {
               Ready to Get Started with Multitach?
             </h2>
             <p className="text-xl text-purple-100 mb-8 leading-relaxed">
-              Join thousands of satisfied customers and professionals. Get matched
-              with the perfect maintenance worker today.
+              Join thousands of satisfied customers and professionals. Get
+              matched with the perfect maintenance worker today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button size="lg" variant="secondary" className="text-lg px-8 py-4 bg-white hover:bg-gray-100 text-brand-600 shadow-xl hover:shadow-2xl transition-all duration-300">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  className="text-lg px-8 py-4 bg-white hover:bg-gray-100 text-brand-600 shadow-xl hover:shadow-2xl transition-all duration-300"
+                >
                   Find a Professional
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   size="lg"
                   variant="outline"
@@ -824,7 +922,7 @@ export default function Index() {
       {/* Footer */}
       <footer className="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
@@ -833,7 +931,7 @@ export default function Index() {
           >
             <motion.div variants={fadeInUp}>
               <div className="flex items-center mb-6">
-                <motion.div 
+                <motion.div
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.5 }}
                   className="h-10 w-10 bg-gradient-to-br from-brand-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg"
@@ -849,41 +947,41 @@ export default function Index() {
                 AI-powered matching for a better tomorrow.
               </p>
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <h3 className="font-semibold mb-6 text-lg">For Customers</h3>
               <ul className="space-y-3 text-slate-400">
                 <li>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#" 
+                    href="#"
                     className="hover:text-white transition-all duration-200"
                   >
                     Find Professionals
                   </motion.a>
                 </li>
                 <li>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#" 
+                    href="#"
                     className="hover:text-white transition-all duration-200"
                   >
                     How It Works
                   </motion.a>
                 </li>
                 <li>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#" 
+                    href="#"
                     className="hover:text-white transition-all duration-200"
                   >
                     Pricing
                   </motion.a>
                 </li>
                 <li>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#" 
+                    href="#"
                     className="hover:text-white transition-all duration-200"
                   >
                     Safety
@@ -891,41 +989,41 @@ export default function Index() {
                 </li>
               </ul>
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <h3 className="font-semibold mb-6 text-lg">For Professionals</h3>
               <ul className="space-y-3 text-slate-400">
                 <li>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#" 
+                    href="#"
                     className="hover:text-white transition-all duration-200"
                   >
                     Join Multitach
                   </motion.a>
                 </li>
                 <li>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#" 
+                    href="#"
                     className="hover:text-white transition-all duration-200"
                   >
                     Professional App
                   </motion.a>
                 </li>
                 <li>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#" 
+                    href="#"
                     className="hover:text-white transition-all duration-200"
                   >
                     Resources
                   </motion.a>
                 </li>
                 <li>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#" 
+                    href="#"
                     className="hover:text-white transition-all duration-200"
                   >
                     Success Stories
@@ -933,41 +1031,41 @@ export default function Index() {
                 </li>
               </ul>
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <h3 className="font-semibold mb-6 text-lg">Company</h3>
               <ul className="space-y-3 text-slate-400">
                 <li>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#" 
+                    href="#"
                     className="hover:text-white transition-all duration-200"
                   >
                     About Us
                   </motion.a>
                 </li>
                 <li>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#" 
+                    href="#"
                     className="hover:text-white transition-all duration-200"
                   >
                     Contact
                   </motion.a>
                 </li>
                 <li>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#" 
+                    href="#"
                     className="hover:text-white transition-all duration-200"
                   >
                     Careers
                   </motion.a>
                 </li>
                 <li>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#" 
+                    href="#"
                     className="hover:text-white transition-all duration-200"
                   >
                     Press
@@ -976,8 +1074,8 @@ export default function Index() {
               </ul>
             </motion.div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -989,23 +1087,23 @@ export default function Index() {
                 © 2024 Multitach. All rights reserved.
               </p>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <motion.a 
+                <motion.a
                   whileHover={{ y: -2, color: "#fff" }}
-                  href="#" 
+                  href="#"
                   className="text-slate-400 hover:text-white transition-all duration-200"
                 >
                   Privacy Policy
                 </motion.a>
-                <motion.a 
+                <motion.a
                   whileHover={{ y: -2, color: "#fff" }}
-                  href="#" 
+                  href="#"
                   className="text-slate-400 hover:text-white transition-all duration-200"
                 >
                   Terms of Service
                 </motion.a>
-                <motion.a 
+                <motion.a
                   whileHover={{ y: -2, color: "#fff" }}
-                  href="#" 
+                  href="#"
                   className="text-slate-400 hover:text-white transition-all duration-200"
                 >
                   Cookie Policy
