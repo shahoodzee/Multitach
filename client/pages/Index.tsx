@@ -1056,7 +1056,7 @@ export default function Index() {
                 <li>
                   <motion.a
                     whileHover={{ x: 4, color: "#fff" }}
-                    href="#"
+                    href="/careers"
                     className="hover:text-white transition-all duration-200"
                   >
                     Careers
