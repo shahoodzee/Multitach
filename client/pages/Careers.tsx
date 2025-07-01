@@ -425,9 +425,9 @@ export default function Careers() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-16 pb-1"
           >
-            <h2 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-gray-900 to-brand-800 bg-clip-text text-transparent mb-4">
+            <h2 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-gray-900 to-brand-800 bg-clip-text text-transparent mb-4 pb-1.5">
               Why You'll Love Working Here
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
