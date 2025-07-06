@@ -42,7 +42,7 @@ interface FormData {
   phone: string;
   dateOfBirth: string;
   gender: string;
-  imageUrl: string;
+  profileImage: File | null;
   cnic: string;
   address: string;
   agreeToTerms: boolean;
@@ -54,7 +54,7 @@ const initialFormData: FormData = {
   phone: "",
   dateOfBirth: "",
   gender: "",
-  imageUrl: "",
+  profileImage: null,
   cnic: "",
   address: "",
   agreeToTerms: false,
