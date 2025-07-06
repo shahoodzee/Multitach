@@ -396,18 +396,44 @@ export default function ClientSignup() {
                     </div>
 
                     <div>
-                      <Label htmlFor="imageUrl">Profile Image URL</Label>
-                      <Input
-                        id="imageUrl"
-                        value={formData.imageUrl}
-                        onChange={(e) =>
-                          updateFormData("imageUrl", e.target.value)
-                        }
-                        placeholder="https://example.com/your-photo.jpg"
-                      />
-                      <p className="text-sm text-gray-500 mt-1">
-                        Optional: Link to your profile photo
-                      </p>
+                      <Label htmlFor="profileImage">Profile Image</Label>
+                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-brand-400 transition-colors">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) =>
+                            updateFormData(
+                              "profileImage",
+                              e.target.files?.[0] || null,
+                            )
+                          }
+                          className="hidden"
+                          id="profileImage"
+                        />
+                        <label
+                          htmlFor="profileImage"
+                          className="cursor-pointer"
+                        >
+                          {formData.profileImage ? (
+                            <div className="flex items-center justify-center space-x-2">
+                              <Camera className="h-6 w-6 text-brand-500" />
+                              <span className="text-sm font-medium text-brand-600">
+                                {formData.profileImage.name}
+                              </span>
+                            </div>
+                          ) : (
+                            <>
+                              <Upload className="h-8 w-8 mx-auto mb-2 text-gray-400" />
+                              <p className="text-sm font-medium text-gray-600">
+                                Click to upload profile photo
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                Optional: JPG, PNG up to 5MB
+                              </p>
+                            </>
+                          )}
+                        </label>
+                      </div>
                     </div>
                   </div>
 
