@@ -210,13 +210,15 @@ export default function Index() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="text-lg px-8 py-4 border-brand-200 hover:bg-brand-50 hover:border-brand-300 transition-all duration-300"
-                  >
-                    Join as Professional
-                  </Button>
+                  <a href="/worker-signup">
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="text-lg px-8 py-4 border-brand-200 hover:bg-brand-50 hover:border-brand-300 transition-all duration-300"
+                    >
+                      Join as Professional
+                    </Button>
+                  </a>
                 </motion.div>
               </motion.div>
             </motion.div>
