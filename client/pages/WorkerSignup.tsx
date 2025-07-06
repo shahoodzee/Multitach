@@ -58,7 +58,7 @@ interface FormData {
   fullName: string;
   dateOfBirth: string;
   gender: string;
-  imageUrl: string;
+  profileImage: File | null;
   cnic: string;
   address: string;
   workerType: string;
@@ -71,7 +71,7 @@ const initialFormData: FormData = {
   fullName: "",
   dateOfBirth: "",
   gender: "",
-  imageUrl: "",
+  profileImage: null,
   cnic: "",
   address: "",
   workerType: "",
