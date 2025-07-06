@@ -29,6 +29,7 @@ import {
   Shield,
   Clock,
   Star,
+  Zap,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
