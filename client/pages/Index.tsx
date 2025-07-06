@@ -198,13 +198,15 @@ export default function Index() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button
-                    size="lg"
-                    className="text-lg px-8 py-4 bg-gradient-to-r from-brand-500 to-purple-600 hover:from-brand-600 hover:to-purple-700 shadow-xl hover:shadow-2xl transition-all duration-300"
-                  >
-                    Find a Professional
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
+                  <a href="/client-signup">
+                    <Button
+                      size="lg"
+                      className="text-lg px-8 py-4 bg-gradient-to-r from-brand-500 to-purple-600 hover:from-brand-600 hover:to-purple-700 shadow-xl hover:shadow-2xl transition-all duration-300"
+                    >
+                      Find a Professional
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </a>
                 </motion.div>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
