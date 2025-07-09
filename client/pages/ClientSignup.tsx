@@ -543,7 +543,7 @@ export default function ClientSignup() {
                     <p className="text-sm text-gray-600">
                       Already have an account?{" "}
                       <a
-                        href="#"
+                        href="/sign-in"
                         className="text-brand-600 hover:text-brand-700 font-medium"
                       >
                         Sign in here
