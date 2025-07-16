@@ -90,7 +90,8 @@ export default function SignIn() {
         // Simulate API call
         await new Promise((resolve) => setTimeout(resolve, 1500));
         alert("Sign in successful! Welcome to Multitach!");
-        // Here you would normally redirect the user
+        // Redirect to dashboard
+        window.location.href = "/dashboard";
       } catch (error) {
         alert("Sign in failed. Please check your credentials and try again.");
       } finally {
