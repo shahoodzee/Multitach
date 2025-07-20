@@ -9,29 +9,16 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  Wrench,
-  User,
   Users,
-  Settings,
-  LogOut,
   Star,
   MapPin,
   Phone,
-  Mail,
-  ChevronDown,
   Search,
   Filter,
   DollarSign,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Sidebar from "@/components/Sidebar";
 
 const mockWorkers = [
   {
@@ -76,97 +63,27 @@ const fadeInUp = {
 };
 
 export default function Workers() {
-  const handleLogout = () => {
-    alert("Logged out successfully!");
-    window.location.href = "/";
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30">
-      {/* Dashboard Navbar */}
-      <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="bg-white/95 backdrop-blur-lg border-b border-gray-200 sticky top-0 z-50 shadow-sm"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <Link to="/dashboard" className="flex items-center">
-              <motion.div
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.5 }}
-                className="h-10 w-10 bg-gradient-to-br from-brand-500 to-brand-600 rounded-xl flex items-center justify-center shadow-lg"
-              >
-                <Wrench className="h-6 w-6 text-white" />
-              </motion.div>
-              <span className="ml-3 text-xl font-bold bg-gradient-to-r from-brand-600 to-purple-600 bg-clip-text text-transparent">
-                Multitach
-              </span>
-            </Link>
-
-            {/* Navigation Items */}
-            <div className="hidden md:flex items-center space-x-8">
-              <Link
-                to="/dashboard/workers"
-                className="text-brand-600 hover:text-brand-700 px-3 py-2 text-sm font-medium transition-colors border-b-2 border-brand-600"
-              >
-                Workers
-              </Link>
-              <Link
-                to="/dashboard/pricing"
-                className="text-gray-700 hover:text-brand-600 px-3 py-2 text-sm font-medium transition-colors"
-              >
-                Task Pricing
-              </Link>
-
-              {/* Profile Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className="flex items-center space-x-2 hover:bg-brand-50"
-                  >
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage src="" alt="Profile" />
-                      <AvatarFallback className="bg-brand-100 text-brand-700">
-                        JD
-                      </AvatarFallback>
-                    </Avatar>
-                    <span className="text-sm font-medium text-gray-700">
-                      John Doe
-                    </span>
-                    <ChevronDown className="h-4 w-4 text-gray-500" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48">
-                  <DropdownMenuItem>
-                    <User className="mr-2 h-4 w-4" />
-                    Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <User className="mr-2 h-4 w-4" />
-                    Account
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Settings className="mr-2 h-4 w-4" />
-                    Settings
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout}>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+    <Sidebar>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-100">
+        {/* Header */}
+        <div className="bg-white border-b border-gray-200">
+          <div className="px-6 py-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">Available Workers</h1>
+                <p className="text-gray-600 mt-1">
+                  Browse and connect with verified maintenance professionals
+                </p>
+              </div>
+              <Badge variant="secondary" className="px-3 py-1">
+                {mockWorkers.length} professionals available
+              </Badge>
             </div>
           </div>
         </div>
-      </motion.nav>
 
-      {/* Workers Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="p-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -287,7 +204,8 @@ export default function Workers() {
             </p>
           </motion.div>
         </motion.div>
+        </div>
       </div>
-    </div>
+    </Sidebar>
   );
 }
