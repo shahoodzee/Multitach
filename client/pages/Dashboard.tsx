@@ -195,8 +195,8 @@ export default function Dashboard() {
                   <Progress value={getStepProgress()} className="h-3" />
                 </div>
               </CardHeader>
-              <CardContent className="p-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <CardContent className="p-6">
+                <div className="grid grid-cols-6 gap-4">
                   {taskSteps.map((step, index) => {
                     const Icon = step.icon;
                     return (
@@ -204,11 +204,11 @@ export default function Dashboard() {
                         key={step.id}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
+                        transition={{ delay: index * 0.05 }}
                         className="relative"
                       >
                         <div
-                          className={`p-6 rounded-xl border-2 transition-all duration-300 ${
+                          className={`p-4 rounded-lg border-2 transition-all duration-300 text-center ${
                             step.status === "completed"
                               ? "bg-green-50 border-green-200 shadow-sm"
                               : step.status === "current"
@@ -216,9 +216,9 @@ export default function Dashboard() {
                                 : "bg-gray-50 border-gray-200"
                           }`}
                         >
-                          <div className="flex items-start space-x-4">
+                          <div className="flex flex-col items-center space-y-3">
                             <div
-                              className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                              className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                                 step.status === "completed"
                                   ? "bg-green-100 text-green-600"
                                   : step.status === "current"
@@ -226,12 +226,12 @@ export default function Dashboard() {
                                     : "bg-gray-100 text-gray-400"
                               }`}
                             >
-                              <Icon className="h-6 w-6" />
+                              <Icon className="h-5 w-5" />
                             </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center space-x-2 mb-2">
+                            <div className="min-w-0">
+                              <div className="flex items-center justify-center space-x-1 mb-1">
                                 <h4
-                                  className={`font-semibold ${
+                                  className={`text-sm font-semibold ${
                                     step.status === "completed"
                                       ? "text-green-900"
                                       : step.status === "current"
@@ -242,18 +242,19 @@ export default function Dashboard() {
                                   {step.title}
                                 </h4>
                                 {step.status === "completed" && (
-                                  <CheckCircle className="h-5 w-5 text-green-500" />
+                                  <CheckCircle className="h-4 w-4 text-green-500" />
                                 )}
                                 {step.status === "current" && (
-                                  <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
+                                  <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse" />
                                 )}
                               </div>
-                              <p className="text-sm text-gray-600 leading-relaxed">
-                                {step.description}
+                              <p className="text-xs text-gray-600 leading-relaxed">
+                                {step.description.length > 50
+                                  ? step.description.substring(0, 50) + "..."
+                                  : step.description}
                               </p>
                               {step.timestamp && (
-                                <div className="mt-3 text-xs text-gray-500">
-                                  Completed at{" "}
+                                <div className="mt-2 text-xs text-gray-500">
                                   {step.timestamp.toLocaleTimeString()}
                                 </div>
                               )}
@@ -262,7 +263,7 @@ export default function Dashboard() {
                         </div>
                         {step.status === "current" && (
                           <motion.div
-                            className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-orange-400 to-orange-600 opacity-20 blur-sm"
+                            className="absolute -inset-0.5 rounded-lg bg-gradient-to-r from-orange-400 to-orange-600 opacity-20 blur-sm"
                             animate={{ opacity: [0.2, 0.4, 0.2] }}
                             transition={{ duration: 2, repeat: Infinity }}
                           />
@@ -294,7 +295,7 @@ export default function Dashboard() {
 
             {/* Task Stats */}
             <motion.div variants={fadeInUp} className="lg:col-span-2">
-              <div className="grid grid-cols-2 gap-4 h-full">
+              <div className="grid grid-cols-3 gap-4 h-full">
                 {/* Current Step */}
                 <Card className="border-0 shadow-lg bg-white">
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -336,27 +337,6 @@ export default function Dashboard() {
                   </CardContent>
                 </Card>
 
-                {/* Estimated Completion */}
-                <Card className="border-0 shadow-lg bg-white">
-                  <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-sm font-medium text-gray-600">
-                      Completion ETA
-                    </CardTitle>
-                    <Clock className="h-4 w-4 text-blue-500" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-lg font-bold text-blue-600">
-                      Tomorrow
-                    </div>
-                    <p className="text-sm text-gray-500 mt-1">
-                      {mockTask.estimatedCompletion.toLocaleDateString()}
-                    </p>
-                    <div className="text-xs text-gray-500 mt-1">
-                      {mockTask.estimatedCompletion.toLocaleTimeString()}
-                    </div>
-                  </CardContent>
-                </Card>
-
                 {/* Service Rating */}
                 <Card className="border-0 shadow-lg bg-white">
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -382,63 +362,67 @@ export default function Dashboard() {
             {/* Worker Information */}
             <motion.div variants={fadeInUp} className="lg:col-span-1">
               <Card className="border-0 shadow-lg bg-white h-full">
-                <CardHeader>
-                  <CardTitle className="text-lg text-gray-900">
-                    Assigned Professional
+                <CardHeader className="text-center pb-4">
+                  <Avatar className="h-20 w-20 mx-auto mb-4 ring-4 ring-brand-100">
+                    <AvatarImage src="" alt={mockTask.worker.name} />
+                    <AvatarFallback className="bg-brand-100 text-brand-700 text-xl font-bold">
+                      {mockTask.worker.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </AvatarFallback>
+                  </Avatar>
+                  <CardTitle className="text-xl text-gray-900">
+                    {mockTask.worker.name}
                   </CardTitle>
-                  <CardDescription>Your service provider</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center space-x-3 mb-6">
-                    <Avatar className="h-14 w-14">
-                      <AvatarImage src="" alt={mockTask.worker.name} />
-                      <AvatarFallback className="bg-brand-100 text-brand-700 text-lg font-semibold">
-                        {mockTask.worker.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 text-lg">
-                        {mockTask.worker.name}
-                      </h4>
-                      <div className="flex items-center mt-1">
-                        <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                        <span className="text-sm text-gray-600 ml-1">
-                          {mockTask.worker.rating} • {mockTask.worker.experience}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 mb-6">
-                    <div className="flex items-center text-sm">
-                      <Phone className="h-4 w-4 text-gray-400 mr-3" />
-                      <span className="text-gray-900">{mockTask.worker.phone}</span>
-                    </div>
-                    <div className="flex items-center text-sm">
-                      <Mail className="h-4 w-4 text-gray-400 mr-3" />
-                      <span className="text-gray-900">{mockTask.worker.email}</span>
-                    </div>
-                    <div className="flex items-center text-sm">
-                      <Wrench className="h-4 w-4 text-gray-400 mr-3" />
-                      <span className="text-gray-900">
-                        {mockTask.worker.specialization} Specialist
+                  <CardDescription className="text-brand-600 font-medium">
+                    {mockTask.worker.specialization} Specialist
+                  </CardDescription>
+                  <div className="flex items-center justify-center mt-2">
+                    <div className="flex items-center bg-yellow-50 px-3 py-1 rounded-full">
+                      <Star className="h-4 w-4 text-yellow-400 fill-current mr-1" />
+                      <span className="text-sm font-semibold text-yellow-700">
+                        {mockTask.worker.rating}
+                      </span>
+                      <span className="text-xs text-yellow-600 ml-1">
+                        ({mockTask.worker.experience})
                       </span>
                     </div>
-                    <div className="flex items-center text-sm">
-                      <MapPin className="h-4 w-4 text-gray-400 mr-3" />
-                      <span className="text-gray-900">{mockTask.location}</span>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {/* Contact Information */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div className="flex items-center">
+                        <Phone className="h-4 w-4 text-brand-500 mr-3" />
+                        <span className="text-sm font-medium text-gray-700">Phone</span>
+                      </div>
+                      <span className="text-sm text-gray-900 font-mono">{mockTask.worker.phone}</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div className="flex items-center">
+                        <Mail className="h-4 w-4 text-brand-500 mr-3" />
+                        <span className="text-sm font-medium text-gray-700">Email</span>
+                      </div>
+                      <span className="text-sm text-gray-900">{mockTask.worker.email}</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div className="flex items-center">
+                        <MapPin className="h-4 w-4 text-brand-500 mr-3" />
+                        <span className="text-sm font-medium text-gray-700">Location</span>
+                      </div>
+                      <span className="text-sm text-gray-900">{mockTask.location}</span>
                     </div>
                   </div>
 
-                  <div className="space-y-3">
-                    <Button className="w-full bg-brand-500 hover:bg-brand-600 text-white">
+                  {/* Action Buttons */}
+                  <div className="space-y-3 pt-4">
+                    <Button className="w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white shadow-lg">
                       <Phone className="h-4 w-4 mr-2" />
-                      Call Professional
+                      Call Now
                     </Button>
-                    <Button variant="outline" className="w-full border-brand-200 hover:bg-brand-50">
+                    <Button variant="outline" className="w-full border-brand-200 hover:bg-brand-50 text-brand-700">
                       <MessageCircle className="h-4 w-4 mr-2" />
                       Send Message
                     </Button>
