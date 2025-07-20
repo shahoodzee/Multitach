@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Sidebar from "@/components/Sidebar";
+import DashboardNavbar from "@/components/DashboardNavbar";
 import ClockComponent from "@/components/Clock";
 
 // Mock task data
