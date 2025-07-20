@@ -58,8 +58,6 @@ export default function Sidebar({ children }: SidebarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-
-
   const isActiveRoute = (href: string) => {
     return location.pathname === href;
   };
