@@ -123,7 +123,7 @@ export default function Clock({ startTime, size = "medium" }: ClockProps) {
             {/* Clock Hands */}
             {/* Hour Hand */}
             <motion.div
-              className="absolute w-1 bg-gray-700 rounded-full origin-bottom z-20"
+              className="absolute w-1 bg-gray-700 rounded-full z-20"
               style={{
                 height:
                   size === "large"
@@ -131,17 +131,20 @@ export default function Clock({ startTime, size = "medium" }: ClockProps) {
                     : size === "small"
                       ? "24px"
                       : "32px",
-                transform: `rotate(${(timeElapsed.hours % 12) * 30 + timeElapsed.minutes * 0.5}deg)`,
+                top: "50%",
+                left: "50%",
+                transformOrigin: `50% ${size === "large" ? "60px" : size === "small" ? "36px" : "48px"}`,
+                transform: `translate(-50%, -${size === "large" ? "60px" : size === "small" ? "36px" : "48px"}) rotate(${(timeElapsed.hours % 12) * 30 + timeElapsed.minutes * 0.5}deg)`,
               }}
               animate={{
-                transform: `rotate(${(timeElapsed.hours % 12) * 30 + timeElapsed.minutes * 0.5}deg)`,
+                transform: `translate(-50%, -${size === "large" ? "60px" : size === "small" ? "36px" : "48px"}) rotate(${(timeElapsed.hours % 12) * 30 + timeElapsed.minutes * 0.5}deg)`,
               }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             />
 
             {/* Minute Hand */}
             <motion.div
-              className="absolute w-0.5 bg-brand-600 rounded-full origin-bottom z-30"
+              className="absolute w-0.5 bg-brand-600 rounded-full z-30"
               style={{
                 height:
                   size === "large"
@@ -149,17 +152,20 @@ export default function Clock({ startTime, size = "medium" }: ClockProps) {
                     : size === "small"
                       ? "32px"
                       : "40px",
-                transform: `rotate(${timeElapsed.minutes * 6}deg)`,
+                top: "50%",
+                left: "50%",
+                transformOrigin: `50% ${size === "large" ? "75px" : size === "small" ? "48px" : "60px"}`,
+                transform: `translate(-50%, -${size === "large" ? "75px" : size === "small" ? "48px" : "60px"}) rotate(${timeElapsed.minutes * 6}deg)`,
               }}
               animate={{
-                transform: `rotate(${timeElapsed.minutes * 6}deg)`,
+                transform: `translate(-50%, -${size === "large" ? "75px" : size === "small" ? "48px" : "60px"}) rotate(${timeElapsed.minutes * 6}deg)`,
               }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             />
 
             {/* Second Hand */}
             <motion.div
-              className="absolute w-px bg-red-500 rounded-full origin-bottom z-40"
+              className="absolute w-px bg-red-500 rounded-full z-40"
               style={{
                 height:
                   size === "large"
@@ -167,10 +173,13 @@ export default function Clock({ startTime, size = "medium" }: ClockProps) {
                     : size === "small"
                       ? "36px"
                       : "44px",
-                transform: `rotate(${timeElapsed.seconds * 6}deg)`,
+                top: "50%",
+                left: "50%",
+                transformOrigin: `50% ${size === "large" ? "82px" : size === "small" ? "54px" : "66px"}`,
+                transform: `translate(-50%, -${size === "large" ? "82px" : size === "small" ? "54px" : "66px"}) rotate(${timeElapsed.seconds * 6}deg)`,
               }}
               animate={{
-                transform: `rotate(${timeElapsed.seconds * 6}deg)`,
+                transform: `translate(-50%, -${size === "large" ? "82px" : size === "small" ? "54px" : "66px"}) rotate(${timeElapsed.seconds * 6}deg)`,
               }}
               transition={{ duration: 0.1, ease: "easeInOut" }}
             />
