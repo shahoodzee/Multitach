@@ -135,57 +135,26 @@ export default function Sidebar({ children }: SidebarProps) {
               })}
             </nav>
 
-            {/* User Profile */}
+            {/* Settings */}
             <div className="flex-shrink-0 px-3 py-4 border-t border-gray-200">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className={`w-full flex items-center hover:bg-gray-50 p-3 ${
-                      isCollapsed ? "justify-center" : "justify-start space-x-3"
-                    }`}
-                  >
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage src="" alt="Profile" />
-                      <AvatarFallback className="bg-brand-100 text-brand-700 font-semibold">
-                        JD
-                      </AvatarFallback>
-                    </Avatar>
-                    {!isCollapsed && (
-                      <>
-                        <div className="flex-1 text-left">
-                          <div className="text-sm font-semibold text-gray-900">
-                            John Doe
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            john@example.com
-                          </div>
-                        </div>
-                        <ChevronDown className="h-4 w-4 text-gray-400" />
-                      </>
-                    )}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuItem>
-                    <User className="mr-2 h-4 w-4" />
-                    View Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Settings className="mr-2 h-4 w-4" />
-                    Account Settings
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Bell className="mr-2 h-4 w-4" />
-                    Notifications
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout}>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Sign Out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <Link
+                to="/dashboard/settings"
+                title={isCollapsed ? "Settings" : undefined}
+                className={`group flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                  isActiveRoute("/dashboard/settings")
+                    ? "bg-brand-50 text-brand-700 border-r-2 border-brand-500"
+                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                } ${isCollapsed ? "justify-center" : ""}`}
+              >
+                <Settings
+                  className={`${isCollapsed ? "" : "mr-3"} h-5 w-5 transition-colors ${
+                    isActiveRoute("/dashboard/settings")
+                      ? "text-brand-500"
+                      : "text-gray-400 group-hover:text-gray-500"
+                  }`}
+                />
+                {!isCollapsed && "Settings"}
+              </Link>
             </div>
           </div>
         </div>
