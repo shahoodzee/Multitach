@@ -32,24 +32,22 @@ export default function Navbar() {
       className="bg-white border-b border-gray-200 shadow-sm"
     >
       <div className="px-6 py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-end">
           {/* Right Side - Navigation Items & Profile */}
           <div className="flex items-center space-x-6">
             {/* Workers Link */}
             <a
               href="/dashboard/workers"
-              className="flex items-center text-gray-600 hover:text-brand-600 transition-colors"
+              className="text-gray-600 hover:text-brand-600 transition-colors"
             >
-              <Users className="h-5 w-5 mr-2" />
               <span className="font-medium">Workers</span>
             </a>
 
             {/* Task Pricing Link */}
             <a
               href="/dashboard/pricing"
-              className="flex items-center text-gray-600 hover:text-brand-600 transition-colors"
+              className="text-gray-600 hover:text-brand-600 transition-colors"
             >
-              <DollarSign className="h-5 w-5 mr-2" />
               <span className="font-medium">Pricing</span>
             </a>
 

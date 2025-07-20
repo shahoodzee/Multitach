@@ -212,7 +212,7 @@ export default function Dashboard() {
                         className="relative"
                       >
                         <div
-                          className={`p-4 rounded-lg border-2 transition-all duration-300 text-center ${
+                          className={`p-4 rounded-lg border-2 transition-all duration-300 text-center h-32 flex flex-col justify-between ${
                             step.status === "completed"
                               ? "bg-green-50 border-green-200 shadow-sm"
                               : step.status === "current"
