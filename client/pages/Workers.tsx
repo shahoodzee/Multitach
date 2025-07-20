@@ -89,16 +89,6 @@ export default function Workers() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Available Workers
-            </h1>
-            <p className="text-gray-600">
-              Browse and connect with verified maintenance professionals
-            </p>
-          </div>
-
           {/* Filters */}
           <div className="flex flex-wrap gap-4 mb-8">
             <Button variant="outline" className="flex items-center">
