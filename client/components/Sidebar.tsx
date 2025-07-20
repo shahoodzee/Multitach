@@ -69,7 +69,9 @@ export default function Sidebar({ children }: SidebarProps) {
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Desktop Sidebar */}
-      <div className={`hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 transition-all duration-300 ${isCollapsed ? 'lg:w-16' : 'lg:w-64'}`}>
+      <div
+        className={`hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 transition-all duration-300 ${isCollapsed ? "lg:w-16" : "lg:w-64"}`}
+      >
         <div className="flex flex-col flex-grow bg-white border-r border-gray-200 pt-5 pb-4 overflow-y-auto">
           {/* Logo and Toggle */}
           <div className="flex items-center justify-between flex-shrink-0 px-6">
@@ -116,10 +118,10 @@ export default function Sidebar({ children }: SidebarProps) {
                       isActive
                         ? "bg-brand-50 text-brand-700 border-r-2 border-brand-500"
                         : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                    } ${isCollapsed ? 'justify-center' : ''}`}
+                    } ${isCollapsed ? "justify-center" : ""}`}
                   >
                     <Icon
-                      className={`${isCollapsed ? '' : 'mr-3'} h-5 w-5 transition-colors ${
+                      className={`${isCollapsed ? "" : "mr-3"} h-5 w-5 transition-colors ${
                         isActive
                           ? "text-brand-500"
                           : "text-gray-400 group-hover:text-gray-500"
@@ -138,7 +140,7 @@ export default function Sidebar({ children }: SidebarProps) {
                   <Button
                     variant="ghost"
                     className={`w-full flex items-center hover:bg-gray-50 p-3 ${
-                      isCollapsed ? 'justify-center' : 'justify-start space-x-3'
+                      isCollapsed ? "justify-center" : "justify-start space-x-3"
                     }`}
                   >
                     <Avatar className="h-10 w-10">
@@ -284,10 +286,10 @@ export default function Sidebar({ children }: SidebarProps) {
       </AnimatePresence>
 
       {/* Main content */}
-      <div className={`flex flex-col flex-1 transition-all duration-300 ${isCollapsed ? 'lg:pl-16' : 'lg:pl-64'}`}>
-        <main className="flex-1 pt-16 lg:pt-0">
-          {children}
-        </main>
+      <div
+        className={`flex flex-col flex-1 transition-all duration-300 ${isCollapsed ? "lg:pl-16" : "lg:pl-64"}`}
+      >
+        <main className="flex-1 pt-16 lg:pt-0">{children}</main>
       </div>
     </div>
   );

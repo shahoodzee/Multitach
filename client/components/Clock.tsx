@@ -80,7 +80,10 @@ export default function Clock({ startTime, size = "medium" }: ClockProps) {
   const sizeClasses = getSizeClasses();
 
   // Calculate progress for circular indicator (360 degrees for 24 hours)
-  const progressDegrees = Math.min((timeElapsed.totalSeconds / 86400) * 360, 360);
+  const progressDegrees = Math.min(
+    (timeElapsed.totalSeconds / 86400) * 360,
+    360,
+  );
 
   return (
     <div className="flex flex-col items-center space-y-4">
@@ -122,11 +125,16 @@ export default function Clock({ startTime, size = "medium" }: ClockProps) {
             <motion.div
               className="absolute w-1 bg-gray-700 rounded-full origin-bottom z-20"
               style={{
-                height: size === "large" ? "40px" : size === "small" ? "24px" : "32px",
-                transform: `rotate(${(timeElapsed.hours % 12) * 30 + (timeElapsed.minutes * 0.5)}deg)`,
+                height:
+                  size === "large"
+                    ? "40px"
+                    : size === "small"
+                      ? "24px"
+                      : "32px",
+                transform: `rotate(${(timeElapsed.hours % 12) * 30 + timeElapsed.minutes * 0.5}deg)`,
               }}
               animate={{
-                transform: `rotate(${(timeElapsed.hours % 12) * 30 + (timeElapsed.minutes * 0.5)}deg)`,
+                transform: `rotate(${(timeElapsed.hours % 12) * 30 + timeElapsed.minutes * 0.5}deg)`,
               }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             />
@@ -135,7 +143,12 @@ export default function Clock({ startTime, size = "medium" }: ClockProps) {
             <motion.div
               className="absolute w-0.5 bg-brand-600 rounded-full origin-bottom z-30"
               style={{
-                height: size === "large" ? "50px" : size === "small" ? "32px" : "40px",
+                height:
+                  size === "large"
+                    ? "50px"
+                    : size === "small"
+                      ? "32px"
+                      : "40px",
                 transform: `rotate(${timeElapsed.minutes * 6}deg)`,
               }}
               animate={{
@@ -148,7 +161,12 @@ export default function Clock({ startTime, size = "medium" }: ClockProps) {
             <motion.div
               className="absolute w-px bg-red-500 rounded-full origin-bottom z-40"
               style={{
-                height: size === "large" ? "55px" : size === "small" ? "36px" : "44px",
+                height:
+                  size === "large"
+                    ? "55px"
+                    : size === "small"
+                      ? "36px"
+                      : "44px",
                 transform: `rotate(${timeElapsed.seconds * 6}deg)`,
               }}
               animate={{
@@ -172,8 +190,7 @@ export default function Clock({ startTime, size = "medium" }: ClockProps) {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.1 }}
         >
-          {formatTime(timeElapsed.hours)}:
-          {formatTime(timeElapsed.minutes)}:
+          {formatTime(timeElapsed.hours)}:{formatTime(timeElapsed.minutes)}:
           <motion.span
             className="text-brand-600"
             animate={{ color: ["#7c3aed", "#a855f7", "#7c3aed"] }}

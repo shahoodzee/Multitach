@@ -287,9 +287,14 @@ export default function Dashboard() {
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-2">
                         <Calendar className="h-5 w-5 text-orange-500" />
-                        <span className="text-sm font-medium text-gray-600">Current Step</span>
+                        <span className="text-sm font-medium text-gray-600">
+                          Current Step
+                        </span>
                       </div>
-                      <Badge variant="secondary" className="bg-orange-100 text-orange-700">
+                      <Badge
+                        variant="secondary"
+                        className="bg-orange-100 text-orange-700"
+                      >
                         Active
                       </Badge>
                     </div>
@@ -299,7 +304,10 @@ export default function Dashboard() {
                     <p className="text-sm text-gray-500 mb-3">
                       Worker Confirmation
                     </p>
-                    <Progress value={(mockTask.currentStep / taskSteps.length) * 100} className="h-2" />
+                    <Progress
+                      value={(mockTask.currentStep / taskSteps.length) * 100}
+                      className="h-2"
+                    />
                   </CardContent>
                 </Card>
 
@@ -309,9 +317,14 @@ export default function Dashboard() {
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-2">
                         <DollarSign className="h-5 w-5 text-green-500" />
-                        <span className="text-sm font-medium text-gray-600">Service Budget</span>
+                        <span className="text-sm font-medium text-gray-600">
+                          Service Budget
+                        </span>
                       </div>
-                      <Badge variant="secondary" className="bg-green-100 text-green-700">
+                      <Badge
+                        variant="secondary"
+                        className="bg-green-100 text-green-700"
+                      >
                         Approved
                       </Badge>
                     </div>
@@ -332,9 +345,14 @@ export default function Dashboard() {
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-2">
                         <Award className="h-5 w-5 text-yellow-500" />
-                        <span className="text-sm font-medium text-gray-600">Service Quality</span>
+                        <span className="text-sm font-medium text-gray-600">
+                          Service Quality
+                        </span>
                       </div>
-                      <Badge variant="secondary" className="bg-yellow-100 text-yellow-700">
+                      <Badge
+                        variant="secondary"
+                        className="bg-yellow-100 text-yellow-700"
+                      >
                         Excellent
                       </Badge>
                     </div>
@@ -363,10 +381,15 @@ export default function Dashboard() {
                         Task Timer
                       </CardTitle>
                     </div>
-                    <CardDescription>Live tracking since task initiation</CardDescription>
+                    <CardDescription>
+                      Live tracking since task initiation
+                    </CardDescription>
                   </CardHeader>
                   <CardContent className="flex items-center justify-center py-8">
-                    <ClockComponent startTime={mockTask.initiatedAt} size="medium" />
+                    <ClockComponent
+                      startTime={mockTask.initiatedAt}
+                      size="medium"
+                    />
                   </CardContent>
                 </Card>
 
@@ -379,7 +402,9 @@ export default function Dashboard() {
                         Assigned Professional
                       </CardTitle>
                     </div>
-                    <CardDescription>Your dedicated service provider</CardDescription>
+                    <CardDescription>
+                      Your dedicated service provider
+                    </CardDescription>
                   </CardHeader>
                   <CardContent className="p-6">
                     {/* Professional Profile */}
@@ -417,23 +442,35 @@ export default function Dashboard() {
                       <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <div className="flex items-center">
                           <Phone className="h-4 w-4 text-brand-500 mr-3" />
-                          <span className="text-sm font-medium text-gray-700">Phone</span>
+                          <span className="text-sm font-medium text-gray-700">
+                            Phone
+                          </span>
                         </div>
-                        <span className="text-sm text-gray-900 font-mono">{mockTask.worker.phone}</span>
+                        <span className="text-sm text-gray-900 font-mono">
+                          {mockTask.worker.phone}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <div className="flex items-center">
                           <Mail className="h-4 w-4 text-brand-500 mr-3" />
-                          <span className="text-sm font-medium text-gray-700">Email</span>
+                          <span className="text-sm font-medium text-gray-700">
+                            Email
+                          </span>
                         </div>
-                        <span className="text-sm text-gray-900">{mockTask.worker.email}</span>
+                        <span className="text-sm text-gray-900">
+                          {mockTask.worker.email}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <div className="flex items-center">
                           <MapPin className="h-4 w-4 text-brand-500 mr-3" />
-                          <span className="text-sm font-medium text-gray-700">Location</span>
+                          <span className="text-sm font-medium text-gray-700">
+                            Location
+                          </span>
                         </div>
-                        <span className="text-sm text-gray-900">{mockTask.location}</span>
+                        <span className="text-sm text-gray-900">
+                          {mockTask.location}
+                        </span>
                       </div>
                     </div>
 
@@ -443,7 +480,10 @@ export default function Dashboard() {
                         <Phone className="h-4 w-4 mr-2" />
                         Call Now
                       </Button>
-                      <Button variant="outline" className="w-full border-brand-200 hover:bg-brand-50 text-brand-700">
+                      <Button
+                        variant="outline"
+                        className="w-full border-brand-200 hover:bg-brand-50 text-brand-700"
+                      >
                         <MessageCircle className="h-4 w-4 mr-2" />
                         Send Message
                       </Button>
