@@ -59,10 +59,7 @@ export default function Sidebar({ children }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
 
-  const handleLogout = () => {
-    alert("Logged out successfully!");
-    window.location.href = "/";
-  };
+
 
   const isActiveRoute = (href: string) => {
     return location.pathname === href;
