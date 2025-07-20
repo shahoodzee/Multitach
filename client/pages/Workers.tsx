@@ -67,6 +67,9 @@ export default function Workers() {
   return (
     <Sidebar>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-100">
+        {/* Dashboard Navbar */}
+        <DashboardNavbar />
+
         {/* Header */}
         <div className="bg-white border-b border-gray-200">
           <div className="px-6 py-6">
