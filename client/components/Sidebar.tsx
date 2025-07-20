@@ -19,6 +19,8 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
+  Search,
+  Bell,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
