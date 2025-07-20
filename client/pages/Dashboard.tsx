@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Sidebar from "@/components/Sidebar";
-import DashboardNavbar from "@/components/DashboardNavbar";
+import Navbar from "@/components/Navbar";
 import ClockComponent from "@/components/Clock";
 
 // Mock task data
@@ -136,8 +136,8 @@ export default function Dashboard() {
   return (
     <Sidebar>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-100">
-        {/* Dashboard Navbar */}
-        <DashboardNavbar />
+        {/* Navbar */}
+        <Navbar />
 
         {/* Header */}
         <div className="bg-white border-b border-gray-200">

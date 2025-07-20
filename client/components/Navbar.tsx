@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-export default function DashboardNavbar() {
+export default function Navbar() {
   const handleLogout = () => {
     alert("Logged out successfully!");
     window.location.href = "/";
@@ -33,11 +33,6 @@ export default function DashboardNavbar() {
     >
       <div className="px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Page Title */}
-          <div>
-            <h1 className="text-xl font-semibold text-gray-900">Dashboard</h1>
-          </div>
-
           {/* Right Side - Navigation Items & Profile */}
           <div className="flex items-center space-x-6">
             {/* Workers Link */}
