@@ -277,60 +277,49 @@ export default function Dashboard() {
           </motion.div>
 
           {/* Task Stats and Details */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {/* Time Elapsed with Clock */}
-            <motion.div variants={fadeInUp} className="lg:col-span-1">
-              <Card className="border-0 shadow-lg bg-white h-full">
-                <CardHeader className="text-center">
-                  <CardTitle className="text-lg text-gray-900">
-                    Task Timer
-                  </CardTitle>
-                  <CardDescription>Live tracking since initiation</CardDescription>
-                </CardHeader>
-                <CardContent className="flex items-center justify-center">
-                  <ClockComponent startTime={mockTask.initiatedAt} size="medium" />
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Task Stats */}
-            <motion.div variants={fadeInUp} className="lg:col-span-2">
-              <div className="grid grid-cols-3 gap-4 h-full">
+          <div className="space-y-6">
+            {/* Top Row: Stat Cards */}
+            <motion.div variants={fadeInUp}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Current Step */}
                 <Card className="border-0 shadow-lg bg-white">
-                  <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-sm font-medium text-gray-600">
-                      Current Step
-                    </CardTitle>
-                    <Calendar className="h-4 w-4 text-orange-500" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold text-orange-600">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-2">
+                        <Calendar className="h-5 w-5 text-orange-500" />
+                        <span className="text-sm font-medium text-gray-600">Current Step</span>
+                      </div>
+                      <Badge variant="secondary" className="bg-orange-100 text-orange-700">
+                        Active
+                      </Badge>
+                    </div>
+                    <div className="text-3xl font-bold text-orange-600 mb-2">
                       {mockTask.currentStep} of {taskSteps.length}
                     </div>
-                    <p className="text-sm text-gray-500 mt-1">
+                    <p className="text-sm text-gray-500 mb-3">
                       Worker Confirmation
                     </p>
-                    <div className="mt-3">
-                      <Progress value={(mockTask.currentStep / taskSteps.length) * 100} className="h-2" />
-                    </div>
+                    <Progress value={(mockTask.currentStep / taskSteps.length) * 100} className="h-2" />
                   </CardContent>
                 </Card>
 
                 {/* Budget */}
                 <Card className="border-0 shadow-lg bg-white">
-                  <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-sm font-medium text-gray-600">
-                      Service Budget
-                    </CardTitle>
-                    <DollarSign className="h-4 w-4 text-green-500" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold text-green-600">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-2">
+                        <DollarSign className="h-5 w-5 text-green-500" />
+                        <span className="text-sm font-medium text-gray-600">Service Budget</span>
+                      </div>
+                      <Badge variant="secondary" className="bg-green-100 text-green-700">
+                        Approved
+                      </Badge>
+                    </div>
+                    <div className="text-3xl font-bold text-green-600 mb-2">
                       ${mockTask.budget}
                     </div>
-                    <p className="text-sm text-gray-500 mt-1">Estimated cost</p>
-                    <div className="mt-3 flex items-center text-xs text-green-600">
+                    <p className="text-sm text-gray-500 mb-3">Estimated cost</p>
+                    <div className="flex items-center text-xs text-green-600">
                       <TrendingUp className="h-3 w-3 mr-1" />
                       Fair market price
                     </div>
@@ -339,18 +328,21 @@ export default function Dashboard() {
 
                 {/* Service Rating */}
                 <Card className="border-0 shadow-lg bg-white">
-                  <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-sm font-medium text-gray-600">
-                      Service Quality
-                    </CardTitle>
-                    <Award className="h-4 w-4 text-yellow-500" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold text-yellow-600">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-2">
+                        <Award className="h-5 w-5 text-yellow-500" />
+                        <span className="text-sm font-medium text-gray-600">Service Quality</span>
+                      </div>
+                      <Badge variant="secondary" className="bg-yellow-100 text-yellow-700">
+                        Excellent
+                      </Badge>
+                    </div>
+                    <div className="text-3xl font-bold text-yellow-600 mb-2">
                       4.8★
                     </div>
-                    <p className="text-sm text-gray-500 mt-1">Average rating</p>
-                    <div className="mt-3 flex items-center text-xs text-yellow-600">
+                    <p className="text-sm text-gray-500 mb-3">Average rating</p>
+                    <div className="flex items-center text-xs text-yellow-600">
                       <Users className="h-3 w-3 mr-1" />
                       Verified professional
                     </div>
@@ -359,76 +351,106 @@ export default function Dashboard() {
               </div>
             </motion.div>
 
-            {/* Worker Information */}
-            <motion.div variants={fadeInUp} className="lg:col-span-1">
-              <Card className="border-0 shadow-lg bg-white h-full">
-                <CardHeader className="text-center pb-4">
-                  <Avatar className="h-20 w-20 mx-auto mb-4 ring-4 ring-brand-100">
-                    <AvatarImage src="" alt={mockTask.worker.name} />
-                    <AvatarFallback className="bg-brand-100 text-brand-700 text-xl font-bold">
-                      {mockTask.worker.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  <CardTitle className="text-xl text-gray-900">
-                    {mockTask.worker.name}
-                  </CardTitle>
-                  <CardDescription className="text-brand-600 font-medium">
-                    {mockTask.worker.specialization} Specialist
-                  </CardDescription>
-                  <div className="flex items-center justify-center mt-2">
-                    <div className="flex items-center bg-yellow-50 px-3 py-1 rounded-full">
-                      <Star className="h-4 w-4 text-yellow-400 fill-current mr-1" />
-                      <span className="text-sm font-semibold text-yellow-700">
-                        {mockTask.worker.rating}
-                      </span>
-                      <span className="text-xs text-yellow-600 ml-1">
-                        ({mockTask.worker.experience})
-                      </span>
+            {/* Bottom Row: Timer and Worker Info */}
+            <motion.div variants={fadeInUp}>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Task Timer */}
+                <Card className="border-0 shadow-lg bg-white">
+                  <CardHeader className="text-center border-b border-gray-100">
+                    <div className="flex items-center justify-center space-x-2 mb-2">
+                      <Clock className="h-6 w-6 text-brand-500" />
+                      <CardTitle className="text-xl text-gray-900">
+                        Task Timer
+                      </CardTitle>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {/* Contact Information */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center">
-                        <Phone className="h-4 w-4 text-brand-500 mr-3" />
-                        <span className="text-sm font-medium text-gray-700">Phone</span>
-                      </div>
-                      <span className="text-sm text-gray-900 font-mono">{mockTask.worker.phone}</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center">
-                        <Mail className="h-4 w-4 text-brand-500 mr-3" />
-                        <span className="text-sm font-medium text-gray-700">Email</span>
-                      </div>
-                      <span className="text-sm text-gray-900">{mockTask.worker.email}</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center">
-                        <MapPin className="h-4 w-4 text-brand-500 mr-3" />
-                        <span className="text-sm font-medium text-gray-700">Location</span>
-                      </div>
-                      <span className="text-sm text-gray-900">{mockTask.location}</span>
-                    </div>
-                  </div>
+                    <CardDescription>Live tracking since task initiation</CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex items-center justify-center py-8">
+                    <ClockComponent startTime={mockTask.initiatedAt} size="medium" />
+                  </CardContent>
+                </Card>
 
-                  {/* Action Buttons */}
-                  <div className="space-y-3 pt-4">
-                    <Button className="w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white shadow-lg">
-                      <Phone className="h-4 w-4 mr-2" />
-                      Call Now
-                    </Button>
-                    <Button variant="outline" className="w-full border-brand-200 hover:bg-brand-50 text-brand-700">
-                      <MessageCircle className="h-4 w-4 mr-2" />
-                      Send Message
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                {/* Assigned Professional */}
+                <Card className="border-0 shadow-lg bg-white">
+                  <CardHeader className="text-center border-b border-gray-100">
+                    <div className="flex items-center justify-center space-x-2 mb-2">
+                      <Users className="h-6 w-6 text-brand-500" />
+                      <CardTitle className="text-xl text-gray-900">
+                        Assigned Professional
+                      </CardTitle>
+                    </div>
+                    <CardDescription>Your dedicated service provider</CardDescription>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    {/* Professional Profile */}
+                    <div className="text-center mb-6">
+                      <Avatar className="h-20 w-20 mx-auto mb-4 ring-4 ring-brand-100">
+                        <AvatarImage src="" alt={mockTask.worker.name} />
+                        <AvatarFallback className="bg-brand-100 text-brand-700 text-xl font-bold">
+                          {mockTask.worker.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
+                        </AvatarFallback>
+                      </Avatar>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                        {mockTask.worker.name}
+                      </h3>
+                      <p className="text-brand-600 font-medium mb-2">
+                        {mockTask.worker.specialization} Specialist
+                      </p>
+                      <div className="flex items-center justify-center">
+                        <div className="flex items-center bg-yellow-50 px-3 py-1 rounded-full">
+                          <Star className="h-4 w-4 text-yellow-400 fill-current mr-1" />
+                          <span className="text-sm font-semibold text-yellow-700">
+                            {mockTask.worker.rating}
+                          </span>
+                          <span className="text-xs text-yellow-600 ml-1">
+                            ({mockTask.worker.experience})
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Contact Information */}
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div className="flex items-center">
+                          <Phone className="h-4 w-4 text-brand-500 mr-3" />
+                          <span className="text-sm font-medium text-gray-700">Phone</span>
+                        </div>
+                        <span className="text-sm text-gray-900 font-mono">{mockTask.worker.phone}</span>
+                      </div>
+                      <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div className="flex items-center">
+                          <Mail className="h-4 w-4 text-brand-500 mr-3" />
+                          <span className="text-sm font-medium text-gray-700">Email</span>
+                        </div>
+                        <span className="text-sm text-gray-900">{mockTask.worker.email}</span>
+                      </div>
+                      <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div className="flex items-center">
+                          <MapPin className="h-4 w-4 text-brand-500 mr-3" />
+                          <span className="text-sm font-medium text-gray-700">Location</span>
+                        </div>
+                        <span className="text-sm text-gray-900">{mockTask.location}</span>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="space-y-3">
+                      <Button className="w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white shadow-lg">
+                        <Phone className="h-4 w-4 mr-2" />
+                        Call Now
+                      </Button>
+                      <Button variant="outline" className="w-full border-brand-200 hover:bg-brand-50 text-brand-700">
+                        <MessageCircle className="h-4 w-4 mr-2" />
+                        Send Message
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </motion.div>
           </div>
         </div>
