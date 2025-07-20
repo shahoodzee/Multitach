@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Sidebar from "@/components/Sidebar";
+import DashboardNavbar from "@/components/DashboardNavbar";
 
 const mockWorkers = [
   {
