@@ -15,9 +15,11 @@ import {
   Phone,
   Search,
   Filter,
-  DollarSign,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import DashboardNavbar from "@/components/Navbar";
 
@@ -27,9 +29,8 @@ const mockWorkers = [
     name: "Ahmed Khan",
     specialization: "Plumbing",
     rating: 4.8,
-    reviews: 156,
+    score: 92,
     location: "Downtown Area",
-    price: "$50-80/hr",
     availability: "Available",
     experience: "5+ years",
   },
@@ -38,9 +39,8 @@ const mockWorkers = [
     name: "Sarah Ahmed",
     specialization: "HVAC",
     rating: 4.9,
-    reviews: 203,
+    score: 96,
     location: "North City",
-    price: "$60-90/hr",
     availability: "Busy",
     experience: "7+ years",
   },
@@ -49,11 +49,60 @@ const mockWorkers = [
     name: "Muhammad Ali",
     specialization: "Electrician",
     rating: 4.7,
-    reviews: 89,
+    score: 89,
     location: "East District",
-    price: "$45-75/hr",
     availability: "Available",
     experience: "4+ years",
+  },
+  {
+    id: 4,
+    name: "Fatima Sheikh",
+    specialization: "Carpenter",
+    rating: 4.6,
+    score: 87,
+    location: "South Zone",
+    availability: "Available",
+    experience: "6+ years",
+  },
+  {
+    id: 5,
+    name: "Omar Hassan",
+    specialization: "Painter",
+    rating: 4.9,
+    score: 94,
+    location: "Central District",
+    availability: "Available",
+    experience: "8+ years",
+  },
+  {
+    id: 6,
+    name: "Aisha Khan",
+    specialization: "Cleaner",
+    rating: 4.8,
+    score: 91,
+    location: "West Side",
+    availability: "Busy",
+    experience: "3+ years",
+  },
+  {
+    id: 7,
+    name: "Hassan Ali",
+    specialization: "Gardener",
+    rating: 4.5,
+    score: 85,
+    location: "Suburban Area",
+    availability: "Available",
+    experience: "4+ years",
+  },
+  {
+    id: 8,
+    name: "Zara Ahmed",
+    specialization: "Appliance Repair",
+    rating: 4.7,
+    score: 88,
+    location: "Downtown Area",
+    availability: "Available",
+    experience: "5+ years",
   },
 ];
 
@@ -64,6 +113,25 @@ const fadeInUp = {
 };
 
 export default function Workers() {
+  const WORKERS_PER_PAGE = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(mockWorkers.length / WORKERS_PER_PAGE);
+  const startIndex = (currentPage - 1) * WORKERS_PER_PAGE;
+  const endIndex = startIndex + WORKERS_PER_PAGE;
+  const currentWorkers = mockWorkers.slice(startIndex, endIndex);
+
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const goToPrevPage = () => {
+    setCurrentPage(prev => Math.max(prev - 1, 1));
+  };
+
+  const goToNextPage = () => {
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+  };
   return (
     <Sidebar>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-100">
@@ -112,7 +180,7 @@ export default function Workers() {
 
             {/* Workers Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {mockWorkers.map((worker, index) => (
+              {currentWorkers.map((worker, index) => (
                 <motion.div
                   key={worker.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -138,7 +206,7 @@ export default function Workers() {
                           {worker.rating}
                         </span>
                         <span className="text-sm text-gray-500 ml-1">
-                          ({worker.reviews} reviews)
+                          (Score: {worker.score}/100)
                         </span>
                       </div>
                     </CardHeader>
@@ -146,10 +214,6 @@ export default function Workers() {
                       <div className="flex items-center text-sm text-gray-600">
                         <MapPin className="h-4 w-4 mr-2" />
                         {worker.location}
-                      </div>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <DollarSign className="h-4 w-4 mr-2" />
-                        {worker.price}
                       </div>
                       <div className="flex items-center justify-between">
                         <Badge
@@ -184,6 +248,48 @@ export default function Workers() {
                 </motion.div>
               ))}
             </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center mt-8 space-x-2">
+                <Button
+                  variant="outline"
+                  onClick={goToPrevPage}
+                  disabled={currentPage === 1}
+                  className="flex items-center"
+                >
+                  <ChevronLeft className="h-4 w-4 mr-1" />
+                  Previous
+                </Button>
+
+                <div className="flex items-center space-x-1">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <Button
+                      key={page}
+                      variant={currentPage === page ? "default" : "outline"}
+                      onClick={() => goToPage(page)}
+                      className={`w-10 h-10 ${
+                        currentPage === page
+                          ? "bg-brand-500 hover:bg-brand-600"
+                          : ""
+                      }`}
+                    >
+                      {page}
+                    </Button>
+                  ))}
+                </div>
+
+                <Button
+                  variant="outline"
+                  onClick={goToNextPage}
+                  disabled={currentPage === totalPages}
+                  className="flex items-center"
+                >
+                  Next
+                  <ChevronRight className="h-4 w-4 ml-1" />
+                </Button>
+              </div>
+            )}
 
             {/* Coming Soon Message */}
             <motion.div
