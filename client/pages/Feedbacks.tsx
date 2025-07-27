@@ -28,6 +28,8 @@ import {
   MapPin,
   Edit3,
   Clock,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Sidebar from "@/components/Sidebar";
@@ -130,14 +132,22 @@ export default function Feedbacks() {
   const [rating, setRating] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Pagination for Pending Feedbacks
+  const PENDING_PER_PAGE = 3;
+  const [pendingCurrentPage, setPendingCurrentPage] = useState(1);
+
+  // Pagination for Completed Feedbacks
+  const COMPLETED_PER_PAGE = 3;
+  const [completedCurrentPage, setCompletedCurrentPage] = useState(1);
+
   const handleSubmitFeedback = async () => {
     if (!selectedTask || !feedbackText.trim() || rating === 0) return;
-    
+
     setIsSubmitting(true);
-    
+
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     // Update task with feedback (in a real app, this would be handled by state management)
     const taskIndex = mockCompletedTasks.findIndex(t => t.id === selectedTask.id);
     if (taskIndex !== -1) {
@@ -151,12 +161,12 @@ export default function Feedbacks() {
         },
       };
     }
-    
+
     setIsSubmitting(false);
     setSelectedTask(null);
     setFeedbackText("");
     setRating(0);
-    
+
     // Show success message
     alert("Feedback submitted successfully!");
   };
@@ -169,6 +179,44 @@ export default function Feedbacks() {
 
   const pendingFeedbacks = mockCompletedTasks.filter(task => !task.hasFeedback);
   const completedFeedbacks = mockCompletedTasks.filter(task => task.hasFeedback);
+
+  // Pagination calculations for Pending Feedbacks
+  const pendingTotalPages = Math.ceil(pendingFeedbacks.length / PENDING_PER_PAGE);
+  const pendingStartIndex = (pendingCurrentPage - 1) * PENDING_PER_PAGE;
+  const pendingEndIndex = pendingStartIndex + PENDING_PER_PAGE;
+  const currentPendingFeedbacks = pendingFeedbacks.slice(pendingStartIndex, pendingEndIndex);
+
+  // Pagination calculations for Completed Feedbacks
+  const completedTotalPages = Math.ceil(completedFeedbacks.length / COMPLETED_PER_PAGE);
+  const completedStartIndex = (completedCurrentPage - 1) * COMPLETED_PER_PAGE;
+  const completedEndIndex = completedStartIndex + COMPLETED_PER_PAGE;
+  const currentCompletedFeedbacks = completedFeedbacks.slice(completedStartIndex, completedEndIndex);
+
+  // Pagination functions for Pending Feedbacks
+  const goToPendingPage = (page: number) => {
+    setPendingCurrentPage(page);
+  };
+
+  const goToPendingPrevPage = () => {
+    setPendingCurrentPage(prev => Math.max(prev - 1, 1));
+  };
+
+  const goToPendingNextPage = () => {
+    setPendingCurrentPage(prev => Math.min(prev + 1, pendingTotalPages));
+  };
+
+  // Pagination functions for Completed Feedbacks
+  const goToCompletedPage = (page: number) => {
+    setCompletedCurrentPage(page);
+  };
+
+  const goToCompletedPrevPage = () => {
+    setCompletedCurrentPage(prev => Math.max(prev - 1, 1));
+  };
+
+  const goToCompletedNextPage = () => {
+    setCompletedCurrentPage(prev => Math.min(prev + 1, completedTotalPages));
+  };
 
   return (
     <Sidebar>
@@ -206,16 +254,23 @@ export default function Feedbacks() {
               transition={{ duration: 0.6 }}
             >
               <div className="mb-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                  Pending Feedbacks
-                </h2>
-                <p className="text-gray-600">
-                  Tasks completed but awaiting your feedback
-                </p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                      Pending Feedbacks
+                    </h2>
+                    <p className="text-gray-600">
+                      Tasks completed but awaiting your feedback
+                    </p>
+                  </div>
+                  <Badge variant="secondary" className="px-3 py-1">
+                    {pendingFeedbacks.length} total
+                  </Badge>
+                </div>
               </div>
 
               <div className="space-y-4">
-                {pendingFeedbacks.map((task, index) => (
+                {currentPendingFeedbacks.map((task, index) => (
                   <motion.div
                     key={task.id}
                     initial={{ opacity: 0, x: -20 }}
@@ -233,7 +288,7 @@ export default function Feedbacks() {
                                   {task.workerName.split(" ").map(n => n[0]).join("")}
                                 </AvatarFallback>
                               </Avatar>
-                              
+
                               <div className="flex-1">
                                 <div className="flex items-center justify-between mb-2">
                                   <h3 className="text-lg font-semibold text-gray-900">
@@ -243,9 +298,9 @@ export default function Feedbacks() {
                                     Feedback Pending
                                   </Badge>
                                 </div>
-                                
+
                                 <p className="text-gray-600 mb-3">{task.description}</p>
-                                
+
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                                   <div className="flex items-center text-gray-500">
                                     <User className="h-4 w-4 mr-2" />
@@ -254,7 +309,7 @@ export default function Feedbacks() {
                                       <div>{task.workerSpecialization}</div>
                                     </div>
                                   </div>
-                                  
+
                                   <div className="flex items-center text-gray-500">
                                     <Calendar className="h-4 w-4 mr-2" />
                                     <div>
@@ -262,7 +317,7 @@ export default function Feedbacks() {
                                       <div>{task.completedDate.toLocaleDateString()}</div>
                                     </div>
                                   </div>
-                                  
+
                                   <div className="flex items-center text-gray-500">
                                     <MapPin className="h-4 w-4 mr-2" />
                                     <div>
@@ -270,7 +325,7 @@ export default function Feedbacks() {
                                       <div>{task.location}</div>
                                     </div>
                                   </div>
-                                  
+
                                   <div className="flex items-center text-gray-500">
                                     <Clock className="h-4 w-4 mr-2" />
                                     <div>
@@ -282,11 +337,11 @@ export default function Feedbacks() {
                               </div>
                             </div>
                           </div>
-                          
+
                           <div className="ml-6">
                             <Dialog>
                               <DialogTrigger asChild>
-                                <Button 
+                                <Button
                                   onClick={() => setSelectedTask(task)}
                                   className="bg-brand-500 hover:bg-brand-600"
                                 >
@@ -301,7 +356,7 @@ export default function Feedbacks() {
                                     Share your experience with {task.workerName} for "{task.title}"
                                   </DialogDescription>
                                 </DialogHeader>
-                                
+
                                 <div className="space-y-4 py-4">
                                   {/* Rating */}
                                   <div>
@@ -329,7 +384,7 @@ export default function Feedbacks() {
                                       </span>
                                     </div>
                                   </div>
-                                  
+
                                   {/* Feedback Text */}
                                   <div>
                                     <label className="text-sm font-medium text-gray-700 mb-2 block">
@@ -343,7 +398,7 @@ export default function Feedbacks() {
                                     />
                                   </div>
                                 </div>
-                                
+
                                 <DialogFooter>
                                   <Button
                                     variant="outline"
@@ -383,16 +438,23 @@ export default function Feedbacks() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="mb-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                  Completed Feedbacks
-                </h2>
-                <p className="text-gray-600">
-                  Your submitted feedback for completed tasks
-                </p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                      Completed Feedbacks
+                    </h2>
+                    <p className="text-gray-600">
+                      Your submitted feedback for completed tasks
+                    </p>
+                  </div>
+                  <Badge variant="default" className="px-3 py-1 bg-green-500">
+                    {completedFeedbacks.length} total
+                  </Badge>
+                </div>
               </div>
 
               <div className="space-y-4">
-                {completedFeedbacks.map((task, index) => (
+                {currentCompletedFeedbacks.map((task, index) => (
                   <motion.div
                     key={task.id}
                     initial={{ opacity: 0, x: -20 }}
@@ -421,7 +483,7 @@ export default function Feedbacks() {
                             </Button>
                           </div>
                         </div>
-                        
+
                         <div className="flex items-start space-x-4">
                           <Avatar className="h-10 w-10">
                             <AvatarImage src="" alt={task.workerName} />
@@ -429,7 +491,7 @@ export default function Feedbacks() {
                               {task.workerName.split(" ").map(n => n[0]).join("")}
                             </AvatarFallback>
                           </Avatar>
-                          
+
                           <div className="flex-1">
                             <div className="flex items-center space-x-2 mb-2">
                               <span className="font-medium text-gray-900">{task.workerName}</span>
@@ -438,7 +500,7 @@ export default function Feedbacks() {
                               <span className="text-gray-500">•</span>
                               <span className="text-gray-600">Completed {task.completedDate.toLocaleDateString()}</span>
                             </div>
-                            
+
                             {task.feedback && (
                               <div className="bg-gray-50 rounded-lg p-4 mt-3">
                                 <div className="flex items-center space-x-2 mb-2">
