@@ -133,7 +133,7 @@ export default function Feedbacks() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Pagination for Pending Feedbacks
-  const PENDING_PER_PAGE = 3;
+  const PENDING_PER_PAGE = 2;
   const [pendingCurrentPage, setPendingCurrentPage] = useState(1);
 
   // Pagination for Completed Feedbacks
