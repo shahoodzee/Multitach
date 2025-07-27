@@ -427,6 +427,48 @@ export default function Feedbacks() {
                   </motion.div>
                 ))}
               </div>
+
+              {/* Pagination for Pending Feedbacks */}
+              {pendingTotalPages > 1 && (
+                <div className="flex items-center justify-center mt-6 space-x-2">
+                  <Button
+                    variant="outline"
+                    onClick={goToPendingPrevPage}
+                    disabled={pendingCurrentPage === 1}
+                    className="flex items-center"
+                  >
+                    <ChevronLeft className="h-4 w-4 mr-1" />
+                    Previous
+                  </Button>
+
+                  <div className="flex items-center space-x-1">
+                    {Array.from({ length: pendingTotalPages }, (_, i) => i + 1).map((page) => (
+                      <Button
+                        key={page}
+                        variant={pendingCurrentPage === page ? "default" : "outline"}
+                        onClick={() => goToPendingPage(page)}
+                        className={`w-10 h-10 ${
+                          pendingCurrentPage === page
+                            ? "bg-brand-500 hover:bg-brand-600"
+                            : ""
+                        }`}
+                      >
+                        {page}
+                      </Button>
+                    ))}
+                  </div>
+
+                  <Button
+                    variant="outline"
+                    onClick={goToPendingNextPage}
+                    disabled={pendingCurrentPage === pendingTotalPages}
+                    className="flex items-center"
+                  >
+                    Next
+                    <ChevronRight className="h-4 w-4 ml-1" />
+                  </Button>
+                </div>
+              )}
             </motion.div>
           )}
 
@@ -536,6 +578,48 @@ export default function Feedbacks() {
                   </motion.div>
                 ))}
               </div>
+
+              {/* Pagination for Completed Feedbacks */}
+              {completedTotalPages > 1 && (
+                <div className="flex items-center justify-center mt-6 space-x-2">
+                  <Button
+                    variant="outline"
+                    onClick={goToCompletedPrevPage}
+                    disabled={completedCurrentPage === 1}
+                    className="flex items-center"
+                  >
+                    <ChevronLeft className="h-4 w-4 mr-1" />
+                    Previous
+                  </Button>
+
+                  <div className="flex items-center space-x-1">
+                    {Array.from({ length: completedTotalPages }, (_, i) => i + 1).map((page) => (
+                      <Button
+                        key={page}
+                        variant={completedCurrentPage === page ? "default" : "outline"}
+                        onClick={() => goToCompletedPage(page)}
+                        className={`w-10 h-10 ${
+                          completedCurrentPage === page
+                            ? "bg-brand-500 hover:bg-brand-600"
+                            : ""
+                        }`}
+                      >
+                        {page}
+                      </Button>
+                    ))}
+                  </div>
+
+                  <Button
+                    variant="outline"
+                    onClick={goToCompletedNextPage}
+                    disabled={completedCurrentPage === completedTotalPages}
+                    className="flex items-center"
+                  >
+                    Next
+                    <ChevronRight className="h-4 w-4 ml-1" />
+                  </Button>
+                </div>
+              )}
             </motion.div>
           )}
 
