@@ -287,7 +287,10 @@ export default function ClientSignup() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-6 flex flex-col">
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-6 flex flex-col"
+                >
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="fullName">Full Name *</Label>
@@ -453,8 +456,8 @@ export default function ClientSignup() {
                     <p className="text-sm text-gray-600 mt-1 flex items-center">
                       <Shield className="h-4 w-4 text-green-500 m-auto" />
                       <span className="m-auto">
-                        Your CNIC helps professionals verify your identity
-                        and builds trust
+                        Your CNIC helps professionals verify your identity and
+                        builds trust
                       </span>
                     </p>
                   </div>
