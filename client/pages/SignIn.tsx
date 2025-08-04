@@ -105,7 +105,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-purple-50/30 to-blue-50/30 flex items-center justify-center">
+    <div className="h-screen bg-gradient-to-br from-white via-purple-50/30 to-blue-50/30 flex items-center justify-center py-4 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-brand-50/40 via-purple-50/40 to-blue-50/40" />
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-brand-400/10 to-purple-400/10 rounded-full blur-3xl" />
@@ -117,17 +117,17 @@ export default function SignIn() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8"
+          className="text-center mb-4"
         >
-          <Link to="/" className="inline-flex items-center mb-6">
+          <Link to="/" className="inline-flex items-center mb-3">
             <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.5 }}
-              className="h-12 w-12 bg-gradient-to-br from-brand-500 to-brand-600 rounded-xl flex items-center justify-center shadow-lg"
+              className="h-10 w-10 bg-gradient-to-br from-brand-500 to-brand-600 rounded-xl flex items-center justify-center shadow-lg"
             >
-              <Wrench className="h-7 w-7 text-white" />
+              <Wrench className="h-6 w-6 text-white" />
             </motion.div>
-            <span className="ml-3 text-3xl font-bold bg-gradient-to-r from-brand-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="ml-3 text-2xl font-bold bg-gradient-to-r from-brand-600 to-purple-600 bg-clip-text text-transparent">
               Multitach
             </span>
           </Link>
@@ -135,15 +135,15 @@ export default function SignIn() {
           <motion.div variants={fadeInUp}>
             <Badge
               variant="secondary"
-              className="mb-4 bg-gradient-to-r from-brand-100 to-purple-100 text-brand-700 border-brand-200/50 shadow-sm"
+              className="mb-2 bg-gradient-to-r from-brand-100 to-purple-100 text-brand-700 border-brand-200/50 shadow-sm"
             >
               <LogIn className="w-4 h-4 mr-2" />
               Welcome Back
             </Badge>
-            <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-gray-900 to-brand-800 bg-clip-text text-transparent mb-2">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-brand-800 bg-clip-text text-transparent mb-1">
               Sign In to Multitach
             </h1>
-            <p className="text-gray-600">
+            <p className="text-sm text-gray-600">
               Access your account to find professionals or manage your services
             </p>
           </motion.div>
@@ -156,14 +156,14 @@ export default function SignIn() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <Card className="border-0 shadow-2xl bg-white/90 backdrop-blur-sm">
-            <CardHeader className="text-center pb-6">
-              <User className="h-16 w-16 mx-auto mb-4 text-brand-500" />
-              <CardTitle className="text-2xl">Sign In</CardTitle>
-              <CardDescription>
+            <CardHeader className="text-center pb-4">
+              <User className="h-12 w-12 mx-auto mb-2 text-brand-500" />
+              <CardTitle className="text-xl">Sign In</CardTitle>
+              <CardDescription className="text-sm">
                 Enter your credentials to access your account
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-4">
               {/* Google Sign In Button */}
               <motion.div
                 whileHover={{ scale: 1.02 }}
@@ -172,7 +172,7 @@ export default function SignIn() {
                 <Button
                   type="button"
                   variant="outline"
-                  className="w-full h-12 border-2 hover:bg-gray-50"
+                  className="w-full h-10 border-2 hover:bg-gray-50"
                   onClick={handleGoogleSignIn}
                 >
                   <svg
@@ -201,7 +201,7 @@ export default function SignIn() {
               </div>
 
               {/* Sign In Form */}
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-3">
                 <div>
                   <Label htmlFor="email">Email Address</Label>
                   <div className="relative">
@@ -276,13 +276,12 @@ export default function SignIn() {
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="pt-2"
+                  className="pt-1"
                 >
                   <Button
                     type="submit"
-                    size="lg"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-brand-500 to-purple-600 hover:from-brand-600 hover:to-purple-700 shadow-xl hover:shadow-2xl transition-all duration-300"
+                    className="w-full h-10 bg-gradient-to-r from-brand-500 to-purple-600 hover:from-brand-600 hover:to-purple-700 shadow-xl hover:shadow-2xl transition-all duration-300"
                   >
                     {isSubmitting ? (
                       <div className="flex items-center">
@@ -300,14 +299,14 @@ export default function SignIn() {
               </form>
 
               {/* Sign Up Links */}
-              <div className="text-center pt-6 border-t space-y-2">
-                <p className="text-sm text-gray-600">Don't have an account?</p>
-                <div className="flex flex-col sm:flex-row gap-2 justify-center">
+              <div className="text-center pt-3 border-t space-y-1">
+                <p className="text-xs text-gray-600">Don't have an account?</p>
+                <div className="flex flex-col sm:flex-row gap-1 justify-center">
                   <Link to="/client-signup">
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-brand-600 hover:text-brand-700 hover:bg-brand-50"
+                      className="text-brand-600 hover:text-brand-700 hover:bg-brand-50 h-8 text-xs"
                     >
                       Sign up as Client
                     </Button>
@@ -316,7 +315,7 @@ export default function SignIn() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-purple-600 hover:text-purple-700 hover:bg-purple-50"
+                      className="text-purple-600 hover:text-purple-700 hover:bg-purple-50 h-8 text-xs"
                     >
                       Sign up as Professional
                     </Button>
@@ -330,7 +329,7 @@ export default function SignIn() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="border-brand-200 hover:bg-brand-50"
+                    className="border-brand-200 hover:bg-brand-50 h-8 text-xs"
                   >
                     ← Back to Home
                   </Button>
@@ -345,23 +344,23 @@ export default function SignIn() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-8 text-center"
+          className="mt-3 text-center"
         >
-          <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
-            <div className="flex items-center justify-center space-x-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+          <div className="grid grid-cols-2 gap-2 text-xs text-gray-600">
+            <div className="flex items-center justify-center space-x-1">
+              <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
               <span>Secure Login</span>
             </div>
-            <div className="flex items-center justify-center space-x-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+            <div className="flex items-center justify-center space-x-1">
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
               <span>24/7 Support</span>
             </div>
-            <div className="flex items-center justify-center space-x-2">
-              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+            <div className="flex items-center justify-center space-x-1">
+              <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
               <span>AI-Powered Matching</span>
             </div>
-            <div className="flex items-center justify-center space-x-2">
-              <div className="w-2 h-2 bg-brand-500 rounded-full"></div>
+            <div className="flex items-center justify-center space-x-1">
+              <div className="w-1.5 h-1.5 bg-brand-500 rounded-full"></div>
               <span>Trusted Platform</span>
             </div>
           </div>
