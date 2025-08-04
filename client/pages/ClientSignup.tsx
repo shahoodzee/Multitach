@@ -485,14 +485,14 @@ export default function ClientSignup() {
                       onCheckedChange={(checked) =>
                         updateFormData("agreeToTerms", checked)
                       }
-                      className={errors.agreeToTerms ? "border-red-500" : ""}
+                      className={`my-auto ${errors.agreeToTerms ? "border-red-500" : ""}`}
                     />
-                    <div className="flex-1">
+                    <div className="flex-1 my-auto">
                       <Label
                         htmlFor="agreeToTerms"
                         className="text-sm leading-relaxed cursor-pointer"
                       >
-                        I agree to the{" "}
+                        &nbsp;I agree to the{" "}
                         <a
                           href="#"
                           className="text-brand-600 hover:text-brand-700 underline"
