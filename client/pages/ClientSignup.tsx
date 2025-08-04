@@ -451,9 +451,11 @@ export default function ClientSignup() {
                       placeholder="12345-1234567-1"
                     />
                     <p className="text-sm text-gray-600 mt-1 flex items-center">
-                      <Shield className="h-4 w-4 mr-1 text-green-500" />
-                      Adding your CNIC helps professionals verify your identity
-                      and builds trust
+                      <Shield className="h-4 w-4 text-green-500 m-auto" />
+                      <span className="m-auto">
+                        Your CNIC helps professionals verify your identity
+                        and builds trust
+                      </span>
                     </p>
                   </div>
 
