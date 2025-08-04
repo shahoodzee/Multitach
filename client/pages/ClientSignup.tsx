@@ -287,7 +287,7 @@ export default function ClientSignup() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6 flex flex-col">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="fullName">Full Name *</Label>
