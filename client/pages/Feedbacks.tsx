@@ -67,7 +67,8 @@ const mockCompletedTasks: Task[] = [
     hasFeedback: true,
     feedback: {
       rating: 5,
-      comment: "Excellent work! Ahmed was very professional and completed the job efficiently. The sink works perfectly now and he cleaned up after himself. Highly recommend!",
+      comment:
+        "Excellent work! Ahmed was very professional and completed the job efficiently. The sink works perfectly now and he cleaned up after himself. Highly recommend!",
       submittedDate: new Date("2024-01-15"),
     },
   },
@@ -96,7 +97,8 @@ const mockCompletedTasks: Task[] = [
     hasFeedback: true,
     feedback: {
       rating: 4,
-      comment: "Good work overall. Muhammad was punctual and knew what he was doing. The outlets work perfectly. Only minor issue was that he took a bit longer than expected, but the quality was good.",
+      comment:
+        "Good work overall. Muhammad was punctual and knew what he was doing. The outlets work perfectly. Only minor issue was that he took a bit longer than expected, but the quality was good.",
       submittedDate: new Date("2024-01-08"),
     },
   },
@@ -146,10 +148,12 @@ export default function Feedbacks() {
     setIsSubmitting(true);
 
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Update task with feedback (in a real app, this would be handled by state management)
-    const taskIndex = mockCompletedTasks.findIndex(t => t.id === selectedTask.id);
+    const taskIndex = mockCompletedTasks.findIndex(
+      (t) => t.id === selectedTask.id,
+    );
     if (taskIndex !== -1) {
       mockCompletedTasks[taskIndex] = {
         ...selectedTask,
@@ -177,20 +181,34 @@ export default function Feedbacks() {
     setRating(task.feedback?.rating || 0);
   };
 
-  const pendingFeedbacks = mockCompletedTasks.filter(task => !task.hasFeedback);
-  const completedFeedbacks = mockCompletedTasks.filter(task => task.hasFeedback);
+  const pendingFeedbacks = mockCompletedTasks.filter(
+    (task) => !task.hasFeedback,
+  );
+  const completedFeedbacks = mockCompletedTasks.filter(
+    (task) => task.hasFeedback,
+  );
 
   // Pagination calculations for Pending Feedbacks
-  const pendingTotalPages = Math.ceil(pendingFeedbacks.length / PENDING_PER_PAGE);
+  const pendingTotalPages = Math.ceil(
+    pendingFeedbacks.length / PENDING_PER_PAGE,
+  );
   const pendingStartIndex = (pendingCurrentPage - 1) * PENDING_PER_PAGE;
   const pendingEndIndex = pendingStartIndex + PENDING_PER_PAGE;
-  const currentPendingFeedbacks = pendingFeedbacks.slice(pendingStartIndex, pendingEndIndex);
+  const currentPendingFeedbacks = pendingFeedbacks.slice(
+    pendingStartIndex,
+    pendingEndIndex,
+  );
 
   // Pagination calculations for Completed Feedbacks
-  const completedTotalPages = Math.ceil(completedFeedbacks.length / COMPLETED_PER_PAGE);
+  const completedTotalPages = Math.ceil(
+    completedFeedbacks.length / COMPLETED_PER_PAGE,
+  );
   const completedStartIndex = (completedCurrentPage - 1) * COMPLETED_PER_PAGE;
   const completedEndIndex = completedStartIndex + COMPLETED_PER_PAGE;
-  const currentCompletedFeedbacks = completedFeedbacks.slice(completedStartIndex, completedEndIndex);
+  const currentCompletedFeedbacks = completedFeedbacks.slice(
+    completedStartIndex,
+    completedEndIndex,
+  );
 
   // Pagination functions for Pending Feedbacks
   const goToPendingPage = (page: number) => {
@@ -198,11 +216,11 @@ export default function Feedbacks() {
   };
 
   const goToPendingPrevPage = () => {
-    setPendingCurrentPage(prev => Math.max(prev - 1, 1));
+    setPendingCurrentPage((prev) => Math.max(prev - 1, 1));
   };
 
   const goToPendingNextPage = () => {
-    setPendingCurrentPage(prev => Math.min(prev + 1, pendingTotalPages));
+    setPendingCurrentPage((prev) => Math.min(prev + 1, pendingTotalPages));
   };
 
   // Pagination functions for Completed Feedbacks
@@ -211,11 +229,11 @@ export default function Feedbacks() {
   };
 
   const goToCompletedPrevPage = () => {
-    setCompletedCurrentPage(prev => Math.max(prev - 1, 1));
+    setCompletedCurrentPage((prev) => Math.max(prev - 1, 1));
   };
 
   const goToCompletedNextPage = () => {
-    setCompletedCurrentPage(prev => Math.min(prev + 1, completedTotalPages));
+    setCompletedCurrentPage((prev) => Math.min(prev + 1, completedTotalPages));
   };
 
   return (
@@ -228,7 +246,9 @@ export default function Feedbacks() {
           <div className="px-6 py-3">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-xl font-bold text-gray-900">Task Feedbacks</h1>
+                <h1 className="text-xl font-bold text-gray-900">
+                  Task Feedbacks
+                </h1>
                 <p className="text-gray-600 text-sm">
                   Provide feedback for your completed maintenance tasks
                 </p>
@@ -237,7 +257,10 @@ export default function Feedbacks() {
                 <Badge variant="destructive" className="px-2 py-1 text-xs">
                   {pendingFeedbacks.length} pending
                 </Badge>
-                <Badge variant="default" className="px-2 py-1 bg-green-500 text-xs">
+                <Badge
+                  variant="default"
+                  className="px-2 py-1 bg-green-500 text-xs"
+                >
                   {completedFeedbacks.length} completed
                 </Badge>
               </div>
@@ -285,7 +308,10 @@ export default function Feedbacks() {
                               <Avatar className="h-10 w-10">
                                 <AvatarImage src="" alt={task.workerName} />
                                 <AvatarFallback className="bg-brand-100 text-brand-700 text-sm">
-                                  {task.workerName.split(" ").map(n => n[0]).join("")}
+                                  {task.workerName
+                                    .split(" ")
+                                    .map((n) => n[0])
+                                    .join("")}
                                 </AvatarFallback>
                               </Avatar>
 
@@ -294,18 +320,25 @@ export default function Feedbacks() {
                                   <h3 className="text-base font-semibold text-gray-900">
                                     {task.title}
                                   </h3>
-                                  <Badge variant="outline" className="border-orange-200 text-orange-700 bg-orange-50 text-xs">
+                                  <Badge
+                                    variant="outline"
+                                    className="border-orange-200 text-orange-700 bg-orange-50 text-xs"
+                                  >
                                     Feedback Pending
                                   </Badge>
                                 </div>
 
-                                <p className="text-gray-600 mb-2 text-sm">{task.description}</p>
+                                <p className="text-gray-600 mb-2 text-sm">
+                                  {task.description}
+                                </p>
 
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
                                   <div className="flex items-center text-gray-500">
                                     <User className="h-3 w-3 mr-1" />
                                     <div>
-                                      <div className="font-medium text-gray-900">{task.workerName}</div>
+                                      <div className="font-medium text-gray-900">
+                                        {task.workerName}
+                                      </div>
                                       <div>{task.workerSpecialization}</div>
                                     </div>
                                   </div>
@@ -313,15 +346,21 @@ export default function Feedbacks() {
                                   <div className="flex items-center text-gray-500">
                                     <Calendar className="h-3 w-3 mr-1" />
                                     <div>
-                                      <div className="font-medium text-gray-900">Completed</div>
-                                      <div>{task.completedDate.toLocaleDateString()}</div>
+                                      <div className="font-medium text-gray-900">
+                                        Completed
+                                      </div>
+                                      <div>
+                                        {task.completedDate.toLocaleDateString()}
+                                      </div>
                                     </div>
                                   </div>
 
                                   <div className="flex items-center text-gray-500">
                                     <MapPin className="h-3 w-3 mr-1" />
                                     <div>
-                                      <div className="font-medium text-gray-900">Location</div>
+                                      <div className="font-medium text-gray-900">
+                                        Location
+                                      </div>
                                       <div>{task.location}</div>
                                     </div>
                                   </div>
@@ -329,7 +368,9 @@ export default function Feedbacks() {
                                   <div className="flex items-center text-gray-500">
                                     <Clock className="h-3 w-3 mr-1" />
                                     <div>
-                                      <div className="font-medium text-gray-900">Duration</div>
+                                      <div className="font-medium text-gray-900">
+                                        Duration
+                                      </div>
                                       <div>{task.duration}</div>
                                     </div>
                                   </div>
@@ -353,7 +394,8 @@ export default function Feedbacks() {
                                 <DialogHeader>
                                   <DialogTitle>Provide Feedback</DialogTitle>
                                   <DialogDescription>
-                                    Share your experience with {task.workerName} for "{task.title}"
+                                    Share your experience with {task.workerName}{" "}
+                                    for "{task.title}"
                                   </DialogDescription>
                                 </DialogHeader>
 
@@ -393,7 +435,9 @@ export default function Feedbacks() {
                                     <Textarea
                                       placeholder="Write your detailed feedback about the worker's performance, quality of work, punctuality, professionalism, etc."
                                       value={feedbackText}
-                                      onChange={(e) => setFeedbackText(e.target.value)}
+                                      onChange={(e) =>
+                                        setFeedbackText(e.target.value)
+                                      }
                                       className="min-h-[120px] resize-none"
                                     />
                                   </div>
@@ -412,10 +456,16 @@ export default function Feedbacks() {
                                   </Button>
                                   <Button
                                     onClick={handleSubmitFeedback}
-                                    disabled={!feedbackText.trim() || rating === 0 || isSubmitting}
+                                    disabled={
+                                      !feedbackText.trim() ||
+                                      rating === 0 ||
+                                      isSubmitting
+                                    }
                                     className="bg-brand-500 hover:bg-brand-600"
                                   >
-                                    {isSubmitting ? "Submitting..." : "Submit Feedback"}
+                                    {isSubmitting
+                                      ? "Submitting..."
+                                      : "Submit Feedback"}
                                   </Button>
                                 </DialogFooter>
                               </DialogContent>
@@ -442,10 +492,15 @@ export default function Feedbacks() {
                   </Button>
 
                   <div className="flex items-center space-x-1">
-                    {Array.from({ length: pendingTotalPages }, (_, i) => i + 1).map((page) => (
+                    {Array.from(
+                      { length: pendingTotalPages },
+                      (_, i) => i + 1,
+                    ).map((page) => (
                       <Button
                         key={page}
-                        variant={pendingCurrentPage === page ? "default" : "outline"}
+                        variant={
+                          pendingCurrentPage === page ? "default" : "outline"
+                        }
                         onClick={() => goToPendingPage(page)}
                         className={`w-10 h-10 ${
                           pendingCurrentPage === page
@@ -489,7 +544,10 @@ export default function Feedbacks() {
                       Your submitted feedback for completed tasks
                     </p>
                   </div>
-                  <Badge variant="default" className="px-2 py-1 bg-green-500 text-xs">
+                  <Badge
+                    variant="default"
+                    className="px-2 py-1 bg-green-500 text-xs"
+                  >
                     {completedFeedbacks.length} total
                   </Badge>
                 </div>
@@ -513,7 +571,10 @@ export default function Feedbacks() {
                             </h3>
                           </div>
                           <div className="flex items-center space-x-1">
-                            <Badge variant="default" className="bg-green-500 text-xs">
+                            <Badge
+                              variant="default"
+                              className="bg-green-500 text-xs"
+                            >
                               Feedback Completed
                             </Badge>
                             <Button
@@ -531,17 +592,27 @@ export default function Feedbacks() {
                           <Avatar className="h-8 w-8">
                             <AvatarImage src="" alt={task.workerName} />
                             <AvatarFallback className="bg-brand-100 text-brand-700 text-xs">
-                              {task.workerName.split(" ").map(n => n[0]).join("")}
+                              {task.workerName
+                                .split(" ")
+                                .map((n) => n[0])
+                                .join("")}
                             </AvatarFallback>
                           </Avatar>
 
                           <div className="flex-1">
                             <div className="flex items-center space-x-2 mb-1">
-                              <span className="font-medium text-gray-900 text-sm">{task.workerName}</span>
+                              <span className="font-medium text-gray-900 text-sm">
+                                {task.workerName}
+                              </span>
                               <span className="text-gray-500">•</span>
-                              <span className="text-gray-600 text-sm">{task.workerSpecialization}</span>
+                              <span className="text-gray-600 text-sm">
+                                {task.workerSpecialization}
+                              </span>
                               <span className="text-gray-500">•</span>
-                              <span className="text-gray-600 text-sm">Completed {task.completedDate.toLocaleDateString()}</span>
+                              <span className="text-gray-600 text-sm">
+                                Completed{" "}
+                                {task.completedDate.toLocaleDateString()}
+                              </span>
                             </div>
 
                             {task.feedback && (
@@ -594,10 +665,15 @@ export default function Feedbacks() {
                   </Button>
 
                   <div className="flex items-center space-x-1">
-                    {Array.from({ length: completedTotalPages }, (_, i) => i + 1).map((page) => (
+                    {Array.from(
+                      { length: completedTotalPages },
+                      (_, i) => i + 1,
+                    ).map((page) => (
                       <Button
                         key={page}
-                        variant={completedCurrentPage === page ? "default" : "outline"}
+                        variant={
+                          completedCurrentPage === page ? "default" : "outline"
+                        }
                         onClick={() => goToCompletedPage(page)}
                         className={`w-10 h-10 ${
                           completedCurrentPage === page
@@ -636,7 +712,8 @@ export default function Feedbacks() {
                 No Completed Tasks Yet
               </h3>
               <p className="text-gray-600 max-w-md mx-auto text-sm">
-                Once you complete tasks with our professionals, you'll be able to provide feedback here.
+                Once you complete tasks with our professionals, you'll be able
+                to provide feedback here.
               </p>
             </motion.div>
           )}
