@@ -137,7 +137,7 @@ export default function Feedbacks() {
   const [pendingCurrentPage, setPendingCurrentPage] = useState(1);
 
   // Pagination for Completed Feedbacks
-  const COMPLETED_PER_PAGE = 3;
+  const COMPLETED_PER_PAGE = 1;
   const [completedCurrentPage, setCompletedCurrentPage] = useState(1);
 
   const handleSubmitFeedback = async () => {
@@ -220,24 +220,24 @@ export default function Feedbacks() {
 
   return (
     <Sidebar>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-100">
+      <div className="h-screen bg-gradient-to-br from-gray-50 to-slate-100 overflow-hidden">
         <Navbar />
 
         {/* Header */}
         <div className="bg-white border-b border-gray-200">
-          <div className="px-6 py-6">
+          <div className="px-6 py-3">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Task Feedbacks</h1>
-                <p className="text-gray-600 mt-1">
+                <h1 className="text-xl font-bold text-gray-900">Task Feedbacks</h1>
+                <p className="text-gray-600 text-sm">
                   Provide feedback for your completed maintenance tasks
                 </p>
               </div>
-              <div className="flex items-center space-x-4">
-                <Badge variant="destructive" className="px-3 py-1">
+              <div className="flex items-center space-x-2">
+                <Badge variant="destructive" className="px-2 py-1 text-xs">
                   {pendingFeedbacks.length} pending
                 </Badge>
-                <Badge variant="default" className="px-3 py-1 bg-green-500">
+                <Badge variant="default" className="px-2 py-1 bg-green-500 text-xs">
                   {completedFeedbacks.length} completed
                 </Badge>
               </div>
@@ -245,7 +245,7 @@ export default function Feedbacks() {
           </div>
         </div>
 
-        <div className="p-6 space-y-8">
+        <div className="p-4 space-y-4 h-[calc(100vh-140px)] overflow-y-auto">
           {/* Pending Feedbacks Section */}
           {pendingFeedbacks.length > 0 && (
             <motion.div
@@ -253,17 +253,17 @@ export default function Feedbacks() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="mb-6">
+              <div className="mb-3">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h2 className="text-lg font-semibold text-gray-900 mb-1">
                       Pending Feedbacks
                     </h2>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 text-sm">
                       Tasks completed but awaiting your feedback
                     </p>
                   </div>
-                  <Badge variant="secondary" className="px-3 py-1">
+                  <Badge variant="secondary" className="px-2 py-1 text-xs">
                     {pendingFeedbacks.length} total
                   </Badge>
                 </div>
@@ -278,32 +278,32 @@ export default function Feedbacks() {
                     transition={{ delay: index * 0.1 }}
                   >
                     <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300">
-                      <CardContent className="p-6">
+                      <CardContent className="p-4">
                         <div className="flex items-center justify-between">
                           <div className="flex-1">
-                            <div className="flex items-start space-x-4">
-                              <Avatar className="h-12 w-12">
+                            <div className="flex items-start space-x-3">
+                              <Avatar className="h-10 w-10">
                                 <AvatarImage src="" alt={task.workerName} />
-                                <AvatarFallback className="bg-brand-100 text-brand-700">
+                                <AvatarFallback className="bg-brand-100 text-brand-700 text-sm">
                                   {task.workerName.split(" ").map(n => n[0]).join("")}
                                 </AvatarFallback>
                               </Avatar>
 
                               <div className="flex-1">
-                                <div className="flex items-center justify-between mb-2">
-                                  <h3 className="text-lg font-semibold text-gray-900">
+                                <div className="flex items-center justify-between mb-1">
+                                  <h3 className="text-base font-semibold text-gray-900">
                                     {task.title}
                                   </h3>
-                                  <Badge variant="outline" className="border-orange-200 text-orange-700 bg-orange-50">
+                                  <Badge variant="outline" className="border-orange-200 text-orange-700 bg-orange-50 text-xs">
                                     Feedback Pending
                                   </Badge>
                                 </div>
 
-                                <p className="text-gray-600 mb-3">{task.description}</p>
+                                <p className="text-gray-600 mb-2 text-sm">{task.description}</p>
 
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
                                   <div className="flex items-center text-gray-500">
-                                    <User className="h-4 w-4 mr-2" />
+                                    <User className="h-3 w-3 mr-1" />
                                     <div>
                                       <div className="font-medium text-gray-900">{task.workerName}</div>
                                       <div>{task.workerSpecialization}</div>
@@ -311,7 +311,7 @@ export default function Feedbacks() {
                                   </div>
 
                                   <div className="flex items-center text-gray-500">
-                                    <Calendar className="h-4 w-4 mr-2" />
+                                    <Calendar className="h-3 w-3 mr-1" />
                                     <div>
                                       <div className="font-medium text-gray-900">Completed</div>
                                       <div>{task.completedDate.toLocaleDateString()}</div>
@@ -319,7 +319,7 @@ export default function Feedbacks() {
                                   </div>
 
                                   <div className="flex items-center text-gray-500">
-                                    <MapPin className="h-4 w-4 mr-2" />
+                                    <MapPin className="h-3 w-3 mr-1" />
                                     <div>
                                       <div className="font-medium text-gray-900">Location</div>
                                       <div>{task.location}</div>
@@ -327,7 +327,7 @@ export default function Feedbacks() {
                                   </div>
 
                                   <div className="flex items-center text-gray-500">
-                                    <Clock className="h-4 w-4 mr-2" />
+                                    <Clock className="h-3 w-3 mr-1" />
                                     <div>
                                       <div className="font-medium text-gray-900">Duration</div>
                                       <div>{task.duration}</div>
@@ -338,14 +338,14 @@ export default function Feedbacks() {
                             </div>
                           </div>
 
-                          <div className="ml-6">
+                          <div className="ml-4">
                             <Dialog>
                               <DialogTrigger asChild>
                                 <Button
                                   onClick={() => setSelectedTask(task)}
-                                  className="bg-brand-500 hover:bg-brand-600"
+                                  className="bg-brand-500 hover:bg-brand-600 h-8 text-sm"
                                 >
-                                  <MessageSquare className="h-4 w-4 mr-2" />
+                                  <MessageSquare className="h-3 w-3 mr-1" />
                                   Give Feedback
                                 </Button>
                               </DialogTrigger>
@@ -430,7 +430,7 @@ export default function Feedbacks() {
 
               {/* Pagination for Pending Feedbacks */}
               {pendingTotalPages > 1 && (
-                <div className="flex items-center justify-center mt-6 space-x-2">
+                <div className="flex items-center justify-center mt-3 space-x-2">
                   <Button
                     variant="outline"
                     onClick={goToPendingPrevPage}
@@ -479,17 +479,17 @@ export default function Feedbacks() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="mb-6">
+              <div className="mb-3">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h2 className="text-lg font-semibold text-gray-900 mb-1">
                       Completed Feedbacks
                     </h2>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 text-sm">
                       Your submitted feedback for completed tasks
                     </p>
                   </div>
-                  <Badge variant="default" className="px-3 py-1 bg-green-500">
+                  <Badge variant="default" className="px-2 py-1 bg-green-500 text-xs">
                     {completedFeedbacks.length} total
                   </Badge>
                 </div>
@@ -504,53 +504,54 @@ export default function Feedbacks() {
                     transition={{ delay: index * 0.1 }}
                   >
                     <Card className="border-0 shadow-lg bg-white">
-                      <CardContent className="p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-center space-x-3">
-                            <CheckCircle className="h-5 w-5 text-green-500" />
-                            <h3 className="text-lg font-semibold text-gray-900">
+                      <CardContent className="p-4">
+                        <div className="flex items-start justify-between mb-2">
+                          <div className="flex items-center space-x-2">
+                            <CheckCircle className="h-4 w-4 text-green-500" />
+                            <h3 className="text-base font-semibold text-gray-900">
                               {task.title}
                             </h3>
                           </div>
-                          <div className="flex items-center space-x-2">
-                            <Badge variant="default" className="bg-green-500">
+                          <div className="flex items-center space-x-1">
+                            <Badge variant="default" className="bg-green-500 text-xs">
                               Feedback Completed
                             </Badge>
                             <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => handleEditFeedback(task)}
+                              className="h-6 w-6 p-0"
                             >
-                              <Edit3 className="h-4 w-4" />
+                              <Edit3 className="h-3 w-3" />
                             </Button>
                           </div>
                         </div>
 
-                        <div className="flex items-start space-x-4">
-                          <Avatar className="h-10 w-10">
+                        <div className="flex items-start space-x-3">
+                          <Avatar className="h-8 w-8">
                             <AvatarImage src="" alt={task.workerName} />
-                            <AvatarFallback className="bg-brand-100 text-brand-700">
+                            <AvatarFallback className="bg-brand-100 text-brand-700 text-xs">
                               {task.workerName.split(" ").map(n => n[0]).join("")}
                             </AvatarFallback>
                           </Avatar>
 
                           <div className="flex-1">
-                            <div className="flex items-center space-x-2 mb-2">
-                              <span className="font-medium text-gray-900">{task.workerName}</span>
+                            <div className="flex items-center space-x-2 mb-1">
+                              <span className="font-medium text-gray-900 text-sm">{task.workerName}</span>
                               <span className="text-gray-500">•</span>
-                              <span className="text-gray-600">{task.workerSpecialization}</span>
+                              <span className="text-gray-600 text-sm">{task.workerSpecialization}</span>
                               <span className="text-gray-500">•</span>
-                              <span className="text-gray-600">Completed {task.completedDate.toLocaleDateString()}</span>
+                              <span className="text-gray-600 text-sm">Completed {task.completedDate.toLocaleDateString()}</span>
                             </div>
 
                             {task.feedback && (
-                              <div className="bg-gray-50 rounded-lg p-4 mt-3">
-                                <div className="flex items-center space-x-2 mb-2">
+                              <div className="bg-gray-50 rounded-lg p-3 mt-2">
+                                <div className="flex items-center space-x-2 mb-1">
                                   <div className="flex items-center">
                                     {[1, 2, 3, 4, 5].map((star) => (
                                       <Star
                                         key={star}
-                                        className={`h-4 w-4 ${
+                                        className={`h-3 w-3 ${
                                           star <= task.feedback!.rating
                                             ? "text-yellow-400 fill-current"
                                             : "text-gray-300"
@@ -558,15 +559,15 @@ export default function Feedbacks() {
                                       />
                                     ))}
                                   </div>
-                                  <span className="text-sm text-gray-600">
+                                  <span className="text-xs text-gray-600">
                                     ({task.feedback.rating}/5)
                                   </span>
                                   <span className="text-gray-500">•</span>
-                                  <span className="text-sm text-gray-500">
+                                  <span className="text-xs text-gray-500">
                                     {task.feedback.submittedDate.toLocaleDateString()}
                                   </span>
                                 </div>
-                                <p className="text-gray-700 leading-relaxed">
+                                <p className="text-gray-700 leading-relaxed text-sm">
                                   {task.feedback.comment}
                                 </p>
                               </div>
@@ -581,7 +582,7 @@ export default function Feedbacks() {
 
               {/* Pagination for Completed Feedbacks */}
               {completedTotalPages > 1 && (
-                <div className="flex items-center justify-center mt-6 space-x-2">
+                <div className="flex items-center justify-center mt-3 space-x-2">
                   <Button
                     variant="outline"
                     onClick={goToCompletedPrevPage}
@@ -628,13 +629,13 @@ export default function Feedbacks() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-center py-12"
+              className="text-center py-6"
             >
-              <MessageSquare className="h-16 w-16 mx-auto text-gray-400 mb-4" />
-              <h3 className="text-xl font-medium text-gray-900 mb-2">
+              <MessageSquare className="h-12 w-12 mx-auto text-gray-400 mb-2" />
+              <h3 className="text-lg font-medium text-gray-900 mb-1">
                 No Completed Tasks Yet
               </h3>
-              <p className="text-gray-600 max-w-md mx-auto">
+              <p className="text-gray-600 max-w-md mx-auto text-sm">
                 Once you complete tasks with our professionals, you'll be able to provide feedback here.
               </p>
             </motion.div>
