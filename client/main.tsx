@@ -14,12 +14,13 @@ import SignIn from "./pages/SignIn";
 import Dashboard from "./pages/Dashboard";
 import Workers from "./pages/Workers";
 import Feedbacks from "./pages/Feedbacks";
+import TaskPost from "./pages/TaskPost";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  
+
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/workers" element={<Workers />} />
           <Route path="/dashboard/feedbacks" element={<Feedbacks />} />
+          <Route path="/dashboard/post-task" element={<TaskPost />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
