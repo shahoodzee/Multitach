@@ -63,21 +63,65 @@ const initialFormData: FormData = {
 const detectTaskCategory = (description: string): string => {
   const desc = description.toLowerCase();
 
-  if (desc.includes("pipe") || desc.includes("sink") || desc.includes("water") || desc.includes("leak") || desc.includes("plumb")) {
+  if (
+    desc.includes("pipe") ||
+    desc.includes("sink") ||
+    desc.includes("water") ||
+    desc.includes("leak") ||
+    desc.includes("plumb")
+  ) {
     return "Plumbing";
-  } else if (desc.includes("electrical") || desc.includes("wire") || desc.includes("light") || desc.includes("power") || desc.includes("socket")) {
+  } else if (
+    desc.includes("electrical") ||
+    desc.includes("wire") ||
+    desc.includes("light") ||
+    desc.includes("power") ||
+    desc.includes("socket")
+  ) {
     return "Electrical";
-  } else if (desc.includes("ac") || desc.includes("air") || desc.includes("heating") || desc.includes("hvac") || desc.includes("cooling")) {
+  } else if (
+    desc.includes("ac") ||
+    desc.includes("air") ||
+    desc.includes("heating") ||
+    desc.includes("hvac") ||
+    desc.includes("cooling")
+  ) {
     return "HVAC";
-  } else if (desc.includes("carpenter") || desc.includes("wood") || desc.includes("furniture") || desc.includes("cabinet") || desc.includes("door")) {
+  } else if (
+    desc.includes("carpenter") ||
+    desc.includes("wood") ||
+    desc.includes("furniture") ||
+    desc.includes("cabinet") ||
+    desc.includes("door")
+  ) {
     return "Carpentry";
-  } else if (desc.includes("paint") || desc.includes("wall") || desc.includes("color") || desc.includes("brush")) {
+  } else if (
+    desc.includes("paint") ||
+    desc.includes("wall") ||
+    desc.includes("color") ||
+    desc.includes("brush")
+  ) {
     return "Painting";
-  } else if (desc.includes("clean") || desc.includes("tidy") || desc.includes("wash") || desc.includes("dust")) {
+  } else if (
+    desc.includes("clean") ||
+    desc.includes("tidy") ||
+    desc.includes("wash") ||
+    desc.includes("dust")
+  ) {
     return "Cleaning";
-  } else if (desc.includes("garden") || desc.includes("plant") || desc.includes("lawn") || desc.includes("trim")) {
+  } else if (
+    desc.includes("garden") ||
+    desc.includes("plant") ||
+    desc.includes("lawn") ||
+    desc.includes("trim")
+  ) {
     return "Gardening";
-  } else if (desc.includes("appliance") || desc.includes("repair") || desc.includes("fix") || desc.includes("broken")) {
+  } else if (
+    desc.includes("appliance") ||
+    desc.includes("repair") ||
+    desc.includes("fix") ||
+    desc.includes("broken")
+  ) {
     return "Appliance Repair";
   } else {
     return "General Maintenance";
@@ -121,7 +165,8 @@ export default function TaskPost() {
       if (!formData.taskDescription.trim()) {
         newErrors.taskDescription = "Task description is required";
       } else if (formData.taskDescription.length < 10) {
-        newErrors.taskDescription = "Please provide a more detailed description (at least 10 characters)";
+        newErrors.taskDescription =
+          "Please provide a more detailed description (at least 10 characters)";
       }
     }
 
@@ -166,7 +211,9 @@ export default function TaskPost() {
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      alert("Task posted successfully! We'll match you with the best professionals.");
+      alert(
+        "Task posted successfully! We'll match you with the best professionals.",
+      );
       // Reset form or redirect
       setFormData(initialFormData);
       setCurrentStep(1);
@@ -210,7 +257,8 @@ export default function TaskPost() {
               <div>
                 <h1 className="text-xl font-bold text-gray-900">Post a Task</h1>
                 <p className="text-gray-600 text-sm">
-                  Get connected with skilled professionals for your maintenance needs
+                  Get connected with skilled professionals for your maintenance
+                  needs
                 </p>
               </div>
               <Badge variant="secondary" className="px-3 py-1">
@@ -253,7 +301,9 @@ export default function TaskPost() {
                           )}
                         </div>
                         <div className="text-center mt-2">
-                          <div className={`text-sm font-medium ${isActive ? "text-brand-600" : "text-gray-500"}`}>
+                          <div
+                            className={`text-sm font-medium ${isActive ? "text-brand-600" : "text-gray-500"}`}
+                          >
                             {step.title}
                           </div>
                           <div className="text-xs text-gray-500 max-w-20">
@@ -264,7 +314,9 @@ export default function TaskPost() {
                       {index < steps.length - 1 && (
                         <div
                           className={`flex-1 h-0.5 mx-4 ${
-                            currentStep > step.number ? "bg-green-500" : "bg-gray-200"
+                            currentStep > step.number
+                              ? "bg-green-500"
+                              : "bg-gray-200"
                           }`}
                         />
                       )}
@@ -286,7 +338,9 @@ export default function TaskPost() {
                   <CardTitle className="text-xl flex items-center justify-center">
                     {(() => {
                       const Icon = steps[currentStep - 1].icon;
-                      return Icon ? <Icon className="h-6 w-6 mr-2 text-brand-500" /> : null;
+                      return Icon ? (
+                        <Icon className="h-6 w-6 mr-2 text-brand-500" />
+                      ) : null;
                     })()}
                     {steps[currentStep - 1].title}
                   </CardTitle>
@@ -301,11 +355,15 @@ export default function TaskPost() {
                     {currentStep === 1 && (
                       <motion.div variants={fadeInUp} className="space-y-4">
                         <div>
-                          <Label htmlFor="taskDescription">Task Description *</Label>
+                          <Label htmlFor="taskDescription">
+                            Task Description *
+                          </Label>
                           <Textarea
                             id="taskDescription"
                             value={formData.taskDescription}
-                            onChange={(e) => updateFormData("taskDescription", e.target.value)}
+                            onChange={(e) =>
+                              updateFormData("taskDescription", e.target.value)
+                            }
                             placeholder="Describe what you need done. Be specific about the problem or task. For example: 'Kitchen sink is leaking from the faucet and needs repair' or 'Need to install 3 ceiling fans in bedrooms'"
                             className={`min-h-[120px] ${errors.taskDescription ? "border-red-500" : ""}`}
                           />
@@ -331,7 +389,11 @@ export default function TaskPost() {
                                   AI Detected Category
                                 </p>
                                 <p className="text-sm text-brand-700">
-                                  This looks like a <span className="font-semibold">{formData.detectedCategory}</span> task
+                                  This looks like a{" "}
+                                  <span className="font-semibold">
+                                    {formData.detectedCategory}
+                                  </span>{" "}
+                                  task
                                 </p>
                               </div>
                             </div>
@@ -342,16 +404,26 @@ export default function TaskPost() {
                           <Label htmlFor="urgency">Task Urgency</Label>
                           <Select
                             value={formData.urgency}
-                            onValueChange={(value) => updateFormData("urgency", value)}
+                            onValueChange={(value) =>
+                              updateFormData("urgency", value)
+                            }
                           >
                             <SelectTrigger>
                               <SelectValue placeholder="Select urgency level" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="low">Low - Can wait a week</SelectItem>
-                              <SelectItem value="normal">Normal - Within a few days</SelectItem>
-                              <SelectItem value="high">High - Within 24 hours</SelectItem>
-                              <SelectItem value="emergency">Emergency - ASAP</SelectItem>
+                              <SelectItem value="low">
+                                Low - Can wait a week
+                              </SelectItem>
+                              <SelectItem value="normal">
+                                Normal - Within a few days
+                              </SelectItem>
+                              <SelectItem value="high">
+                                High - Within 24 hours
+                              </SelectItem>
+                              <SelectItem value="emergency">
+                                Emergency - ASAP
+                              </SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -366,7 +438,9 @@ export default function TaskPost() {
                           <Input
                             id="location"
                             value={formData.location}
-                            onChange={(e) => updateFormData("location", e.target.value)}
+                            onChange={(e) =>
+                              updateFormData("location", e.target.value)
+                            }
                             placeholder="e.g., Downtown, North City, East District"
                             className={errors.location ? "border-red-500" : ""}
                           />
@@ -383,7 +457,9 @@ export default function TaskPost() {
                           <Textarea
                             id="address"
                             value={formData.address}
-                            onChange={(e) => updateFormData("address", e.target.value)}
+                            onChange={(e) =>
+                              updateFormData("address", e.target.value)
+                            }
                             placeholder="Enter your complete address including building/house number, street, area, and any landmarks"
                             className={`min-h-[100px] ${errors.address ? "border-red-500" : ""}`}
                           />
@@ -399,9 +475,12 @@ export default function TaskPost() {
                           <div className="flex items-start space-x-2">
                             <MapPin className="h-5 w-5 text-blue-600 mt-0.5" />
                             <div>
-                              <p className="text-sm font-medium text-blue-900">Location Privacy</p>
+                              <p className="text-sm font-medium text-blue-900">
+                                Location Privacy
+                              </p>
                               <p className="text-sm text-blue-700">
-                                Your exact address will only be shared with matched professionals after you approve them.
+                                Your exact address will only be shared with
+                                matched professionals after you approve them.
                               </p>
                             </div>
                           </div>
@@ -414,14 +493,20 @@ export default function TaskPost() {
                       <motion.div variants={fadeInUp} className="space-y-4">
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
-                            <Label htmlFor="preferredDate">Preferred Date *</Label>
+                            <Label htmlFor="preferredDate">
+                              Preferred Date *
+                            </Label>
                             <Input
                               id="preferredDate"
                               type="date"
                               value={formData.preferredDate}
-                              onChange={(e) => updateFormData("preferredDate", e.target.value)}
-                              min={new Date().toISOString().split('T')[0]}
-                              className={errors.preferredDate ? "border-red-500" : ""}
+                              onChange={(e) =>
+                                updateFormData("preferredDate", e.target.value)
+                              }
+                              min={new Date().toISOString().split("T")[0]}
+                              className={
+                                errors.preferredDate ? "border-red-500" : ""
+                              }
                             />
                             {errors.preferredDate && (
                               <p className="text-red-500 text-sm mt-1 flex items-center">
@@ -432,19 +517,35 @@ export default function TaskPost() {
                           </div>
 
                           <div>
-                            <Label htmlFor="preferredTime">Preferred Time *</Label>
+                            <Label htmlFor="preferredTime">
+                              Preferred Time *
+                            </Label>
                             <Select
                               value={formData.preferredTime}
-                              onValueChange={(value) => updateFormData("preferredTime", value)}
+                              onValueChange={(value) =>
+                                updateFormData("preferredTime", value)
+                              }
                             >
-                              <SelectTrigger className={errors.preferredTime ? "border-red-500" : ""}>
+                              <SelectTrigger
+                                className={
+                                  errors.preferredTime ? "border-red-500" : ""
+                                }
+                              >
                                 <SelectValue placeholder="Select time" />
                               </SelectTrigger>
                               <SelectContent>
-                                <SelectItem value="morning">Morning (8 AM - 12 PM)</SelectItem>
-                                <SelectItem value="afternoon">Afternoon (12 PM - 5 PM)</SelectItem>
-                                <SelectItem value="evening">Evening (5 PM - 8 PM)</SelectItem>
-                                <SelectItem value="flexible">Flexible</SelectItem>
+                                <SelectItem value="morning">
+                                  Morning (8 AM - 12 PM)
+                                </SelectItem>
+                                <SelectItem value="afternoon">
+                                  Afternoon (12 PM - 5 PM)
+                                </SelectItem>
+                                <SelectItem value="evening">
+                                  Evening (5 PM - 8 PM)
+                                </SelectItem>
+                                <SelectItem value="flexible">
+                                  Flexible
+                                </SelectItem>
                               </SelectContent>
                             </Select>
                             {errors.preferredTime && (
@@ -457,38 +558,54 @@ export default function TaskPost() {
                         </div>
 
                         <div>
-                          <Label htmlFor="budget">Expected Budget (Optional)</Label>
+                          <Label htmlFor="budget">
+                            Expected Budget (Optional)
+                          </Label>
                           <Input
                             id="budget"
                             value={formData.budget}
-                            onChange={(e) => updateFormData("budget", e.target.value)}
+                            onChange={(e) =>
+                              updateFormData("budget", e.target.value)
+                            }
                             placeholder="e.g., $50-100, or leave blank for quotes"
                           />
                         </div>
 
                         <div>
-                          <Label htmlFor="contactMethod">Preferred Contact Method</Label>
+                          <Label htmlFor="contactMethod">
+                            Preferred Contact Method
+                          </Label>
                           <Select
                             value={formData.contactMethod}
-                            onValueChange={(value) => updateFormData("contactMethod", value)}
+                            onValueChange={(value) =>
+                              updateFormData("contactMethod", value)
+                            }
                           >
                             <SelectTrigger>
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectItem value="phone">Phone Call</SelectItem>
-                              <SelectItem value="message">Text Message</SelectItem>
-                              <SelectItem value="app">In-App Messaging</SelectItem>
+                              <SelectItem value="message">
+                                Text Message
+                              </SelectItem>
+                              <SelectItem value="app">
+                                In-App Messaging
+                              </SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
 
                         <div>
-                          <Label htmlFor="additionalNotes">Additional Notes (Optional)</Label>
+                          <Label htmlFor="additionalNotes">
+                            Additional Notes (Optional)
+                          </Label>
                           <Textarea
                             id="additionalNotes"
                             value={formData.additionalNotes}
-                            onChange={(e) => updateFormData("additionalNotes", e.target.value)}
+                            onChange={(e) =>
+                              updateFormData("additionalNotes", e.target.value)
+                            }
                             placeholder="Any additional information, special requirements, or preferences"
                             className="min-h-[80px]"
                           />
@@ -498,9 +615,12 @@ export default function TaskPost() {
                           <div className="flex items-start space-x-2">
                             <Users className="h-5 w-5 text-green-600 mt-0.5" />
                             <div>
-                              <p className="text-sm font-medium text-green-900">What happens next?</p>
+                              <p className="text-sm font-medium text-green-900">
+                                What happens next?
+                              </p>
                               <p className="text-sm text-green-700">
-                                We'll match you with qualified professionals in your area and they'll contact you with quotes.
+                                We'll match you with qualified professionals in
+                                your area and they'll contact you with quotes.
                               </p>
                             </div>
                           </div>
