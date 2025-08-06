@@ -62,7 +62,7 @@ const initialFormData: FormData = {
 // Mock AI categories based on keywords
 const detectTaskCategory = (description: string): string => {
   const desc = description.toLowerCase();
-  
+
   if (desc.includes("pipe") || desc.includes("sink") || desc.includes("water") || desc.includes("leak") || desc.includes("plumb")) {
     return "Plumbing";
   } else if (desc.includes("electrical") || desc.includes("wire") || desc.includes("light") || desc.includes("power") || desc.includes("socket")) {
@@ -99,15 +99,15 @@ export default function TaskPost() {
   const updateFormData = (field: keyof FormData, value: string) => {
     setFormData((prev) => {
       const updated = { ...prev, [field]: value };
-      
+
       // Auto-detect category when description changes
       if (field === "taskDescription" && value.trim()) {
         updated.detectedCategory = detectTaskCategory(value);
       }
-      
+
       return updated;
     });
-    
+
     // Clear error when user starts typing
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }));
@@ -159,9 +159,9 @@ export default function TaskPost() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateStep(3)) return;
-    
+
     setIsSubmitting(true);
     try {
       // Simulate API call
@@ -233,7 +233,7 @@ export default function TaskPost() {
                   const Icon = step.icon;
                   const isActive = currentStep === step.number;
                   const isCompleted = currentStep > step.number;
-                  
+
                   return (
                     <div key={step.number} className="flex items-center flex-1">
                       <div className="flex flex-col items-center">
@@ -284,16 +284,17 @@ export default function TaskPost() {
               <Card className="border-0 shadow-xl bg-white">
                 <CardHeader className="text-center">
                   <CardTitle className="text-xl flex items-center justify-center">
-                    {steps[currentStep - 1].icon && (
-                      <steps[currentStep - 1].icon className="h-6 w-6 mr-2 text-brand-500" />
-                    )}
+                    {(() => {
+                      const Icon = steps[currentStep - 1].icon;
+                      return Icon ? <Icon className="h-6 w-6 mr-2 text-brand-500" /> : null;
+                    })()}
                     {steps[currentStep - 1].title}
                   </CardTitle>
                   <CardDescription>
                     {steps[currentStep - 1].description}
                   </CardDescription>
                 </CardHeader>
-                
+
                 <CardContent className="p-6">
                   <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Step 1: Task Description */}
